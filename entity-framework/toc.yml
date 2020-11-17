@@ -21,7 +21,7 @@
           href: core/index.md
         - name: 参加 EF Core 6 调查 >>
           href: 'https://www.surveymonkey.com/r/XRL3JBL'
-        - name: 开始使用
+        - name: 入门
           items:
             - name: EF Core 概述
               items:
@@ -154,6 +154,10 @@
           items:
             - name: 概述
               href: core/querying/index.md
+            - name: 客户端与服务器评估
+              href: core/querying/client-eval.md
+            - name: 跟踪与不跟踪
+              href: core/querying/tracking.md
             - name: 加载相关数据
               items:
                 - name: 概述
@@ -166,16 +170,14 @@
                   href: core/querying/related-data/lazy.md
                 - name: 关联数据和序列化
                   href: core/querying/related-data/serialization.md
-            - name: 客户端与服务器评估
-              href: core/querying/client-eval.md
-            - name: 跟踪与不跟踪
-              href: core/querying/tracking.md
             - name: 拆分查询
               href: core/querying/single-split-queries.md
             - name: 复杂查询运算符
               href: core/querying/complex-query-operators.md
             - name: 原始 SQL 查询
               href: core/querying/raw-sql.md
+            - name: 数据库函数
+              href: core/querying/database-functions.md
             - name: 全局查询筛选器
               href: core/querying/filters.md
             - name: 查询标记
