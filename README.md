@@ -1,12 +1,12 @@
-## <a name="entity-framework-docs"></a>实体框架文档
+# <a name="entity-framework-docs"></a>实体框架文档
 
-此项目包含位于 [docs.microsoft.com/ef](https://docs.microsoft.com/ef/) 的 EF Core 和 EF6 文档的来源。 
+此项目包含位于 [docs.microsoft.com/ef](https://docs.microsoft.com/ef/) 的 EF Core 和 EF6 文档的来源。
 
 有关 EF Core 和 EF6 的文档问题应在此存储库中存档。 产品问题 (bug) 应酌情在 [EF Core 存储库](https://github.com/dotnet/efcore)或 [EF6 存储库](https://github.com/dotnet/ef6)中存档。
 
 接受拉取请求！ 
 
-## <a name="fixing-typosspellinggrammaretc"></a>修复键入错误/拼写/语法/等。
+## <a name="fixing-typosspellinggrammaretc"></a>修复键入错误/拼写/语法/等
 
 考虑发送拉取请求，而不是存档问题。 这可以完全通过 Web 完成：
 

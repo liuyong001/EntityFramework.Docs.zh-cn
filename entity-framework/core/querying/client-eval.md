@@ -2,14 +2,14 @@
 title: 客户端与服务器评估 - EF Core
 description: 使用 Entity Framework Core 进行客户端和服务器查询评估
 author: smitpatel
-ms.date: 10/03/2019
+ms.date: 11/09/2020
 uid: core/querying/client-eval
-ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a1ddfb625be36cb05f01da08eb3be29512c54ab5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062706"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430139"
 ---
 # <a name="client-vs-server-evaluation"></a>客户端与服务器评估
 
@@ -46,6 +46,9 @@ ms.locfileid: "92062706"
 
 [!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
+> [!TIP]
+> 如果你正在使用 `AsAsyncEnumerable` 并希望在客户端进一步编写查询，可以使用用于定义异步枚举运算符的 [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/) 库。 有关详细信息，请参阅[客户端 linq 运算符](xref:core/miscellaneous/async#client-side-async-linq-operators)。
+
 ## <a name="potential-memory-leak-in-client-evaluation"></a>客户端评估中潜在的内存泄漏
 
 由于查询转换和编译的开销高昂，因此 EF Core 会缓存已编译的查询计划。 缓存的委托在对顶级投影进行客户端评估时可能会使用客户端代码。 EF Core 为树型结构中客户端评估的部分生成参数，并通过替换参数值重用查询计划。 但表达式树中的某些常数无法转换为参数。 如果缓存的委托包含此类常数，则无法将这些对象垃圾回收，因为它们仍被引用。 如果此类对象包含 DbContext 或其中的其他服务，则会导致应用的内存使用量逐渐增多。 此行为通常是内存泄漏的标志。 只要遇到的常数为不能使用当前数据库提供程序映射的类型，EF Core 就会引发异常。 常见原因及其解决方案如下所示：
@@ -58,7 +61,7 @@ ms.locfileid: "92062706"
 
 以下部分适用于 3.0 以前的 EF Core 版本。
 
-旧的 EF Core 版本支持在查询的任何部分中进行客户端评估，而不仅仅是顶级投影。 因此，与[不支持的客户评估](#unsupported-client-evaluation)部分下发布的查询类似的查询可以正常工作。 由于此行为可能引起不易觉察的性能问题，EF Core 记录了客户端评估警告。 有关如何查看日志记录输出的详细信息，请参阅[日志记录](xref:core/miscellaneous/logging)。
+旧的 EF Core 版本支持在查询的任何部分中进行客户端评估，而不仅仅是顶级投影。 因此，与[不支持的客户评估](#unsupported-client-evaluation)部分下发布的查询类似的查询可以正常工作。 由于此行为可能引起不易觉察的性能问题，EF Core 记录了客户端评估警告。 有关如何查看日志记录输出的详细信息，请参阅[日志记录](xref:core/logging-events-diagnostics/index)。
 
 （可选）借助 EF Core，你可以将默认行为更改为在执行客户端评估时引发异常或不执行任何操作（在投影中除外）。 引发异常的行为会使其类似于 3.0 中的行为。 若要更改该行为，你需要在设置上下文选项时配置警告。上下文选项一般在 `DbContext.OnConfiguring` 中设置，如果使用 ASP.NET Core，则在 `Startup.cs` 中设置。
 

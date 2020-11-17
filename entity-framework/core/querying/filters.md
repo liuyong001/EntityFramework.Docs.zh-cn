@@ -4,12 +4,12 @@ description: 将 Entity Framework Core 与全局查询筛选器结合使用来�
 author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 8a9eabd7e86864c9ebb4b1dc4a06bf7fc207d496
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 6436f9f8e2e09d44ef9528fd2022720d40095fe0
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062602"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430126"
 ---
 # <a name="global-query-filters"></a>全局查询筛选器
 
@@ -46,6 +46,21 @@ ms.locfileid: "92062602"
 ## <a name="use-of-navigations"></a>使用导航
 
 还可以在定义全局查询筛选器时使用导航。 在查询筛选器中使用导航将导致以递归方式应用查询筛选器这一结果。 当 EF Core 展开查询筛选器中使用的导航时，它还会应用在引用的实体上定义的查询筛选器。
+
+为了进行说明，请按以下方式在 `OnModelCreating` 中配置查询筛选器：[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#NavigationInFilter)]
+
+接下来，查询所有 `Blog` 实体：[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#QueriesNavigation)]
+
+此查询将生成以下 SQL，它将应用为 `Blog` 和 `Post` 实体定义的查询筛选器：
+
+```sql
+SELECT [b].[BlogId], [b].[Name], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE (
+    SELECT COUNT(*)
+    FROM [Posts] AS [p]
+    WHERE ([p].[Title] LIKE N'%fish%') AND ([b].[BlogId] = [p].[BlogId])) > 0
+```
 
 > [!NOTE]
 > 目前，EF Core 不会检测全局查询筛选器定义中的循环，因此需在定义它们时小心谨慎。 如果指定错误，这些循环可能在查询转换期间导致无限循环。

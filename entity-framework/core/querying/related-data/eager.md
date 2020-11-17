@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 预先加载相关数据
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: 97ec45a0f8bfecce4d4a59e5d1c36c0268d96052
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062571"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430100"
 ---
 # <a name="eager-loading-of-related-data"></a>相关数据的预先加载
 
@@ -25,6 +25,9 @@ ms.locfileid: "92062571"
 可以在单个查询中包含多个关系的关联数据。
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleIncludes)]
+
+> [!CAUTION]
+> 急于在单个查询中加载集合导航可能会导致性能问题。 有关详细信息，请参阅[单个查询和拆分查询](xref:core/querying/single-split-queries)。
 
 ## <a name="including-multiple-levels"></a>包含多个层级
 
@@ -43,68 +46,6 @@ ms.locfileid: "92062571"
 你可能希望将已包含的某个实体的多个关联实体都包含进来。 例如，当查询 `Blogs` 时，你会包含 `Posts`，然后希望同时包含 `Posts` 的 `Author` 和 `Tags`。 为了包含这两项内容，需要从根级别开始指定每个包含路径。 例如，`Blog -> Posts -> Author` 和 `Blog -> Posts -> Tags`。 这并不意味着会获得冗余联接查询，在大多数情况下，EF 会在生成 SQL 时合并相应的联接查询。
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
-
-## <a name="single-and-split-queries"></a>单个查询和拆分查询
-
-### <a name="single-queries"></a>单个查询
-
-在关系数据库中，所有相关实体默认通过引入 JOIN 来加载：
-
-```sql
-SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url], [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title]
-FROM [Blogs] AS [b]
-LEFT JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
-ORDER BY [b].[BlogId], [p].[PostId]
-```
-
-如果典型博客有多篇相关文章，这些文章对应的行会复制博客的信息，进而导致所谓的“笛卡尔爆炸”问题发生。 随着加载更多的一对多关系，重复的数据量可能会增长，并对应用程序性能产生负面影响。 默认情况下，如果 EF Core 检测到查询加载集合包含内容可能会导致性能问题，便会发出警告。
-
-### <a name="split-queries"></a>拆分查询
-
-> [!NOTE]
-> EF Core 5.0 中已引入了此功能。
-
-通过 EF，可以指定应将给定 LINQ 查询拆分为多个 SQL 查询。 与 JOIN 不同，拆分查询为包含的每个一对多导航执行额外的 SQL 查询：
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSplitQuery&highlight=5)]
-
-这会生成以下 SQL：
-
-```sql
-SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
-FROM [Blogs] AS [b]
-ORDER BY [b].[BlogId]
-
-SELECT [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title], [b].[BlogId]
-FROM [Blogs] AS [b]
-INNER JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
-ORDER BY [b].[BlogId]
-```
-
-> [!NOTE]
-> 一对一相关实体始终都是通过 JOIN 在同一查询中进行加载的，因为这对性能没有影响。
-
-### <a name="enabling-split-queries-globally"></a>全局启用拆分查询
-
-还可以将拆分查询配置为应用程序上下文的默认查询：
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/SplitQueriesBloggingContext.cs?name=QuerySplittingBehaviorSplitQuery&highlight=6)]
-
-将拆分查询配置为默认查询后，仍然可以将特定查询配置为以单个查询的形式执行：
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSingleQuery&highlight=5)]
-
-如果未显式指定查询拆分模式（既不是全局指定，也不是在查询中指定），并且 EF Core 检测到单个查询加载了多项包含内容，便会发出警告，提醒这可能导致的性能问题。 将查询模式设置为 SingleQuery 将导致无法生成警告。
-
-### <a name="characteristics-of-split-queries"></a>拆分查询的特征
-
-虽然拆分查询避免了与 JOIN 和笛卡尔爆炸相关的性能问题，但它也有一些缺点：
-
-* 虽然大多数数据库对单个查询保证数据一致性，但对多个查询不存在这样的保证。 如果在执行查询时同时更新数据库，生成的数据可能会不一致。 这可以通过将查询包装在可序列化或快照事务中来缓解，尽管这样做本身可能会产生性能问题。 有关详细信息，请参见数据库器文档。
-* 当前，每个查询都意味着对数据库进行一次额外的网络往返。 多次网络往返会降低性能，尤其是在数据库延迟很高的情况下（例如云服务）。
-* 虽然有些数据库（带有 MARS 的 SQL Server、Sqlite）允许同时使用多个查询的结果，但大多数数据库在任何给定时间点只允许一个查询处于活动状态。 因此，在执行以后的查询之前，必须先在应用程序的内存中缓冲先前查询的所有结果，这将增加内存需求。
-
-遗憾的是，没有一种加载相关实体的策略可以适用于所有情况。 请仔细考虑单个查询和拆分查询的优缺点，然后选择能够满足你需求的策略。
 
 ## <a name="filtered-include"></a>经过筛选的包含
 
@@ -138,6 +79,9 @@ var orders = context.Orders.Where(o => o.Id > 1000).ToList();
 // customer entities will have references to all orders where Id > 1000, rather than > 5000
 var filtered = context.Customers.Include(c => c.Orders.Where(o => o.Id > 5000)).ToList();
 ```
+
+> [!NOTE]
+> 在跟踪查询的情况下，应用了经过筛选的包含的导航被视为已加载。 这意味着 EF Core 不会尝试使用[显式加载](xref:core/querying/related-data/explicit)或[延迟加载](xref:core/querying/related-data/lazy)来重新加载其值，即使某些元素仍然可能缺失也不会尝试。
 
 ## <a name="include-on-derived-types"></a>派生类型上的包含
 

@@ -4,12 +4,12 @@ description: EF Core 5.0 中的新功能概述
 author: ajcvickers
 ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 8fa45bf31cb5f1a7e35134f9513a40469719f8c2
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 3efa883cdfac1ecd412112ef06c7763f1a7e12f1
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065610"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429242"
 ---
 # <a name="whats-new-in-ef-core-50"></a>EF Core 5.0 中的新增功能
 
@@ -47,7 +47,7 @@ public class Tag
 public class BlogContext : DbContext
 {
     public DbSet<Post> Posts { get; set; }
-    public DbSet<Blog> Blogs { get; set; }
+    public DbSet<Tag> Tags { get; set; }
 }
 ```
 
@@ -77,7 +77,7 @@ CREATE TABLE [PostTag] (
 CREATE INDEX [IX_PostTag_TagsId] ON [PostTag] ([TagsId]);
 ```
 
-创建和关联 `Blog` 和 `Post` 实体会导致联接表更新自动发生。 例如：
+创建和关联 `Tag` 和 `Post` 实体会导致联接表更新自动发生。 例如：
 
 ```csharp
 var beginnerTag = new Tag {Text = "Beginner"};
@@ -158,6 +158,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
+> [!NOTE]
+> 尚未添加对数据库中多对多关系搭建基架的支持。 请参阅[跟踪问题](https://github.com/dotnet/efcore/issues/22475)。
+
 ### <a name="map-entity-types-to-queries"></a>将实体类型映射到查询
 
 实体类型通常映射到表或视图，以便 EF Core 在查询该类型时将拉回表或视图的内容。 EF Core 5.0 允许实体类型映射到“定义查询”。 （这在以前的版本中部分支持，但在 EF Core 5.0 中已显著改进，并使用不同的语法。）
@@ -214,13 +217,13 @@ WHERE ('Unicorn' = '') OR (instr("b"."Name", 'Unicorn') > 0)
 
 [.NET 事件计数器](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/)是有效公开应用程序性能指标的一种方法。 EF Core 5.0 包括 `Microsoft.EntityFrameworkCore` 类别下的事件计数器。 例如：
 
-```
+```console
 dotnet counters monitor Microsoft.EntityFrameworkCore -p 49496
 ```
 
 这指示 dotnet 计数器开始收集进程 49496 的 EF Core 事件。 这将在控制台中生成如下所示的输出：
 
-```
+```console
 [Microsoft.EntityFrameworkCore]
     Active DbContexts                                               1
     Execution Strategy Operation Failures (Count / 1 sec)           0
@@ -314,6 +317,7 @@ context.SavedChanges += (sender, args) =>
 ```
 
 请注意：
+
 * 事件发送方是 `DbContext` 实例
 * `SavedChanges` 事件的参数包含保存到数据库的实体数
 
@@ -344,6 +348,7 @@ public class MySaveChangesInterceptor : SaveChangesInterceptor
 ```
 
 请注意：
+
 * 拦截器具有同步和异步方法。 如果需要执行异步 I/O（例如写入审核服务器），这非常有用。
 * 拦截器允许使用所有拦截器通用的 `InterceptionResult` 机制跳过 SaveChanges。
 
@@ -564,7 +569,7 @@ COMMIT;
 
 `dotnet ef migrations list` 命令现在显示哪些迁移尚未应用于数据库。 例如：
 
-```
+```console
 ajcvickers@avickers420u:~/AllTogetherNow/Daily$ dotnet ef migrations list
 Build started...
 Build succeeded.
@@ -839,6 +844,7 @@ PRAGMA foreign_keys = 1;
 ```
 
 请注意：
+
 * 创建一个临时表，其中包含新表所需的架构
 * 将数据从当前表复制到临时表中
 * 关闭外键强制执行
@@ -884,6 +890,7 @@ END
 ```
 
 EF Core 模型需要两种实体类型才能使用此 TVF：
+
 * 以正常方式映射到 Employees 表的 `Employee` 类型
 * 与 TVF 返回的形状相匹配的 `Report` 类型
 
@@ -1307,7 +1314,10 @@ var artists = context.Artists.Where(e => e.IsSigned).ToList();
 
 EF Core 将引发以下异常，指出由于 `IsSigned` 未映射而导致转换失败：
 
-> 未经处理的异常。 System.InvalidOperationException：无法转换 LINQ 表达式 "DbSet<Artist>() .Where(a => a.IsSigned)"。 其他信息：实体类型 "Artist" 上成员 "IsSigned" 的转换失败。 可能未映射指定的成员。 请用可转换的形式重新编写查询，或者插入对 AsEnumerable()、AsAsyncEnumerable()、ToList() 或 ToListAsync() 的调用来显式切换到客户端评估。 有关更多信息，请参见 https://go.microsoft.com/fwlink/?linkid=2101038 。
+```exception
+Unhandled exception. System.InvalidOperationException: The LINQ expression 'DbSet<Artist>()
+   .Where(a => a.IsSigned)' could not be translated. Additional information: Translation of member 'IsSigned' on entity type 'Artist' failed. Possibly the specified member is not mapped. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync(). See <https://go.microsoft.com/fwlink/?linkid=2101038> for more information.
+```
 
 同样地，在尝试用依赖区域性的语义来转换字符串比较时，现将生成信息更丰富的异常消息。 例如，以下查询尝试使用 `StringComparison.CurrentCulture`：
 
@@ -1319,7 +1329,12 @@ var artists = context.Artists
 
 EF Core 现将引发以下异常：
 
-> 未经处理的异常。 System.InvalidOperationException：无法转换 LINQ 表达式 "DbSet<Artist>() .Where(a => a.Name.Equals( value:"The Unicorns", comparisonType:CurrentCulture))"。 其他信息：不支持采用 "StringComparison" 的 "string.Equals" 方法的转换。 有关更多信息，请参见 https://go.microsoft.com/fwlink/?linkid=2129535 。 请用可转换的形式重新编写查询，或者插入对 AsEnumerable()、AsAsyncEnumerable()、ToList() 或 ToListAsync() 的调用来显式切换到客户端评估。 有关更多信息，请参见 https://go.microsoft.com/fwlink/?linkid=2101038 。
+```exception
+Unhandled exception. System.InvalidOperationException: The LINQ expression 'DbSet<Artist>()
+     .Where(a => a.Name.Equals(
+         value: "The Unicorns",
+         comparisonType: CurrentCulture))' could not be translated. Additional information: Translation of 'string.Equals' method which takes 'StringComparison' argument is not supported. See <https://go.microsoft.com/fwlink/?linkid=2129535> for more information. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync(). See <https://go.microsoft.com/fwlink/?linkid=2101038> for more information.
+```
 
 ### <a name="specify-transaction-id"></a>指定事务 ID
 
@@ -1380,13 +1395,13 @@ Executed DbCommand (14ms) [Parameters=[@p0='1', @p1='127.0.0.1' (Size = 45), @p2
 
 若要解决这种情况，现可指示基架命令不生成 OnConfiguring。 例如：
 
-```
+```console
 dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook" Microsoft.EntityFrameworkCore.SqlServer --no-onconfiguring
 ```
 
 或者在包管理器控制台中：
 
-```
+```console
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer -NoOnConfiguring
 ```
 
@@ -1500,7 +1515,7 @@ WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
 
 参数现从命令行传输到 [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1) 的 `CreateDbContext` 方法。 例如，若要指明这是开发生成，可以在命令行上传递自定义参数（例如 `dev`）：
 
-```
+```console
 dotnet ef migrations add two --verbose --dev
 ```
 
@@ -1600,6 +1615,7 @@ var blogs = context.Blogs
     .Include(e => e.Posts.OrderByDescending(post => post.Title).Take(5)))
     .ToList();
 ```
+
 此查询将返回博客，每个博客最多包含 5 篇文章。
 
 有关完整详细信息，请参阅 [Include 文档](xref:core/querying/related-data#filtered-include)。
@@ -1633,7 +1649,7 @@ dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.S
 dotnet ef database update --connection "connection string"
 ```
 
-有关完整的详细信息，请参阅[工具文档](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update)。
+有关完整的详细信息，请参阅[工具文档](xref:core/cli/dotnet#dotnet-ef-database-update)。
 
 等效参数已添加到 VS 程序包管理器控制台中使用的 PowerShell 命令中。
 

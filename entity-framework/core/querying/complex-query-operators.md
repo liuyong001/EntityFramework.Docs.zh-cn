@@ -4,12 +4,12 @@ description: 关于使用 Entity Framework Core 时更复杂的 LINQ 查询运�
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 03375e6c46a68a719df82572333f0a57e7de6262
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 84c2518972355d31cf5a6a7bafc57b44162412c8
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062615"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430477"
 ---
 # <a name="complex-query-operators"></a>复杂查询运算符
 
@@ -20,7 +20,7 @@ ms.locfileid: "92062615"
 
 ## <a name="join"></a>联接
 
-借助 LINQ Join 运算符，可根据每个源的键选择器连接两个数据源，并在键匹配时生成值的元组。 该运算符在关系数据库中自然而然地转换为 `INNER JOIN`。 虽然 LINQ Join 具有外部和内部键选择器，但数据库只需要一个联接条件。 因此 EF Core 通过比较外部键选择器和内部键选择器是否相等，来生成联接条件。 此外，如果键选择器是匿名类型，则 EF Core 会生成一个联接条件以用于比较组件是否相等。
+借助 LINQ Join 运算符，可根据每个源的键选择器连接两个数据源，并在键匹配时生成值的元组。 该运算符在关系数据库中自然而然地转换为 `INNER JOIN`。 虽然 LINQ Join 具有外部和内部键选择器，但数据库只需要一个联接条件。 因此 EF Core 通过比较外部键选择器和内部键选择器是否相等，来生成联接条件。
 
 [!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#Join)]
 
@@ -28,6 +28,16 @@ ms.locfileid: "92062615"
 SELECT [p].[PersonId], [p].[Name], [p].[PhotoId], [p0].[PersonPhotoId], [p0].[Caption], [p0].[Photo]
 FROM [PersonPhoto] AS [p0]
 INNER JOIN [Person] AS [p] ON [p0].[PersonPhotoId] = [p].[PhotoId]
+```
+
+此外，如果键选择器是匿名类型，则 EF Core 会生成一个联接条件，以比较组件是否相等。
+
+[!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#JoinComposite)]
+
+```sql
+SELECT [p].[PersonId], [p].[Name], [p].[PhotoId], [p0].[PersonPhotoId], [p0].[Caption], [p0].[Photo]
+FROM [PersonPhoto] AS [p0]
+INNER JOIN [Person] AS [p] ON ([p0].[PersonPhotoId] = [p].[PhotoId] AND ([p0].[Caption] = N'SN'))
 ```
 
 ## <a name="groupjoin"></a>GroupJoin

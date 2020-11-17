@@ -4,16 +4,19 @@ description: 关于 Entity Framework Core 如何在内部编译和执行查询�
 author: ajcvickers
 ms.date: 03/17/2020
 uid: core/querying/how-query-works
-ms.openlocfilehash: f3a6794b9bfdf70ae40bc8e97ee41861931b9b46
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7b3014cf64f8467ccbec10598ea1bb47304dfe43
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071181"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430464"
 ---
 # <a name="how-queries-work"></a>查询的工作原理
 
 Entity Framework Core 使用语言集成查询 (LINQ) 来查询数据库中的数据。 通过 LINQ 可使用 C#（或你选择的 .NET 语言）基于派生上下文和实体类编写强类型查询。
+
+> [!NOTE]
+> 本文已过时，其中的某些部分需要更新，以解释查询管道设计中发生的更改。 如果对此处提到的任何行为有任何疑问，请[提问](https://github.com/dotnet/efcore/issues/new/choose)。
 
 ## <a name="the-life-of-a-query"></a>查询的寿命
 
@@ -41,4 +44,4 @@ Entity Framework Core 使用语言集成查询 (LINQ) 来查询数据库中的�
 * 使用 `ToList`、`ToArray`、`Single`、`Count` 等操作或等效的异步重载
 
 > [!WARNING]  
-> **** 始终验证用户输入：虽然 EF Core通过在查询中使用参数和转义文字来防止 SQL 注入攻击，但它不会验证输入。 根据应用程序的要求，在将 LINQ 查询中使用的来自不受信任的源的值分配给实体属性或传递给其他 EF Core API 之前，应执行相应的验证。 这包括用于动态构造查询的所有用户输入。 即使在使用 LINQ 时，如果接受用于生成表达式的用户输入，也会需要确保只能构造预期表达式。
+> 始终验证用户输入：虽然 EF Core通过在查询中使用参数和转义文字来防止 SQL 注入攻击，但它不会验证输入。 根据应用程序的要求，在将 LINQ 查询中使用的来自不受信任的源的值分配给实体属性或传递给其他 EF Core API 之前，应执行相应的验证。 这包括用于动态构造查询的所有用户输入。 即使在使用 LINQ 时，如果接受用于生成表达式的用户输入，也会需要确保只能构造预期表达式。
