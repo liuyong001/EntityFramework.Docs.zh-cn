@@ -4,20 +4,20 @@ description: 截获数据库操作和其他事件
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503197"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003401"
 ---
 # <a name="interceptors"></a>侦听器
 
-Entity Framework Core (EF Core) 拦截允许拦截、修改和/或禁止 EF Core 操作。 这包括低级数据库操作，例如执行命令和更高级别的操作，如对 SaveChanges 的调用。
+Entity Framework Core (EF Core) 拦截允许拦截、修改和/或禁止 EF Core 操作。 这包括低级数据库操作（例如执行命令）以及高级别操作（例如对 SaveChanges 的调用）。
 
-侦听器不同于日志记录和诊断，它们允许修改或禁止正在截获的操作。 [简单日志记录](xref:core/logging-events-diagnostics/simple-logging) 或 [Microsoft。日志](xref:core/logging-events-diagnostics/extensions-logging) 记录是日志记录的更好选择。
+侦听器与日志记录和诊断的不同之处在于，它们允许修改或抑制所侦听的操作。 [简单日志记录](xref:core/logging-events-diagnostics/simple-logging)或 [Microsoft.Extensions.Logging](xref:core/logging-events-diagnostics/extensions-logging) 是日志记录的更好选择。
 
-配置了上下文时，会按 DbContext 实例注册侦听器。 使用 [诊断侦听器](xref:core/logging-events-diagnostics/diagnostic-listeners) 获取相同的信息，但为进程中的所有 DbContext 实例获取相同的信息。
+配置上下文时，将按 DbContext 实例注册侦听器。 使用[诊断侦听器](xref:core/logging-events-diagnostics/diagnostic-listeners)获取相同的信息，但要获取进程中所有 DbContext 实例的信息。
 
 ## <a name="registering-interceptors"></a>正在注册侦听器
 
@@ -56,8 +56,8 @@ public class TaggedQueryCommandInterceptorContext : BlogsContext
 ## <a name="database-interception"></a>数据库拦截
 
 > [!NOTE]
-> 数据库拦截已添加到 EF Core 3.0 中，仅可用于关系数据库提供程序。
-> 在 EF Core 5.0 中添加了保存点支持。
+> 数据库拦截是在 EF Core 3.0 中引入的，并且仅适用于关系数据库提供程序。
+> EF Core 5.0 中引入了保存点支持。
 
 低级别数据库截取拆分为下表中显示的三个接口。
 
@@ -182,7 +182,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 [!code-csharp[AadAuthenticationInterceptor](../../../samples/core/Miscellaneous/ConnectionInterception/AadAuthenticationInterceptor.cs?name=AadAuthenticationInterceptor)]
 
 > [!TIP]
-> [SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 现在支持通过连接字符串进行 AAD 身份验证。 有关详细信息，请参阅<xref:Microsoft.Data.SqlClient.SqlAuthenticationMethod>。
+> [SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 现在支持通过连接字符串进行 AAD 身份验证。 有关更多信息，请参见<xref:Microsoft.Data.SqlClient.SqlAuthenticationMethod>。
 
 > [!WARNING]
 > 请注意，如果对打开连接进行了同步调用，则侦听器将引发。 这是因为不存在用于获取访问令牌的非异步方法，并且没有 [从非异步上下文调用异步方法而不会造成死锁的通用](https://devblogs.microsoft.com/dotnet/configureawait-faq/)方法。
@@ -396,7 +396,7 @@ Free beer for unicorns
 ## <a name="savechanges-interception"></a>SaveChanges 拦截
 
 > [!NOTE]
-> EF Core 5.0 中添加了 SaveChanges 拦截。
+> EF Core 5.0 中引入了 SaveChanges 拦截。
 
 > [!TIP]  
 > 可以从 GitHub [下载 SaveChanges 侦听器示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) 。
@@ -502,7 +502,7 @@ public class EntityAudit
 * 如果 SaveChanges 成功，则更新审核消息以指示成功
 * 如果 SaveChanges 失败，则更新审核消息以指示失败
 
-在使用的替代将任何更改发送到数据库之前处理第一个阶段 `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 --> 与 `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+在使用的替代将任何更改发送到数据库之前处理第一个阶段 `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 -->  和 `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(

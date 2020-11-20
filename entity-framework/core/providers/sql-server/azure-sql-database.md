@@ -4,17 +4,17 @@ description: 如何指定具有 SQL Server Entity Framework Core 数据库提供
 author: AndriySvyryd
 ms.date: 11/05/2019
 uid: core/providers/sql-server/azure-sql-database
-ms.openlocfilehash: 9b2cc5e0790beb41295dcea6ae30c4ad15b537fa
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: ad202336c2c2efdfe17776952f2a65e98222ecc0
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065363"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003583"
 ---
 # <a name="specifying-azure-sql-database-options"></a>指定 Azure SQL 数据库选项
 
 >[!NOTE]
-> 此 API 是 EF Core 3.1 中新增的。
+> 此 API 是在 EF Core 3.1 中引入的。
 
 Azure SQL 数据库提供了 [各种定价选项](https://azure.microsoft.com/pricing/details/sql-database/single/) ，这些选项通常通过 Azure 门户进行配置。 但是，如果使用 [EF Core 迁移](xref:core/managing-schemas/migrations/index) 来管理架构，则可以在模型本身中指定所需的选项。
 

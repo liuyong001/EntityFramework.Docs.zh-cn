@@ -4,17 +4,17 @@ description: 使用值比较器来控制 EF Core 比较属性值的方式
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: d07aee866a542f55c4e1074c5782e67cb4035a89
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d59ab093c7e9d251aac80420972d3e35edabae0b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616681"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003609"
 ---
 # <a name="value-comparers"></a>值比较器
 
 > [!NOTE]  
-> 此功能是 EF Core 3.0 中新增的功能。
+> EF Core 3.0 中引入了此功能。
 
 > [!TIP]  
 > 可在 GitHub 上找到此文档中的代码作为可 [运行示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/)。

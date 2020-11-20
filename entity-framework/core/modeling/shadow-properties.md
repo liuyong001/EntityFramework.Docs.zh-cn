@@ -4,12 +4,12 @@ description: 在 Entity Framework Core 模型中配置影子和索引器属性
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: d419de2da2a9fc29e675dde76e824217347d2e9c
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503184"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003427"
 ---
 # <a name="shadow-and-indexer-properties"></a>影子和索引器属性
 
@@ -63,7 +63,7 @@ var blogs = context.Blogs
 ## <a name="property-bag-entity-types"></a>属性包实体类型
 
 > [!NOTE]
-> EF Core 5.0 中添加了对属性包实体类型的支持。
+> EF Core 5.0 中引入了对属性包实体类型的支持。
 
 仅包含索引器属性的实体类型称为 "属性包实体类型"。 这些实体类型没有影子属性，而 EF 将创建索引器属性。 目前仅 `Dictionary<string, object>` 支持作为属性包实体类型。 它必须配置为具有唯一名称的共享实体类型，并且 `DbSet` 必须使用调用来实现相应的属性 `Set` 。
 

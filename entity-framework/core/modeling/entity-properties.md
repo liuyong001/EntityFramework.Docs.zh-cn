@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 配置和映射实体属性
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 55c6f31543d4ce3257cf203eaf9fd2191301ea7e
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 67ea6eb9cc62c01c16ef33d4d1d1597576ec8b3d
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429591"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003402"
 ---
 # <a name="entity-properties"></a>实体属性
 
@@ -157,7 +157,7 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 ## <a name="column-collations"></a>列排序规则
 
 > [!NOTE]
-> EF Core 5.0 中已引入了此功能。
+> EF Core 5.0 中引入了此功能。
 
 可以在文本列上定义排序规则，以确定如何对它们进行比较和排序。 例如，以下代码段将 SQL Server 列配置为不区分大小写：
 

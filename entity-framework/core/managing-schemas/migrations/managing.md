@@ -4,12 +4,12 @@ description: 添加、删除和管理 Entity Framework Core 的数据库架构�
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 81f7cec54510d95b1e2432d56ff95110224fd9bf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429842"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003271"
 ---
 # <a name="managing-migrations"></a>管理迁移
 
@@ -40,9 +40,9 @@ Add-Migration AddBlogCreatedTimestamp
 
 向 **Migrations** 目录下的项目添加以下三个文件：
 
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp** -主迁移文件。 包含应用迁移所需的操作（在 `Up` 中）和还原迁移所需的操作（在 `Down` 中）。
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp** ：迁移元数据文件。 包含 EF 所用的信息。
-* **MyContextModelSnapshot.cs** --当前模型的快照。 用于确定添加下一迁移时的更改内容。
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp**-主迁移文件。 包含应用迁移所需的操作（在 `Up` 中）和还原迁移所需的操作（在 `Down` 中）。
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp**：迁移元数据文件。 包含 EF 所用的信息。
+* **MyContextModelSnapshot.cs**--当前模型的快照。 用于确定添加下一迁移时的更改内容。
 
 文件名中的时间戳有助于保证文件按时间顺序排列，以便你查看更改情况。
 
@@ -210,7 +210,7 @@ dotnet ef migrations list
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 > [!NOTE]
-> 此命令已添加到 EF Core 5.0。
+> 此命令是在 EF Core 5.0 中引入的。
 
 ```powershell
 Get-Migration
@@ -220,7 +220,7 @@ Get-Migration
 
 ## <a name="resetting-all-migrations"></a>正在重置所有迁移
 
-在某些极端情况下，可能需要删除所有迁移并重新开始。 这可以通过删除 _ *迁移* * 文件夹并删除数据库来轻松完成;此时，你可以创建新的初始迁移，其中将包含整个当前架构。
+在某些极端情况下，可能需要删除所有迁移并重新开始。 这可以通过删除 _ *迁移** 文件夹并删除数据库来轻松完成;此时，你可以创建新的初始迁移，其中将包含整个当前架构。
 
 还可以重置所有迁移并创建单个迁移，而不会丢失数据。 这有时称为 "squashing"，包括一些手动工作：
 

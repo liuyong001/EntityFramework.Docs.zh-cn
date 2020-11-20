@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 配置实体类型继承
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 3ec6e7bd98f9c9716c460d69fc707d95e5e47a05
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429515"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003622"
 ---
 # <a name="inheritance"></a>继承
 
@@ -64,7 +64,7 @@ EF 可以将 .NET 类型层次结构映射到数据库。 这使你可以像平�
 ## <a name="table-per-type-configuration"></a>每种类型一个表配置
 
 > [!NOTE]
->  (TPT) 的每种类型一个表是 EF Core 5.0 中的一种新功能。 EF6 支持每个具体的表类型 (TPC) ，但 EF Core 尚不支持。
+> EF Core 5.0 中引入了每种类型一个表 (TPT) 功能。 EF6 支持每个具体的表类型 (TPC) ，但 EF Core 尚不支持。
 
 在 TPT 映射模式下，所有类型都映射到各个表。 仅属于某个基类型或派生类型的属性存储在映射到该类型的一个表中。 映射到派生类型的表还存储将派生表与基表联接的外键。
 

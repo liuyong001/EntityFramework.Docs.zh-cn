@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 时配置实体类型之间�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: c92fa1904436ec43ff8918354a99440079e2a96a
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503210"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003258"
 ---
 # <a name="relationships"></a>关系
 
@@ -149,7 +149,7 @@ ms.locfileid: "94503210"
 ### <a name="configuring-navigation-properties"></a>配置导航属性
 
 > [!NOTE]
-> EF Core 5.0 中添加了此功能。
+> EF Core 5.0 中引入了此功能。
 
 创建导航属性后，你可能需要对其进行进一步配置。
 
@@ -269,7 +269,7 @@ ms.locfileid: "94503210"
 > 如果使用 [不可为 null 的引用类型](/dotnet/csharp/nullable-references) `IsRequired` ，则无需调用。
 
 > [!NOTE]
-> 是否在 EF Core 5.0 中添加了依赖项是否是必需的。
+> EF Core 5.0 中引入了配置依赖是否必需的功能。
 
 ### <a name="many-to-many"></a>多对多
 
@@ -320,14 +320,14 @@ CREATE TABLE [PostTag] (
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
 > [!NOTE]
-> EF Core 5.0 中添加了配置多对多关系的功能，但对于早期版本，请使用以下方法。
+> EF Core 5.0 中引入了配置多对多关系的功能，但对于以前的版本，请使用以下方法。
 
 您还可以通过只添加联接实体类型并映射两个单独的一对多关系来表示多对多关系。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=16-19,21-24)]
 
 > [!NOTE]
-> 尚未添加对来自数据库的多对多关系的支持。 请参阅 [跟踪问题](https://github.com/dotnet/efcore/issues/22475)。
+> 尚未添加对数据库中多对多关系搭建基架的支持。 请参阅[跟踪问题](https://github.com/dotnet/efcore/issues/22475)。
 
 ## <a name="additional-resources"></a>其他资源
 

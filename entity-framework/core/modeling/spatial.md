@@ -4,17 +4,17 @@ description: 在 Entity Framework Core 模型中使用空间数据
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a38e75e150b3d3404f2ed7619d05ba478c411117
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430516"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003440"
 ---
 # <a name="spatial-data"></a>空间数据
 
 > [!NOTE]
-> 此功能是在 EF Core 2.2 中添加的。
+> EF Core 2.2 中引入了此功能。
 
 空间数据表示对象的物理位置和形状。 许多数据库提供对此类数据的支持，以便能够与其他数据一起进行索引和查询。 常见方案包括从位置在给定距离内查询对象，或选择其边框包含给定位置的对象。 EF Core 支持使用 NetTopologySuite 空间库映射到空间数据类型。
 
