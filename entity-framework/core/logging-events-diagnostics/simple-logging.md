@@ -4,17 +4,17 @@ description: 使用 LogTo 从 EF Core DbContext 进行日志记录
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 49619cc10ea098e39e71dde347e00bbc3c39b13a
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431216"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003505"
 ---
-# <a name="simple-logging"></a>简单日志记录
+# <a name="simple-logging"></a>简单的日志记录
 
 > [!NOTE]
-> EF Core 5.0 中添加了此功能。
+> EF Core 5.0 中引入了此功能。
 
 > [!TIP]  
 > 可以从 GitHub [下载此文章的示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) 。
@@ -26,7 +26,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 
 ## <a name="configuration"></a>Configuration
 
-通过使用[LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) ，可以从任何类型的应用程序访问 EF Core 日志 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> [配置 DbContext 实例](xref:core/dbcontext-configuration/index)时。 此配置通常通过替代 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 来完成。 例如：
+可以通过使用 [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) 从任意类型的应用程序访问 EF Core 日志 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> [配置 DbContext 实例](xref:core/dbcontext-configuration/index)时。 此配置通常通过替代 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 来完成。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -114,7 +114,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 -->
 [!code-csharp[EnableDetailedErrors](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=EnableDetailedErrors)]
 
-## <a name="filtering"></a>筛选
+## <a name="filtering"></a>Filtering
 
 ### <a name="log-levels"></a>日志级别
 
@@ -143,7 +143,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 
 每条日志消息都分配到一个命名的分层记录器类别。 类别为：
 
-| Category                                             | Messages
+| 类别                                             | 消息
 |:-----------------------------------------------------|-------------------------------------------------
 | Microsoft.EntityFrameworkCore                        | 所有 EF Core 消息
 | Microsoft.entityframeworkcore               | 所有数据库交互

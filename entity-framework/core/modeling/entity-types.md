@@ -4,16 +4,16 @@ description: 如何使用 Entity Framework Core 配置和映射实体类型
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: 9094193640e7cab6db3fed7ae0ab818a455156ca
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 9d86b959b5e0360df6d782d8d1c1c2f9393fdf8b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429580"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003492"
 ---
 # <a name="entity-types"></a>实体类型
 
-在上下文中包含一种类型的 DbSet，这意味着它包含在 EF Core 的模型中;我们通常将此类类型称为 *实体* 。 EF Core 可以从/向数据库中读取和写入实体实例，如果使用的是关系数据库，EF Core 可以通过迁移为实体创建表。
+在上下文中包含一种类型的 DbSet，这意味着它包含在 EF Core 的模型中;我们通常将此类类型称为 *实体*。 EF Core 可以从/向数据库中读取和写入实体实例，如果使用的是关系数据库，EF Core 可以通过迁移为实体创建表。
 
 ## <a name="including-types-in-the-model"></a>在模型中包含类型
 
@@ -44,7 +44,7 @@ ms.locfileid: "94429580"
 ### <a name="excluding-from-migrations"></a>从迁移中排除
 
 > [!NOTE]
-> EF Core 5.0 中添加了从迁移中排除表的功能。
+> EF Core 5.0 中引入了从迁移中排除表的功能。
 
 有时在多个类型中映射相同的实体类型会很有用 `DbContext` 。 当使用 [绑定上下文](https://www.martinfowler.com/bliki/BoundedContext.html)时，尤其是对于 `DbContext` 每个边界上下文都有不同类型的情况。
 
