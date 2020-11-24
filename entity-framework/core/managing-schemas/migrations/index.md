@@ -4,12 +4,12 @@ description: 使用迁移通过 Entity Framework Core 管理数据库架构的�
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 9f1c9e266d60b7ed4aed783bb8e01864c93867ea
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429814"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003388"
 ---
 # <a name="migrations-overview"></a>迁移概述
 
@@ -141,7 +141,7 @@ _*_
 ### <a name="excluding-parts-of-your-model"></a>排除模型的各个部分
 
 > [!NOTE]
-> EF Core 5.0 中添加了此功能。
+> EF Core 5.0 中已引入此功能。
 
 有时，你可能希望引用其他 DbContext 中的类型。 这可能会导致迁移冲突。 若要防止出现这种情况，请从 DbContext 之一的迁移中排除该类型。
 

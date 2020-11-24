@@ -4,12 +4,12 @@ description: 概要介绍了 EF Core 的日志记录、事件、侦听器和诊�
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: fdf536dc6ec15e6e520d574b14527a4e7a7b1d72
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 2c44772b22112645f85cf0bffa680bc510ea5afb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431114"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003518"
 ---
 # <a name="overview-of-logging-and-interception"></a>日志记录和侦听的概述
 
@@ -32,7 +32,7 @@ Entity Framework Core (EF Core) 包含一些用于生成日志、响应事件和
 ## <a name="simple-logging"></a>简单的日志记录
 
 > [!NOTE]
-> EF Core 5.0 中添加了此功能。
+> EF Core 5.0 中已引入此功能。
 
 可以通过使用 [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) 从任意类型的应用程序访问 EF Core 日志 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> [配置 DbContext 实例](xref:core/dbcontext-configuration/index)时。 此配置通常通过替代 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 来完成。 例如：
 
@@ -55,7 +55,7 @@ Entity Framework Core (EF Core) 包含一些用于生成日志、响应事件和
 ## <a name="events"></a>事件
 
 > [!NOTE]
-> EF Core 5.0 中添加了其他事件。
+> EF Core 5.0 中引入了其他事件。
 
 当 EF Core 代码中发生某些事情时，EF Core 公开 [.NET 事件](/dotnet/standard/events/)以用作回调。 事件比侦听器简单，并且允许更灵活的注册。 但是，它们只是同步，因此不能执行非阻塞异步 I/O。
 
@@ -66,7 +66,7 @@ Entity Framework Core (EF Core) 包含一些用于生成日志、响应事件和
 ## <a name="interception"></a>Interception
 
 > [!NOTE]
-> EF Core 3.0 中添加了此功能。 EF Core 5.0 中添加了其他侦听器。
+> EF Core 3.0 中已引入此功能。 EF Core 5.0 中引入了其他侦听器。
 
 EF Core 侦听器支持 EF Core 操作的侦听、修改和/或抑制。 这包括低级数据库操作（例如执行命令）以及高级别操作（例如对 SaveChanges 的调用）。
 
