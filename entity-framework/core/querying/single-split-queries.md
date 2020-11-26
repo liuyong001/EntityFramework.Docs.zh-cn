@@ -4,12 +4,12 @@ description: 通过 Entity Framework Core 将查询转换为 SQL 中的单个查
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/single-split-queries
-ms.openlocfilehash: 1c99d931c01b99de199710ffe661e1aac7a37263
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ba282a0c5242b2eb87d681906571036d4751f6ac
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431174"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003557"
 ---
 # <a name="single-vs-split-queries"></a>单个查询和拆分查询
 
@@ -29,7 +29,7 @@ ORDER BY [b].[BlogId], [p].[PostId]
 ## <a name="split-queries"></a>拆分查询
 
 > [!NOTE]
-> EF Core 5.0 中已引入了此功能。 此功能仅在使用 `Include` 时可用。 [此问题](https://github.com/dotnet/efcore/issues/21234)跟踪了在不使用 `Include` 加载投影中相关数据的情况下对拆分查询的支持。
+> EF Core 5.0 中已引入此功能。 此功能仅在使用 `Include` 时可用。 [此问题](https://github.com/dotnet/efcore/issues/21234)跟踪了在不使用 `Include` 加载投影中相关数据的情况下对拆分查询的支持。
 
 通过 EF，可以指定应将给定 LINQ 查询拆分为多个 SQL 查询。 与 JOIN 不同，拆分查询为包含的每个集合导航生成额外的 SQL 查询：
 
