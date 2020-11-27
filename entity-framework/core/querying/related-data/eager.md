@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 预先加载相关数据
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 66956fcd85bb21a08c69fa93b93c12382bbfc8eb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430100"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003570"
 ---
 # <a name="eager-loading-of-related-data"></a>相关数据的预先加载
 
@@ -47,10 +47,15 @@ ms.locfileid: "94430100"
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
 
+> [!TIP]
+> 还可以使用单个 `Include` 方法加载多个导航。 对于作为所有引用的导航“链”，或者当它们以单个集合结尾时，这都是可能的。
+
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#IncludeMultipleNavigationsWithSingleInclude)]
+
 ## <a name="filtered-include"></a>经过筛选的包含
 
 > [!NOTE]
-> EF Core 5.0 中已引入了此功能。
+> EF Core 5.0 中已引入此功能。
 
 在应用包含功能来加载相关数据时，可对已包含的集合导航应用某些可枚举的操作，这样就可对结果进行筛选和排序。
 
