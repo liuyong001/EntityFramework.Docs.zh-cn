@@ -4,12 +4,12 @@ description: 通过 Entity Framework Core 异步查询和保存数据
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: cefbe32b34a38ed6d749ef3ddfff210d5db12332
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: d887bf898d741070f3f3d64b3baf0311b0ab2b63
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071891"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635791"
 ---
 # <a name="asynchronous-programming"></a>异步编程
 
@@ -23,6 +23,9 @@ ms.locfileid: "90071891"
 
 > [!WARNING]
 > EF Core 不支持在同一上下文实例上运行多个并行操作。 应始终等待操作完成，然后再开始下一个操作。 这通常是通过在每个异步操作上使用 `await` 关键字完成的。
+
+> [!WARNING]
+> [SqlClient](https://github.com/dotnet/SqlClient)的异步实现中存在一些已知问题 (例如[#593](https://github.com/dotnet/SqlClient/issues/593)、 [#601](https://github.com/dotnet/SqlClient/issues/601)和其他) 。
 
 > [!NOTE]
 > EF Core 将取消标记传递给中使用的基础数据库提供程序 (例如 SqlClient) 。 这些令牌可能会也可能不起作用-请参考数据库提供商的文档。  

@@ -4,21 +4,21 @@ description: EF Core 定义的 .NET 事件
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 21ee65b7a2c5155c4d5b45350f3f47bdcee22921
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 51c0bba5cf25e1d9ddd1fd9aebea50b9a03481a3
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431218"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635687"
 ---
 # <a name="net-events-in-ef-core"></a>EF Core 中的 .NET 事件
 
 > [!TIP]  
 > 可以从 GitHub [下载事件示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) 。
 
-Entity Framework Core (EF Core) 公开 [.net 事件](/dotnet/standard/events/) ，以在 EF Core 代码中发生某些事情时充当回调。 事件比 [侦听器](xref:core/logging-events-diagnostics/interceptors) 简单，并且允许更灵活的注册。 但是，它们只是同步，因此不能执行非阻塞异步 i/o。
+Entity Framework Core (EF Core) 公开 [.net 事件](/dotnet/standard/events/) ，以在 EF Core 代码中发生某些事情时充当回调。 事件比 [侦听器](xref:core/logging-events-diagnostics/interceptors) 简单，并且允许更灵活的注册。 但是，它们只是同步，因此不能执行非阻塞异步 I/O。
 
-每个实例都注册事件 `DbContext` 。 使用 [诊断侦听器](xref:core/logging-events-diagnostics/diagnostic-listeners) 获取相同的信息，但为进程中的所有 DbContext 实例获取相同的信息。
+每个实例都注册事件 `DbContext` 。 使用[诊断侦听器](xref:core/logging-events-diagnostics/diagnostic-listeners)获取相同的信息，但要获取进程中所有 DbContext 实例的信息。
 
 ## <a name="events-raised-by-ef-core"></a>EF Core 引发的事件
 
@@ -26,9 +26,9 @@ EF Core 引发以下事件：
 
 | 事件 | 引入的版本 | 引发时间
 |:------|--------------------|-------
-| `DbContext.SavingChanges` <!-- Issue #2748 -->| 5.0 | 在或的开头 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A><xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
-| `DbContext.SavedChanges`  <!-- Issue #2748 -->| 5.0 | 在成功 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
-| `DbContext.SaveChangesFailed`  <!-- Issue #2748 -->| 5.0 | 在失败 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SavingChanges?displayProperty=nameWithType> | 5.0 | 在或的开头 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A><xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SavedChanges?displayProperty=nameWithType> | 5.0 | 在成功 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesFailed?displayProperty=nameWithType> | 5.0 | 在失败 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Tracked?displayProperty=nameWithType> | 2.1 | 当上下文跟踪实体时
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.StateChanged?displayProperty=nameWithType> | 2.1 | 当跟踪的实体更改其状态时
 

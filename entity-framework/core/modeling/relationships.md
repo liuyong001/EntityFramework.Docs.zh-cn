@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 时配置实体类型之间�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003258"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635739"
 ---
 # <a name="relationships"></a>关系
 
@@ -149,7 +149,7 @@ ms.locfileid: "95003258"
 ### <a name="configuring-navigation-properties"></a>配置导航属性
 
 > [!NOTE]
-> EF Core 5.0 中引入了此功能。
+> EF Core 5.0 中已引入此功能。
 
 创建导航属性后，你可能需要对其进行进一步配置。
 
@@ -301,11 +301,13 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-在内部，EF 会创建一个实体类型来表示将被称为联接实体类型的联接表。 没有可用于此的特定 CLR 类型，因此 `Dictionary<string, object>` 使用。 模型中可能存在多个多对多关系，因此，在此情况下，必须为联接实体类型指定唯一名称 `PostTag` 。 此功能可用于共享类型的实体类型。
+在内部，EF 会创建一个实体类型来表示将被称为联接实体类型的联接表。 `Dictionary<string, object>` 用于处理外键属性的任意组合，有关详细信息，请参阅 [属性包实体类型](shadow-properties.md#property-bag-entity-types) 。 模型中可能存在多个多对多关系，因此，在此情况下，必须为联接实体类型指定唯一名称 `PostTag` 。 此功能可用于共享类型的实体类型。
 
-"多对多" 导航称为 "跳过导航"，因为它们实际上会跳过联接实体类型。 如果你正在运用大容量配置，则可以从获取所有 skip 导航 `GetSkipNavigations` 。
+"多对多" 导航称为 "跳过导航"，因为它们实际上会跳过联接实体类型。 如果你正在运用大容量配置，则可以从获取所有 skip 导航 <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> 。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Metadata)]
+
+#### <a name="join-entity-type-configuration"></a>联接实体类型配置
 
 通常会将配置应用到联接实体类型。 可以通过完成此操作 `UsingEntity` 。
 
@@ -319,8 +321,16 @@ CREATE TABLE [PostTag] (
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
+#### <a name="joining-relationships-configuration"></a>联接关系配置
+
+EF 使用联接实体类型上的 "2 1 对多" 关系来表示多对多关系。 可以在参数中配置这些关系 `UsingEntity` 。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Components)]
+
 > [!NOTE]
 > EF Core 5.0 中引入了配置多对多关系的功能，但对于以前的版本，请使用以下方法。
+
+#### <a name="indirect-many-to-many-relationships"></a>间接多对多关系
 
 您还可以通过只添加联接实体类型并映射两个单独的一对多关系来表示多对多关系。
 

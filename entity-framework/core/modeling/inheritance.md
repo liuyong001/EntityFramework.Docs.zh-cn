@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 配置实体类型继承
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 11bd653a53767aa732790b1222da1beff8ad26a9
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003622"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635752"
 ---
 # <a name="inheritance"></a>继承
 
@@ -90,6 +90,9 @@ CREATE TABLE [RssBlogs] (
 > [!NOTE]
 > 如果重命名了 primary key 约束，则新名称将应用于映射到层次结构的所有表，以后 EF 版本将允许在解决 [问题 19970](https://github.com/dotnet/efcore/issues/19970) 时为特定表重命名约束。
 
-如果要使用批量配置，可以通过调用来检索特定表的列名称 <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName%2A> 。
+如果要使用批量配置，可以通过调用来检索特定表的列名称 <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)> 。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TPTConfiguration.cs?name=Metadata&highlight=10)]
+
+> [!WARNING]
+> 在许多情况下，与 TPH 相比，TPT 显示的性能差。 [有关详细信息，请参阅性能文档](xref:core/performance/modeling-for-performance#inheritance-mapping)。

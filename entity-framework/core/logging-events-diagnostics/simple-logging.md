@@ -4,17 +4,17 @@ description: 使用 LogTo 从 EF Core DbContext 进行日志记录
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003505"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635609"
 ---
 # <a name="simple-logging"></a>简单的日志记录
 
 > [!NOTE]
-> EF Core 5.0 中引入了此功能。
+> EF Core 5.0 中已引入此功能。
 
 > [!TIP]  
 > 可以从 GitHub [下载此文章的示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) 。
@@ -24,9 +24,9 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 > [!TIP]
 > EF Core 还与 [Microsoft. Extensions. 日志记录](xref:core/logging-events-diagnostics/extensions-logging)，这需要更多配置，但通常更适合用于在生产应用程序中进行日志记录。
 
-## <a name="configuration"></a>Configuration
+## <a name="configuration"></a>配置
 
-可以通过使用 [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) 从任意类型的应用程序访问 EF Core 日志 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> [配置 DbContext 实例](xref:core/dbcontext-configuration/index)时。 此配置通常通过替代 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 来完成。 例如：
+在 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [配置 DbContext 实例](xref:core/dbcontext-configuration/index)时，可以使用任何类型的应用程序访问 EF Core 日志。 此配置通常通过替代 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 来完成。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -114,7 +114,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 -->
 [!code-csharp[EnableDetailedErrors](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=EnableDetailedErrors)]
 
-## <a name="filtering"></a>Filtering
+## <a name="filtering"></a>筛选
 
 ### <a name="log-levels"></a>日志级别
 
@@ -188,7 +188,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 [!code-csharp[CustomFilter](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=CustomFilter)]
 
 > [!TIP]
-> 使用自定义筛选器或使用此处所示的任何其他选项进行筛选比 LogTo 委托中的筛选更有效。 这是因为如果筛选器确定不应记录消息，则不会创建日志消息。
+> 使用自定义筛选器或使用此处所示的任何其他选项进行筛选比委托中的筛选更有效 `LogTo` 。 这是因为如果筛选器确定不应记录消息，则不会创建日志消息。
 
 ## <a name="configuration-for-specific-messages"></a>特定消息的配置
 
@@ -260,14 +260,14 @@ dbug: 10/6/2020 10:52:45.585 RelationalEventId.TransactionCommitted[20202] (Micr
       Committed transaction.
 ```
 
-可以通过从[DbContextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15)传递值来自定义此内容 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> -->，如以下部分所示。
+可以通过传递中的值来自定义此内容 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> ，如以下部分所示。
 
 > [!TIP]
 > 请考虑使用 [Microsoft Extensions](/aspnet/core/fundamentals/logging) 日志来更好地控制日志格式。
 
 ### <a name="using-utc-time"></a>使用 UTC 时间
 
-默认情况下，timestamnps 在调试时专用于本地消耗。 使用 `DbContextLoggerOptions.DefaultWithUtcTime` 可以改为使用与区域性无关的 UTC 时间戳，但保留所有其他内容。 例如：
+默认情况下，时间戳在调试时用于本地使用。 使用 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.DefaultWithUtcTime?displayProperty=nameWithType> 可以改为使用与区域性无关的 UTC 时间戳，但保留所有其他内容。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -295,7 +295,7 @@ dbug: 2020-10-06T17:55:39.0351684Z RelationalEventId.TransactionCommitted[20202]
 
 ### <a name="single-line-logging"></a>单行日志记录
 
-有时，每条日志消息只获取一行很有用。 这可以由启用 `DbContextLoggerOptions.SingleLine` 。 例如：
+有时，每条日志消息只获取一行很有用。 这可以由启用 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.SingleLine?displayProperty=nameWithType> 。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -316,7 +316,7 @@ dbug: 10/6/2020 10:52:45.725 RelationalEventId.TransactionCommitted[20202] (Micr
 
 ### <a name="other-content-options"></a>其他内容选项
 
-[DbContextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15)中的其他标志 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> --> 可用于修整日志中包含的元数据量。 这对于单行日志记录很有用。 例如：
+中的其他标志 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> 可用于修整日志中包含的元数据量。 这对于单行日志记录很有用。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

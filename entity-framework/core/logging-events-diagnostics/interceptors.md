@@ -4,14 +4,14 @@ description: 截获数据库操作和其他事件
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003401"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635804"
 ---
-# <a name="interceptors"></a>侦听器
+# <a name="interceptors"></a>拦截器
 
 Entity Framework Core (EF Core) 拦截允许拦截、修改和/或禁止 EF Core 操作。 这包括低级数据库操作（例如执行命令）以及高级别操作（例如对 SaveChanges 的调用）。
 
@@ -401,7 +401,7 @@ Free beer for unicorns
 > [!TIP]  
 > 可以从 GitHub [下载 SaveChanges 侦听器示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) 。
 
-<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 侦听点由 `ISaveChangesInterceptor` <!-- Issue #2748 --> 交互. 对于其他侦听器， `SaveChangesInterceptor` <!-- Issue #2748 --> 为方便起见，提供了具有无操作方法的基类。
+<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 侦听点由 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> 接口定义。 对于其他侦听器，为 <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> 方便起见，提供了不带操作的方法的基类。
 
 > [!TIP]
 > 拦截功能强大。 但是，在许多情况下，重写 SaveChanges 方法或使用 DbContext 上公开的 [savechanges 的 .net 事件](xref:core/logging-events-diagnostics/events) 可能更容易。
@@ -502,7 +502,7 @@ public class EntityAudit
 * 如果 SaveChanges 成功，则更新审核消息以指示成功
 * 如果 SaveChanges 失败，则更新审核消息以指示失败
 
-在使用的替代将任何更改发送到数据库之前处理第一个阶段 `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 -->  和 `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+在使用和的重写将任何更改发送到数据库之前，先处理第一个阶段 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChanges%2A?displayProperty=nameWithType> <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChangesAsync%2A?displayProperty=nameWithType> 。
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -538,7 +538,7 @@ public class EntityAudit
 -->
 [!code-csharp[SavingChanges](../../../samples/core/Miscellaneous/SaveChangesInterception/AuditingInterceptor.cs?name=SavingChanges)]
 
-同时替代同步和异步方法可确保无论是否调用 SaveChanges 或 SaveChangesAsync，都将发生审核。 另请注意，异步重载本身能够对审核数据库执行非阻塞异步 i/o。 你可能希望从 sync SavingChanges 方法中引发，以确保所有数据库 i/o 都是异步的。 这就要求应用程序始终调用 SaveChangesAsync 而绝不会调用。
+同时替代同步和异步方法可确保无论是否 `SaveChanges` 调用了或，都将发生审核 `SaveChangesAsync` 。 另请注意，异步重载本身能够对审核数据库执行非阻塞异步 i/o。 你可能希望从 sync 方法中引发 `SavingChanges` ，以确保所有数据库 i/o 都是异步的。 这样，应用程序就需要始终调用 `SaveChangesAsync` 和从不 `SaveChanges` 。
 
 #### <a name="the-audit-message"></a>审核消息
 
@@ -598,7 +598,7 @@ public class EntityAudit
 
 #### <a name="detecting-success"></a>检测成功
 
-审核实体存储在侦听器上，以便一旦 SaveChanges 成功或失败，就可以再次访问该实体。 如果成功， `ISaveChangesInterceptor.SavedChanges` <!-- Issue #2748 --> 或 `ISaveChangesInterceptor.SavedChangesAsync` <!-- Issue #2748 --> 调用 。
+审核实体存储在侦听器上，以便一旦 SaveChanges 成功或失败，就可以再次访问该实体。 如果成功， <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChanges%2A?displayProperty=nameWithType> 则为; 否则 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChangesAsync%2A?displayProperty=nameWithType> 为。
 
 <!--
     public int SavedChanges(SaveChangesCompletedEventData eventData, int result)
@@ -638,7 +638,7 @@ public class EntityAudit
 
 #### <a name="detecting-failure"></a>检测失败
 
-处理故障的方式与成功的方式几乎相同，但在 `ISaveChangesInterceptor.SaveChangesFailed` <!-- Issue #2748 --> 或 `ISaveChangesInterceptor.SaveChangesFailedAsync` <!-- Issue #2748 --> 方法。 事件数据包含引发的异常。
+处理失败的方式与成功相同，但在或方法中是 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailed%2A?displayProperty=nameWithType> 如此 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailedAsync%2A?displayProperty=nameWithType> 。 事件数据包含引发的异常。
 
 <!--
     public void SaveChangesFailed(DbContextErrorEventData eventData)

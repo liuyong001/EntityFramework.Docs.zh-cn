@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 配置和映射实体属性
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 67ea6eb9cc62c01c16ef33d4d1d1597576ec8b3d
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003402"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635544"
 ---
 # <a name="entity-properties"></a>实体属性
 
@@ -152,12 +152,12 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?name=Required&highlight=3-5)]
 
-***
+**_
 
 ## <a name="column-collations"></a>列排序规则
 
 > [!NOTE]
-> EF Core 5.0 中引入了此功能。
+> EF Core 5.0 中已引入此功能。
 
 可以在文本列上定义排序规则，以确定如何对它们进行比较和排序。 例如，以下代码段将 SQL Server 列配置为不区分大小写：
 
@@ -166,3 +166,20 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 如果数据库中的所有列都需要使用特定的排序规则，请改为在数据库级别定义排序规则。
 
 有关排序规则 EF Core 支持的常规信息，请参阅 [排序规则文档页](xref:core/miscellaneous/collations-and-case-sensitivity)。
+
+## <a name="column-comments"></a>列注释
+
+您可以设置在数据库列上设置的任意文本注释，以允许您在数据库中记录架构：
+
+### <a name="data-annotations"></a>[数据批注](#tab/data-annotations)
+
+> [!NOTE]
+> EF Core 5.0 中引入了通过数据批注设置注释。
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=4)]
+
+### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnComment.cs?name=ColumnComment&highlight=5)]
+
+_**

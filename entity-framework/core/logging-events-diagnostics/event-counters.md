@@ -4,12 +4,12 @@ description: 利用 .NET 事件计数器跟踪 EF Core 性能和诊断异常
 author: roji
 ms.date: 11/17/2020
 uid: core/logging-events-diagnostics/event-counters
-ms.openlocfilehash: 46acfe82d8aeb7d16146bae0cc2cd4ff733e2831
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 73d360b266db3d3252defbf4a4035c0eb430e22e
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003686"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635817"
 ---
 # <a name="event-counters"></a>事件计数器
 
@@ -77,7 +77,7 @@ Press p to pause, r to resume, q to quit.
 
 计数器名称                          | 说明
 ------------------------------------- | ----
-活动 Dbcontext                     | 当前应用程序中的活动的未释放 DbContext 实例数。 如果此数字持续增长，则可能存在泄漏，因为 DbContext 实例没有正确释放。 请注意，如果启用了 [上下文池](xref:core/miscellaneous/context-pooling) ，则此数目包括当前未使用的共用 DbContext 实例。
+活动 Dbcontext                     | 当前应用程序中的活动的未释放 DbContext 实例数。 如果此数字持续增长，则可能存在泄漏，因为 DbContext 实例没有正确释放。 请注意，如果启用了 [上下文池](xref:core/performance/advanced-performance-topics#dbcontext-pooling) ，则此数目包括当前未使用的共用 DbContext 实例。
 执行策略操作失败 | 数据库操作执行失败的次数。 如果启用重试执行策略，则会在同一操作的多次尝试中包括每个单独的故障。 这可用于检测基础结构的暂时性问题。
 开放式并发故障       | `SaveChanges`由于出现了开放式并发错误而失败的次数，因为数据存储区中的数据自代码加载后发生了更改。 这对应于要 <xref:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException> 引发的。
 查询                               | 执行的查询数。

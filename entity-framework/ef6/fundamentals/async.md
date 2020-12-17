@@ -4,12 +4,12 @@ description: 异步查询并保存实体框架6
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/async
-ms.openlocfilehash: 2b5f6f868cbf2e0699a943cf68c8568550f4ba36
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 77204f56e4dca63322c8ae2e1117318262f16f83
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063395"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635726"
 ---
 # <a name="async-query-and-save"></a>异步查询并保存
 > [!NOTE]
@@ -77,7 +77,7 @@ EF6 引入了对异步查询的支持，并使用 .NET 4.5 中引入的 [async �
     }
 ```
 
- 
+ 
 
 ## <a name="create-a-synchronous-program"></a>创建同步程序
 
@@ -137,32 +137,32 @@ EF6 引入了对异步查询的支持，并使用 .NET 4.5 中引入的 [async �
     }
 ```
 
-此代码调用 **PerformDatabaseOperations** 方法，该方法将新的 **博客** 保存到数据库，然后从数据库中检索所有 **博客** 并将其打印到 **控制台**。 完成此操作后，程序将一天的报价写入 **控制台**。
+此代码调用方法，该 `PerformDatabaseOperations` 方法将新的 **博客** 保存到数据库，然后从数据库中检索所有 **博客** 并将其打印到 **控制台**。 完成此操作后，程序将一天的报价写入 **控制台**。
 
 由于代码是同步的，因此，当我们运行程序时，可以观察到以下执行流：
 
-1.  **SaveChanges** 开始将新 **博客** 推送到数据库
-2.  **SaveChanges** 完成
+1.  `SaveChanges` 开始将新 **博客** 推送到数据库
+2.  `SaveChanges` 表示
 3.  所有 **博客** 的查询都发送到数据库
 4.  查询返回并将结果写入 **控制台**
 5.  将日报价写入 **控制台**
 
-![同步输出](~/ef6/media/syncoutput.png) 
+![同步输出](~/ef6/media/syncoutput.png) 
 
- 
+ 
 
 ## <a name="making-it-asynchronous"></a>使其异步
 
 现在，我们已启动并运行程序，接下来可以开始使用新的 async 和 await 关键字。 我们已对 Program.cs 进行了以下更改
 
-1.  第2行： **system.web** 命名空间的 using 语句使我们能够访问 EF async extension 方法。
-2.  第4行：用于 **system.web** 命名空间的 using 语句允许使用 **任务** 类型。
-3.  第12行 & 18：我们正在捕获的任务是监视 **PerformSomeDatabaseOperations** (第) 12 行的进度，然后在程序的所有工作完成 (第) 18 行后阻止程序执行完成此任务完成。
-4.  第25行：我们更新了 **PerformSomeDatabaseOperations** ，将其标记为 **async** 并返回一个 **任务**。
-5.  第35行：现在，我们正在调用 SaveChanges 的异步版本，并等待其完成。
-6.  第42行：我们正在调用 System.linq.enumerable.tolist 的异步版本，并等待结果。
+1.  第2行：命名空间的 using 语句 `System.Data.Entity` 使我们能够访问 EF async extension 方法。
+2.  第4行：命名空间的 using 语句 `System.Threading.Tasks` 允许使用该 `Task` 类型。
+3.  第12行 & 18：我们正在捕获到监视 `PerformSomeDatabaseOperations` (行 12) 进度的任务，然后在程序的所有工作完成 (第) 18 行后阻止程序执行完成此任务完成。
+4.  第25行：我们更新 `PerformSomeDatabaseOperations` 为标记为 `async` ，并返回 `Task` 。
+5.  第35行：我们正在调用的异步版本 `SaveChanges` ，并等待其完成。
+6.  第42行：我们正在调用的异步版本 `ToList` ，并等待结果。
 
-有关 System.web 命名空间中可用扩展方法的完整列表，请参阅 QueryableExtensions 类。 *还需要向 using 语句添加 "使用 System.web"。*
+有关命名空间中可用扩展方法的完整列表 `System.Data.Entity` ，请参阅 `QueryableExtensions` 类。 *还需要将添加 `using System.Data.Entity` 到 using 语句。*
 
 ``` csharp
     using System;
@@ -222,18 +222,18 @@ EF6 引入了对异步查询的支持，并使用 .NET 4.5 中引入的 [async �
 
 由于代码是异步的，因此，我们可以在运行程序时观察到不同的执行流程：
 
-1. **SaveChanges** 开始将新 **博客** 推送到数据库  
-    *将命令发送到数据库后，当前托管线程不需要更多计算时间。 **PerformDatabaseOperations** 方法将返回 (，即使尚未完成执行 Main 方法中的) 和程序流。*
+1. `SaveChanges` 开始将新 **博客** 推送到数据库  
+    *将命令发送到数据库后，当前托管线程不需要更多计算时间。 `PerformDatabaseOperations` 即使未完成执行 Main 方法中的) 和程序流，方法也会返回 (。*
 2. **将日报价写入控制台**  
-    *由于在 Main 方法中没有更多的工作要做，因此，在数据库操作完成前，会阻止在等待调用上托管线程。完成后，我们将执行 **PerformDatabaseOperations** 的剩余部分。*
-3.  **SaveChanges** 完成  
+    *由于在 Main 方法中没有更多的工作要做，因此 `Wait` 直到数据库操作完成后，调用中的托管线程才会被阻止。完成后，我们将执行的其余部分 `PerformDatabaseOperations` 。*
+3.  `SaveChanges` 表示  
 4.  所有 **博客** 的查询都发送到数据库  
     *同样，在数据库中处理查询时，托管线程可以自由地执行其他工作。由于所有其他执行都已完成，线程只会在等待调用时停止。*
 5.  查询返回并将结果写入 **控制台**  
 
-![异步输出](~/ef6/media/asyncoutput.png) 
+![异步输出](~/ef6/media/asyncoutput.png) 
 
- 
+ 
 
 ## <a name="the-takeaway"></a>要点在于
 
