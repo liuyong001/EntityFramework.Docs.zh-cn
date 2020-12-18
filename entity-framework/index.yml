@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 71b676ca7890997c84aa6c80cfdbcf934406d7a9
-  ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+  ms.openlocfilehash: 644d3ad0654e8d97835d4a2e6ee3d2ba3cbaf370
+  ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 11/20/2020
-  ms.locfileid: "95003674"
+  ms.lasthandoff: 12/17/2020
+  ms.locfileid: "97635830"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -136,6 +136,8 @@ additionalContent:
         text: 异步查询
       - url: core/querying/raw-sql.md
         text: 原始 SQL 查询
+      - url: core/querying/user-defined-function-mapping.md
+        text: 用户定义的函数映射
       - url: core/querying/filters.md
         text: 全局查询筛选器
     - title: 管理数据库架构
