@@ -4,12 +4,12 @@ description: 用于创建和管理包含或不包含依赖关系注入的 DbCont
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: f4d51e10555844b5a14000a464f86d3440d5749e
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 93d5942fbc81ee0ae9aeff0c5c8b9e20b160d512
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003284"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635387"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbContext 生存期、配置和初始化
 
@@ -42,7 +42,7 @@ ms.locfileid: "95003284"
 
 在许多 Web 应用程序中，每个 HTTP 请求都对应于单个工作单元。 这使得上下文生存期与请求的生存期相关，成为 Web 应用程序的一个良好默认值。
 
-[使用依赖关系注入配置](/aspnet/core/fundamentals/startup) ASP.NET Core 应用程序。 可以使用 `Startup.cs` 的 [`ConfigurureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method) 方法中的 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 将 EF Core 添加到此配置。 例如：
+[使用依赖关系注入配置](/aspnet/core/fundamentals/startup) ASP.NET Core 应用程序。 可以使用 `Startup.cs` 的 [`ConfigureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method) 方法中的 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 将 EF Core 添加到此配置。 例如：
 
 <!--
         public void ConfigureServices(IServiceCollection services)

@@ -4,12 +4,12 @@ description: 数据库提供程序的文档，该提供程序允许将 Entity Fr
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: b167f53515799efdaead232f44ad5eab37fb0b14
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 8bfce78465e8194544562c3ecac4d3398ca91265
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003596"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635583"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB Provider
 
@@ -103,12 +103,12 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!NOTE]
 >只要分区键属性[转换为字符串](xref:core/modeling/value-conversions)，则它可以为任意类型。
 
-配置分区键属性后，应始终具有非 null 值。 通过添加 `WithPartitionKey` 调用，可以将查询设为单分区。
+配置分区键属性后，应始终具有非 null 值。 通过添加 <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A> 调用，可以将查询设为单分区。
 
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
 
 > [!NOTE]
-> EF Core 5.0 中引入了 `WithPartitionKey`。
+> EF Core 5.0 中引入了 <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A>。
 
 通常建议将分区键添加到主键，因为这样可以最好地反映服务器语义，并允许进行某些优化，例如在 `FindAsync` 中。
 
@@ -212,10 +212,10 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!NOTE]
 > 在 EF Core 5.0 中引入了对 eTag 并发性的支持。
 
-若要配置实体类型以使用[乐观并发](xref:core/modeling/concurrency)，请调用 `UseETagConcurrency`。 此调用将在[阴影状态](xref:core/modeling/shadow-properties)中设置一个 `_etag` 属性，并将它设置为并发令牌。
+若要配置实体类型以使用[乐观并发](xref:core/modeling/concurrency)，请调用 <xref:Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.UseETagConcurrency%2A>。 此调用将在[阴影状态](xref:core/modeling/shadow-properties)中设置一个 `_etag` 属性，并将它设置为并发令牌。
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETag)]
 
-为了更轻松地解决并发性错误，可使用 `IsETagConcurrency` 将 eTag 映射到 CLR 属性。
+为了更轻松地解决并发性错误，可使用 <xref:Microsoft.EntityFrameworkCore.CosmosPropertyBuilderExtensions.IsETagConcurrency%2A> 将 eTag 映射到 CLR 属性。
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETagProperty)]
