@@ -176,6 +176,8 @@
               href: core/querying/raw-sql.md
             - name: 数据库函数
               href: core/querying/database-functions.md
+            - name: 用户定义的函数映射
+              href: core/querying/user-defined-function-mapping.md
             - name: 全局查询筛选器
               href: core/querying/filters.md
             - name: 查询标记
@@ -228,6 +230,20 @@
               href: core/testing/sqlite.md
             - name: 使用 InMemory 进行测试
               href: core/testing/in-memory.md
+        - name: 性能
+          items:
+            - name: 简介
+              href: core/performance/index.md
+            - name: 性能诊断
+              href: core/performance/performance-diagnosis.md
+            - name: 高效查询
+              href: core/performance/efficient-querying.md
+            - name: 高效更新
+              href: core/performance/efficient-updating.md
+            - name: 性能建模
+              href: core/performance/modeling-for-performance.md
+            - name: 高级性能主题
+              href: core/performance/advanced-performance-topics.md
         - name: 杂项
           items:
             - name: 支持的 .NET 实现
@@ -307,7 +323,7 @@
             - name: 设计时服务
               href: core/cli/services.md
         - name: EF Core API 参考 >>
-          href: /dotnet/api/?view=efcore-3.1
+          href: /dotnet/api/?view=efcore-5.0
     - name: Entity Framework 6
       items:
         - name: 概述
