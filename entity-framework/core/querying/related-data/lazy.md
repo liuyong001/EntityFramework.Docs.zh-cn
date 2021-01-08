@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 延迟加载相关数据
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/lazy
-ms.openlocfilehash: c42cde469e2be38d53a46cb6c5c252a088978e5c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 55622b9c5a8f70ef4e7246d6eb14678036948f18
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078861"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635453"
 ---
 # <a name="lazy-loading-of-related-data"></a>相关数据的延迟加载
 
@@ -52,6 +52,9 @@ public class Post
     public virtual Blog Blog { get; set; }
 }
 ```
+
+> [!WARNING]
+> 延迟加载可能会导致发生不必要的额外数据库往返（即 N+1 问题），应注意避免此问题。 有关详细信息，请参阅[性能部分](xref:core/performance/efficient-querying#beware-of-lazy-loading)。
 
 ## <a name="lazy-loading-without-proxies"></a>不使用代理的延迟加载
 

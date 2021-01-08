@@ -4,12 +4,12 @@ description: Entity Framework Core 5.0 中引入的中断性变更的完整列�
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: e2537dbc1d5dba48450bd0fea7712054ba2fa622
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 7a13c9a6f6bd299991c379ec490480e1fbb4ba46
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503171"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635466"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>EF Core 5.0 中的中断性变更
 
@@ -29,8 +29,11 @@ API 和行为的下列更改有可能导致现有应用程序在更新到 EF Cor
 | [Cosmos：GetPropertyName 和 SetPropertyName 已重命名](#cosmos-metadata)                                                          | 低        |
 | [当实体状态从“已分离”更改为“未更改”、“已更新”或“已删除”时，将调用值生成器](#non-added-generation) | 低        |
 | [IMigrationsModelDiffer 当前使用 IRelationalModel](#relational-model)                                                                 | 低        |
+| [ToView() 因迁移具有不同的处理方式](#toview)                                                                              | 低        |
+| [ToTable(null) 将实体类型标记为未映射到表](#totable)                                                              | 低        |
 | [鉴别器是只读的](#read-only-discriminators)                                                                             | 低        |
 | [特定于提供程序的 EF.Functions 方法针对 InMemory 提供程序引发](#no-client-methods)                                              | 低        |
+| [IProperty.GetColumnName() 现已过时](#getcolumnname-obsolete)                                                                  | 低        |
 | [IndexBuilder.HasName 现已过时](#index-obsolete)                                                                               | 低        |
 | [现已包括用于搭建实施了反向工程的模型的复数化程序](#pluralizer)                                                 | 低        |
 | [INavigationBase 替换某些 API 中的 INavigation 以支持跳过导航](#inavigationbase)                                     | 低        |
@@ -340,6 +343,64 @@ var hasDifferences = modelDiffer.HasDifferences(
 
 我们计划在 6.0 中改进这种体验（[请参阅 #22031](https://github.com/dotnet/efcore/issues/22031)）
 
+<a name="toview"></a>
+
+### <a name="toview-is-treated-differently-by-migrations"></a>ToView() 因迁移具有不同的处理方式
+
+[跟踪问题 #2725](https://github.com/dotnet/efcore/issues/2725)
+
+#### <a name="old-behavior"></a>旧行为
+
+如果调用 `ToView(string)`，迁移会将实体类型映射到视图，但会忽略该类型。
+
+#### <a name="new-behavior"></a>新行为
+
+现在，`ToView(string)` 除了将实体类型映射到视图，还会将其标记为未映射到表。 这会导致升级到 EF Core 5 之后的第一次迁移尝试删除此实体类型的默认表，因为它不会被忽略。
+
+#### <a name="why"></a>原因
+
+EF Core 现在允许同时映射到表和视图的实体类型，因此 `ToView` 不再是应由迁移忽略的有效指示器。
+
+#### <a name="mitigations"></a>缓解措施
+
+使用以下代码将映射的表标记为从迁移中排除：
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().ToTable("UserView", t => t.ExcludeFromMigrations());
+}
+```
+
+<a name="totable"></a>
+
+### <a name="totablenull-marks-the-entity-type-as-not-mapped-to-a-table"></a>ToTable(null) 将实体类型标记为未映射到表
+
+[跟踪问题 #21172](https://github.com/dotnet/efcore/issues/21172)
+
+#### <a name="old-behavior"></a>旧行为
+
+`ToTable(null)` 会将表名称重置为默认值。
+
+#### <a name="new-behavior"></a>新行为
+
+`ToTable(null)` 现在会将实体类型标记为未映射到任何表。
+
+#### <a name="why"></a>原因
+
+EF Core 现在允许同时映射到表和视图的实体类型，因此使用 `ToTable(null)` 指示其未映射到任何表。
+
+#### <a name="mitigations"></a>缓解措施
+
+如果表名称未映射到视图或 DbFunction，请使用以下代码将其重置为默认值：
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().Metadata.RemoveAnnotation(RelationalAnnotationNames.TableName);
+}
+```
+
 <a name="read-only-discriminators"></a>
 
 ### <a name="discriminators-are-read-only"></a>鉴别器是只读的
@@ -389,6 +450,32 @@ modelBuilder.Entity<BaseEntity>()
 #### <a name="mitigations"></a>缓解措施
 
 由于无法准确模拟数据库函数的行为，因此应根据生产中的同一种数据库测试包含这些函数的查询。
+
+<a name="getcolumnname-obsolete"></a>
+
+### <a name="ipropertygetcolumnname-is-now-obsolete"></a>IProperty.GetColumnName() 现已过时
+
+[跟踪问题 #2266](https://github.com/dotnet/efcore/issues/2266)
+
+#### <a name="old-behavior"></a>旧行为
+
+`GetColumnName()` 返回属性将映射到的列的名称。
+
+#### <a name="new-behavior"></a>新行为
+
+`GetColumnName()` 仍返回属性所映射到的列的名称，但此行为现在是不明确的，因为 EF Core 5 支持 TPT 并支持同时映射到视图或函数，在视图或函数中，这些映射可对同一属性使用不同的列名。
+
+#### <a name="why"></a>原因
+
+我们将此方法标记为已过时，以指导用户更准确地重载 - <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)>。
+
+#### <a name="mitigations"></a>缓解措施
+
+使用以下代码获取特定表的列名：
+
+```csharp
+var columnName = property.GetColumnName(StoreObjectIdentifier.Table("Users", null)));
+```
 
 <a name="index-obsolete"></a>
 
