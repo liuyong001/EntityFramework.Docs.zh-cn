@@ -4,12 +4,12 @@ description: 截获数据库操作和其他事件
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e3b2f1a0f1a97d211bcaba0633955a7fe9c0aa91
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635804"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128584"
 ---
 # <a name="interceptors"></a>拦截器
 
@@ -26,7 +26,7 @@ Entity Framework Core (EF Core) 拦截允许拦截、修改和/或禁止 EF Core
 <!--
 public class ExampleContext : BlogsContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.AddInterceptors(new TaggedQueryCommandInterceptor());
 }
 -->
@@ -42,10 +42,10 @@ public class ExampleContext : BlogsContext
 <!--
 public class TaggedQueryCommandInterceptorContext : BlogsContext
 {
-    private static readonly TaggedQueryCommandInterceptor _interceptor 
+    private static readonly TaggedQueryCommandInterceptor _interceptor
         = new TaggedQueryCommandInterceptor();
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.AddInterceptors(_interceptor);
 }
 -->
@@ -75,7 +75,7 @@ public class TaggedQueryCommandInterceptorContext : BlogsContext
 
 ### <a name="example-command-interception-to-add-query-hints"></a>示例：命令侦听以添加查询提示
 
-> [!TIP]  
+> [!TIP]
 > 可以从 GitHub [下载命令侦听器示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CommandInterception) 。
 
 在将 <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor> SQL 发送到数据库之前，可以使用对其进行修改。 此示例演示如何修改 SQL 以包含查询提示。
@@ -148,7 +148,7 @@ FROM [Blogs] AS [b]
 
 ### <a name="example-connection-interception-for-sql-azure-authentication-using-add"></a>示例：使用 ADD 进行 SQL Azure 身份验证的连接拦截
 
-> [!TIP]  
+> [!TIP]
 > 可以从 GitHub [下载连接侦听器示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) 。
 
 在 <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> <xref:System.Data.Common.DbConnection> 用于连接到数据库之前，可以使用来操作。 这可用于获取 AAD) 访问令牌 (Azure Active Directory。 例如：
@@ -182,7 +182,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 [!code-csharp[AadAuthenticationInterceptor](../../../samples/core/Miscellaneous/ConnectionInterception/AadAuthenticationInterceptor.cs?name=AadAuthenticationInterceptor)]
 
 > [!TIP]
-> [SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 现在支持通过连接字符串进行 AAD 身份验证。 有关更多信息，请参见<xref:Microsoft.Data.SqlClient.SqlAuthenticationMethod>。
+> [SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 现在支持通过连接字符串进行 AAD 身份验证。 有关更多信息，请参见 <xref:Microsoft.Data.SqlClient.SqlAuthenticationMethod> 。
 
 > [!WARNING]
 > 请注意，如果对打开连接进行了同步调用，则侦听器将引发。 这是因为不存在用于获取访问令牌的非异步方法，并且没有 [从非异步上下文调用异步方法而不会造成死锁的通用](https://devblogs.microsoft.com/dotnet/configureawait-faq/)方法。
@@ -192,7 +192,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 
 ### <a name="example-advanced-command-interception-for-caching"></a>示例：缓存的高级命令拦截
 
-> [!TIP]  
+> [!TIP]
 > 可以从 GitHub [下载高级命令侦听器示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CachingInterception) 。
 
 EF Core 侦听器可以：
@@ -343,7 +343,7 @@ EF Core 侦听器可以：
         {
             Console.WriteLine(await GetDailyMessage(context));
         }
-        
+
         #region GetDailyMessage
         async Task<string> GetDailyMessage(DailyMessageContext context)
             => (await context.DailyMessages.TagWith("Get_Daily_Message").OrderBy(e => e.Id).LastAsync()).Message;
@@ -398,7 +398,7 @@ Free beer for unicorns
 > [!NOTE]
 > EF Core 5.0 中引入了 SaveChanges 拦截。
 
-> [!TIP]  
+> [!TIP]
 > 可以从 GitHub [下载 SaveChanges 侦听器示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) 。
 
 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 侦听点由 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> 接口定义。 对于其他侦听器，为 <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> 方便起见，提供了不带操作的方法的基类。

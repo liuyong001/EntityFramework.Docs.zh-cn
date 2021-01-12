@@ -11,18 +11,18 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 9666bbde8ae9608dcebbea3ad37c51883960a942
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7af516421a6ec3040b636507a6cd7976cabce3a9
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431236"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128792"
 ---
 # <a name="ef-core-testing-sample"></a>EF Core 测试示例
 
 > [!TIP]
 > 可在 GitHub 上找到此文档中的代码作为可 [运行示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/)。
-> 请注意，其中某些测试 **应该会失败** 。 下面说明了这种情况的原因。
+> 请注意，其中某些测试 **应该会失败**。 下面说明了这种情况的原因。
 
 此文档介绍了用于测试使用 EF Core 的代码的示例。
 

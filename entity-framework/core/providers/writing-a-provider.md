@@ -4,22 +4,22 @@ description: 有关编写新的 Entity Framework Core 提供程序的信息
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/providers/writing-a-provider
-ms.openlocfilehash: 898a7a50211e68400ee012daa542bed14bdcec1c
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: e66c5b94d826e35bb5148d57897a1081de4e9736
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430490"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128415"
 ---
 # <a name="writing-a-database-provider"></a>编写数据库提供程序
 
 有关编写 Entity Framework Core 数据库提供程序的信息，请参阅，希望通过[Arthur Vickers](https://github.com/ajcvickers)[编写 EF Core 提供程序](https://blog.oneunicorn.com/2016/11/11/so-you-want-to-write-an-ef-core-provider/)。
 
 > [!NOTE]
-> 自 EF Core 1.1 起，这些文章尚未更新，因此该时间以来发生了重大更改。  
+> 自 EF Core 1.1 起，这些文章尚未更新，因此该时间以来发生了重大更改。
 [问题 681](https://github.com/dotnet/EntityFramework.Docs/issues/681) 正在跟踪对此文档的更新。
 
-EF Core 基本代码是开放源代码，并且包含多个可用作参考的数据库提供程序。 可以在中找到源代码 <https://github.com/dotnet/efcore> 。 查看常用的第三方提供程序（例如 [Npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)、 [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)和 [SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact)）的代码可能也很有帮助。 特别是，设置这些项目是为了从和运行我们在 NuGet 上发布的功能测试。 强烈建议使用这种设置。
+EF Core 基本代码是开放源代码，并且包含多个可用作参考的数据库提供程序。 可以在中找到源代码 <https://github.com/dotnet/efcore> 。 查看常用的第三方提供程序（例如 [Npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)、 [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)和 [SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact)）的代码可能也很有帮助。 特别是，这些项目设置为从在 NuGet 上发布并运行功能测试。 强烈建议使用这种设置。
 
 ## <a name="keeping-up-to-date-with-provider-changes"></a>提供提供程序更改的最新状态
 

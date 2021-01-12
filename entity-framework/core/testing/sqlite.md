@@ -4,19 +4,19 @@ description: 使用 SQLite 测试 Entity Framework Core 应用程序
 author: ajcvickers
 ms.date: 04/24/2020
 uid: core/testing/sqlite
-ms.openlocfilehash: ebfcd36bf236cb83cab8683a8c31d4752d437998
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: da2504cfe7997a10a5ee8c447b1c6ef00dd02369
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431238"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129052"
 ---
 # <a name="using-sqlite-to-test-an-ef-core-application"></a>使用 SQLite 测试 EF Core 应用程序
 
 > [!WARNING]
 > 使用 SQLite 可以有效地测试 EF Core 应用程序。
 > 但是，当 SQLite 的行为与其他数据库系统不同时，可能会出现问题。
-> 有关问题和利弊权衡的讨论，请参阅 [使用 EF Core 的测试代码](xref:core/testing/index) 。  
+> 有关问题和利弊权衡的讨论，请参阅 [使用 EF Core 的测试代码](xref:core/testing/index) 。
 
 本文档在示例中所述的概念上生成了 [如何测试使用 EF Core 的应用程序](xref:core/testing/testing-sample)。
 此处所示的代码示例来自于此示例。
@@ -33,7 +33,7 @@ SQLite 还可以使用纯粹在内存中创建的数据库。
 * 当数据库的连接关闭时，将删除该数据库
 
 EF Core 将在给定连接时使用已打开的连接，并且不会尝试关闭该连接。
-因此，将 EF Core 用于内存中 SQLite 数据库的关键是在将连接传递给 EF 之前打开连接。  
+因此，将 EF Core 用于内存中 SQLite 数据库的关键是在将连接传递给 EF 之前打开连接。
 
 该 [示例](xref:core/testing/testing-sample) 通过以下代码实现此操作：
 

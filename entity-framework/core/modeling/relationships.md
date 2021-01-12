@@ -4,18 +4,18 @@ description: 如何在使用 Entity Framework Core 时配置实体类型之间�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635739"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129169"
 ---
 # <a name="relationships"></a>关系
 
 关系定义两个实体之间的关系。 在关系数据库中，这由外键约束表示。
 
-> [!NOTE]  
+> [!NOTE]
 > 本文中的大多数示例都使用一对多关系来演示概念。 有关一对一关系和多对多关系的示例，请参阅文章末尾的 [其他关系模式](#other-relationship-patterns) 部分。
 
 ## <a name="definition-of-terms"></a>术语定义
@@ -37,7 +37,7 @@ ms.locfileid: "97635739"
   * **引用导航属性：** 保存对单个相关实体的引用的导航属性。
 
   * **反向导航属性：** 讨论特定导航属性时，此术语是指关系另一端的导航属性。
-  
+
 * **自引用关系：** 依赖关系和主体实体类型相同的关系。
 
 下面的代码显示与之间的一对多关系 `Blog``Post`
@@ -62,7 +62,7 @@ ms.locfileid: "97635739"
 
 默认情况下，当在某个类型上发现导航属性时，将创建一个关系。 如果当前数据库提供程序无法将其指向的类型映射为标量类型，则该属性被视为导航属性。
 
-> [!NOTE]  
+> [!NOTE]
 > 按约定发现的关系将始终以主体实体的主键为目标。 若要以备用密钥为目标，则必须使用熟知的 API 执行其他配置。
 
 ### <a name="fully-defined-relationships"></a>完全定义的关系
@@ -178,7 +178,7 @@ ms.locfileid: "97635739"
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?name=ForeignKey&highlight=17)]
 
-> [!TIP]  
+> [!TIP]
 > `[ForeignKey]`批注可放置在关系中的任一导航属性上。 它不需要在依赖实体类中定位导航属性。
 
 > [!NOTE]
@@ -208,7 +208,7 @@ ms.locfileid: "97635739"
 
 ### <a name="principal-key"></a>主体密钥
 
-如果你希望外键引用主键之外的属性，则可以使用熟知的 API 来配置关系的主体键属性。 配置为主体密钥的属性将自动设置为 [备用密钥](xref:core/modeling/keys#alternate-keys)。
+如果你希望外键引用主键之外的属性，则可以使用熟知的 API 来配置关系的主体键属性。 你配置为主体密钥的属性将自动设置为 [备用密钥](xref:core/modeling/keys#alternate-keys)。
 
 #### <a name="simple-key"></a>[简单键](#tab/simple-key)
 
@@ -218,7 +218,7 @@ ms.locfileid: "97635739"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=CompositePrincipalKey&highlight=11)]
 
-> [!WARNING]  
+> [!WARNING]
 > 指定主体键属性的顺序必须与为外键指定这些属性的顺序一致。
 
 ---
@@ -250,7 +250,7 @@ ms.locfileid: "97635739"
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneToOne.cs?name=OneToOne&highlight=6,15-16)]
 
-> [!NOTE]  
+> [!NOTE]
 > EF 会根据其检测外键属性的能力，选择其中一个实体作为依赖项。 如果选择了错误的实体作为依赖项，则可以使用熟知的 API 来更正此问题。
 
 使用 "流畅" API 配置关系时，请使用 `HasOne` 和 `WithOne` 方法。

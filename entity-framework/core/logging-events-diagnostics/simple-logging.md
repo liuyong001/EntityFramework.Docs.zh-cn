@@ -4,20 +4,20 @@ description: 使用 LogTo 从 EF Core DbContext 进行日志记录
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 5c2dc41122dfa3919d1e6a26b0760883d77ee1a0
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635609"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129208"
 ---
 # <a name="simple-logging"></a>简单的日志记录
 
 > [!NOTE]
 > EF Core 5.0 中已引入此功能。
 
-> [!TIP]  
-> 可以从 GitHub [下载此文章的示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) 。
+> [!TIP]
+> 可以从 GitHub [下载此文章的示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging/SimpleLogging) 。
 
 Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应用程序时轻松获取日志。 这种形式的日志记录需要最少的配置，而不需要其他 NuGet 包。
 
@@ -26,7 +26,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 
 ## <a name="configuration"></a>配置
 
-在 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [配置 DbContext 实例](xref:core/dbcontext-configuration/index)时，可以使用任何类型的应用程序访问 EF Core 日志。 此配置通常通过替代 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 来完成。 例如：
+可以在[配置 DbContext 实例](xref:core/dbcontext-configuration/index)时使用 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> 从任意类型的应用程序访问 EF Core 日志。 此配置通常通过替代 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 来完成。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -62,7 +62,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 写入文件时，需要 <xref:System.IO.StreamWriter> 为该文件创建一个或类似的。 <xref:System.IO.StreamWriter.WriteLine%2A>然后，可以使用方法，如以上其他示例中所示。 请记住，在释放上下文时释放编写器，以确保文件完全关闭。 例如：
 
 <!--
-    private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true); 
+    private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true);
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.LogTo(_logStream.WriteLine);
@@ -72,7 +72,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
         base.Dispose();
         _logStream.Dispose();
     }
-    
+
     public override async ValueTask DisposeAsync()
     {
         await base.DisposeAsync();
@@ -130,7 +130,7 @@ Entity Framework Core (EF Core) 简单日志记录可用于在开发和调试应
 
 每条日志消息都分配有一个 <xref:Microsoft.Extensions.Logging.EventId> 。 这些 Id 可以从 <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId> 类或 <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId> 类用于关系特定消息。 数据库提供程序还可以在类似类中具有特定于提供程序的 Id。 例如， <xref:Microsoft.EntityFrameworkCore.Diagnostics.SqlServerEventId> 对于 SQL Server 提供程序。
 
-`LogTo` 可以配置为仅记录与一个或多个事件 Id 相关联的消息。 例如，若要只记录要初始化或释放的上下文的消息，请执行以下操作：  
+`LogTo` 可以配置为仅记录与一个或多个事件 Id 相关联的消息。 例如，若要只记录要初始化或释放的上下文的消息，请执行以下操作：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

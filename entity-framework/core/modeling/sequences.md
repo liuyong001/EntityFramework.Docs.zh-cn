@@ -4,16 +4,16 @@ description: 在 Entity Framework Core 模型中配置序列
 author: roji
 ms.date: 12/18/2019
 uid: core/modeling/sequences
-ms.openlocfilehash: 8848a7237934091c1253ec61a37eea1c4326d1cb
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e388bde11b1251564b37227e8884d2b8c34dc02e
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071389"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128519"
 ---
 # <a name="sequences"></a>序列
 
-> [!NOTE]  
+> [!NOTE]
 > 序列是通常仅由关系数据库支持的功能。 如果使用的是非关系数据库（如 Cosmos），请查看数据库文档以生成唯一值。
 
 序列将在数据库中生成唯一的顺序数值。 序列不与特定表相关联，并且可以将多个表设置为从同一序列中绘制值。

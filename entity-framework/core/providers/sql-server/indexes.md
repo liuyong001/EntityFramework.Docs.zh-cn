@@ -4,18 +4,18 @@ description: 特定于 Entity Framework Core SQL Server 提供程序的索引功
 author: roji
 ms.date: 9/1/2020
 uid: core/providers/sql-server/indexes
-ms.openlocfilehash: 66b4e3ce5ab1d4da855c106a6a2d2e75c43081f7
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 42411a562b4741ba39b4eb855bb84c66e100456b
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003155"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129156"
 ---
 # <a name="index-features-specific-to-the-entity-framework-core-sql-server-provider"></a>特定于 Entity Framework Core SQL Server 提供程序的索引功能
 
 此页详细介绍了特定于 SQL Server 提供程序的索引配置选项。
 
-## <a name="clustering"></a>群集
+## <a name="clustering"></a>群集功能
 
 聚集索引根据数据行的键值在表或视图中排序和存储这些数据行。 为表创建适当的聚集索引可以显著提高查询的速度，因为数据已经按最佳顺序进行布局。 每个表只能有一个聚集索引，因为数据行本身只能按一个顺序存储。 有关详细信息，请参阅 [有关聚集索引和非聚集索引的 SQL Server 文档](/sql/relational-databases/indexes/clustered-and-nonclustered-indexes-described)。
 
@@ -25,10 +25,13 @@ ms.locfileid: "95003155"
 
 [!code-csharp[ClusteredIndex](../../../../samples/core/SqlServer/Indexes/ClusteredIndexContext.cs?name=ClusteredIndex)]
 
+> [!NOTE]
+> SQL Server 仅支持每个表有一个聚集索引，并且在默认情况下，主密钥为聚集索引。 如果要对非键列具有聚集索引，则必须将键显式设为非群集。
+
 ## <a name="fill-factor"></a>填充因子
 
 > [!NOTE]
-> EF Core 5.0 中引入了此功能。
+> EF Core 5.0 中已引入此功能。
 
 提供索引填充因子选项是为了优化索引数据存储和性能。 有关详细信息，请参阅 [有关填充因子的 SQL Server 文档](/sql/relational-databases/indexes/specify-fill-factor-for-an-index)。
 

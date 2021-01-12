@@ -4,12 +4,12 @@ description: '使用时使用 c # 可为 null 的引用类型 Entity Framework C
 author: roji
 ms.date: 09/09/2019
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 648b79576838d2ba424b5216d5ad6811912f8ccb
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 749fef8560c6777dcb2314126b11d2dd6a3562f8
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429710"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128558"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可以为 Null 的引用类型
 
@@ -76,4 +76,4 @@ C # 8 引入了一项名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 ## <a name="limitations"></a>限制
 
 * 反向工程当前不支持 [c # 8 可为 null 的引用类型 (NRTs) ](/dotnet/csharp/tutorials/nullable-reference-types)： EF Core 始终生成假定该功能处于关闭状态的 c # 代码。 例如，可以将可为 null 的文本列基架为类型为的属性 `string` ，而不是 `string?` 用于配置是否需要属性的熟知 API 或数据批注。 您可以编辑基架代码并将其替换为 c # 为空批注。 [#15520](https://github.com/dotnet/efcore/issues/15520)的问题跟踪了可为 null 的引用类型的基架支持。
-* EF Core 的公共 API 图面尚未批注为为空性 (公共 API 为 "在意" ) ，这使得在打开 NRT 功能时，使用此功能有时会很难使用。 这特别包括 EF Core 公开的异步 LINQ 运算符，如 [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)。 我们计划为5.0 版本解决这一情况。
+* EF Core 的公共 API 图面尚未批注为为空性 (公共 API 为 "在意" ) ，这使得在打开 NRT 功能时，使用此功能有时会很难使用。 这特别包括 EF Core 公开的异步 LINQ 运算符，如 [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)。 我们计划为6.0 版本解决这一情况。

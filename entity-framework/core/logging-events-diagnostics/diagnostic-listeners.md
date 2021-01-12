@@ -4,16 +4,16 @@ description: 使用 DiagnosticListener 进行 EF Core 诊断的全局使用
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: a2a962ac714cf80c42c269cee3770699aaa4c0c9
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: afb80aa8f05f70761e423f58653f681938079858
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503223"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129260"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>在 EF Core 中使用诊断侦听器
 
-> [!TIP]  
+> [!TIP]
 > 可以从 GitHub [下载此文章的示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) 。
 
 诊断侦听器允许侦听当前 .NET 进程中发生的任何 EF Core 事件。 <xref:System.Diagnostics.DiagnosticListener>类是一种[跨 .net 的通用机制](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md)的组成部分，用于从运行的应用程序中获取诊断信息。
@@ -24,15 +24,15 @@ ms.locfileid: "94503223"
 
 ## <a name="example-observing-diagnostic-events"></a>示例：观察诊断事件
 
-解析 EF Core 事件的过程分为两个步骤。 首先， [observer](/dotnet/standard/events/observer-design-pattern) `DiagnosticListener` 必须创建其自身的观察程序：
+解析 EF Core 事件的过程分为两个步骤。 首先， [](/dotnet/standard/events/observer-design-pattern) `DiagnosticListener` 必须创建其自身的观察程序：
 
 <!--
 public class DiagnosticObserver : IObserver<DiagnosticListener>
 {
-    public void OnCompleted() 
+    public void OnCompleted()
         => throw new NotImplementedException();
-    
-    public void OnError(Exception error) 
+
+    public void OnError(Exception error)
         => throw new NotImplementedException();
 
     public void OnNext(DiagnosticListener value)
@@ -60,10 +60,10 @@ public class DiagnosticObserver : IObserver<DiagnosticListener>
 <!--
 public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
 {
-    public void OnCompleted() 
+    public void OnCompleted()
         => throw new NotImplementedException();
-    
-    public void OnError(Exception error) 
+
+    public void OnError(Exception error)
         => throw new NotImplementedException();
 
     public void OnNext(KeyValuePair<string, object> value)
@@ -105,12 +105,12 @@ public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
         #region RegisterDiagnosticListener
         DiagnosticListener.AllListeners.Subscribe(new DiagnosticObserver());
         #endregion
-        
+
         using (var context = new BlogsContext())
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
-            
+
             context.Add(
                 new Blog
                 {

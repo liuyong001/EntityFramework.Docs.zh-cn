@@ -4,18 +4,18 @@ description: 使用 EF 内存中数据库测试 Entity Framework Core 应用程�
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/testing/in-memory
-ms.openlocfilehash: db91570dc9d5a4b95d513df509867e9bca406356
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 78dcac3d0fd69110986c99a097a864104caa1951
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431211"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128805"
 ---
 # <a name="testing-with-the-ef-in-memory-database"></a>用 EF In-Memory 数据库进行测试
 
 > [!WARNING]
 > EF 内存中数据库的行为通常与关系数据库不同。
-> 在充分了解所涉及的问题和折衷后，只需使用 EF 内存中数据库，如 [测试使用 EF Core 的代码](xref:core/testing/index)中所述。  
+> 在充分了解所涉及的问题和折衷后，只需使用 EF 内存中数据库，如 [测试使用 EF Core 的代码](xref:core/testing/index)中所述。
 
 > [!TIP]
 > SQLite 是一个关系提供程序，还可以使用内存中数据库。

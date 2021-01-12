@@ -4,12 +4,12 @@ description: 示例演示如何在多个测试之间共享数据库
 author: ajcvickers
 ms.date: 04/25/2020
 uid: core/testing/sharing-databases
-ms.openlocfilehash: 95b756c80b983356a07fd836aa1b02f2835e6629
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7a90a144271d5c34e9d5043aa439f84db805c6af
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431210"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128831"
 ---
 # <a name="sharing-databases-between-tests"></a>在测试之间共享数据库
 
@@ -29,7 +29,7 @@ ms.locfileid: "94431210"
 
 * 如何在测试之间安全共享对象
 * 当测试框架并行运行测试时
-* 如何使数据库处于每个测试的干净状态  
+* 如何使数据库处于每个测试的干净状态
 
 ## <a name="the-fixture"></a>装置
 
@@ -65,7 +65,7 @@ ms.locfileid: "94431210"
 释放装置后，数据库连接会被释放。
 此时，您还可以考虑删除测试数据库。
 但是，如果多个测试类正在共享该装置，则这将需要额外的锁定和引用计数。
-此外，使测试数据库仍可用于调试失败的测试通常是很有用的。  
+此外，使测试数据库仍可用于调试失败的测试通常是很有用的。
 
 ## <a name="using-the-fixture"></a>使用装置
 

@@ -4,16 +4,16 @@ description: 如何在使用时配置拥有的实体类型或聚合 Entity Frame
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 0cd6bfd25d4462509a3e6c112b892d652d29e45e
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429427"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128623"
 ---
 # <a name="owned-entity-types"></a>从属实体类型
 
-EF Core 允许您为只能出现在其他实体类型的导航属性中的实体类型建模。 它们称为 _拥有的实体类型_ 。 包含拥有的实体类型的实体是其 _所有者_ 。
+EF Core 允许您为只能出现在其他实体类型的导航属性中的实体类型建模。 它们称为 _拥有的实体类型_。 包含拥有的实体类型的实体是其 _所有者_。
 
 拥有的实体实质上是所有者的一部分，并且在没有它的情况下不存在，它们在概念上类似于 [聚合](https://martinfowler.com/bliki/DDD_Aggregate.html)。 这意味着，拥有的实体由与所有者的关系的从属方定义。
 
@@ -48,7 +48,7 @@ EF Core 允许您为只能出现在其他实体类型的导航属性中的实体
 
 ## <a name="implicit-keys"></a>隐式键
 
-`OwnsOne`通过引用导航配置的或通过引用导航发现的拥有的类型与所有者始终具有一对一的关系，因此，它们不需要其自己的键值，因为外键值是唯一的。 在上面的示例中， `StreetAddress` 类型不需要定义键属性。  
+`OwnsOne`通过引用导航配置的或通过引用导航发现的拥有的类型与所有者始终具有一对一的关系，因此，它们不需要其自己的键值，因为外键值是唯一的。 在上面的示例中， `StreetAddress` 类型不需要定义键属性。
 
 为了理解 EF Core 如何跟踪这些对象，知道主键是作为所属类型的 [影子属性](xref:core/modeling/shadow-properties) 创建的，这会很有用。 所拥有类型的实例的键值将与所有者实例的键的值相同。
 
@@ -130,7 +130,7 @@ EF Core 允许您为只能出现在其他实体类型的导航属性中的实体
 
 以上模型映射到以下数据库架构：
 
-![包含嵌套的引用的实体的数据库模型的 Sceenshot](_static/owned-entities-nested.png)
+![包含嵌套的引用的实体的数据库模型的屏幕截图](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>将拥有的类型存储在单独的表中
 
