@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 创建并配置模型的概述
 author: AndriySvyryd
 ms.date: 10/13/2020
 uid: core/modeling/index
-ms.openlocfilehash: b18db0059efd335abe2fc44bbc78e0106717e058
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 709e2bde60c8e2c31f0a39390624c5d31a9cfa08
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429606"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129195"
 ---
 # <a name="creating-and-configuring-a-model"></a>创建并配置模型
 
@@ -17,7 +17,7 @@ Entity Framework 使用一组约定基于实体类的形状构建模型。 可�
 
 本文介绍可应用于面向任何数据存储的模型的配置，以及面向任意关系数据库时可应用的配置。 提供程序还可支持特定于具体数据存储的配置。 有关提供程序特定配置的文档，请参阅[数据库提供程序](xref:core/providers/index)部分。
 
-> [!TIP]  
+> [!TIP]
 > 可在 GitHub 上查看此文章的[示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples)。
 
 ## <a name="use-fluent-api-to-configure-a-model"></a>使用 fluent API 配置模型

@@ -4,12 +4,12 @@ description: 用于创建和管理包含或不包含依赖关系注入的 DbCont
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: 93d5942fbc81ee0ae9aeff0c5c8b9e20b160d512
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 10ed474df2c4c52e61083d9d671909be02cd8cef
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635387"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129026"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbContext 生存期、配置和初始化
 
@@ -48,7 +48,7 @@ ms.locfileid: "97635387"
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
         }
@@ -303,7 +303,7 @@ ms.locfileid: "97635387"
 |:-------------------------------------------------------------------------------------------|-------------------------------------------------------------|--------------
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseQueryTrackingBehavior%2A>   | 设置查询的默认跟踪行为              | [查询跟踪行为](xref:core/querying/tracking)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A>                      | 获取 EF Core 日志的一种简单方法（EF Core 5.0 及更高版本）    | [日志记录、事件和诊断](xref:core/logging-events-diagnostics/index)
-| <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseLoggerFactory%2A>           | 注册 `Micrsofot.Extensions.Logging` 工厂         | [日志记录、事件和诊断](xref:core/logging-events-diagnostics/index)
+| <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseLoggerFactory%2A>           | 注册 `Microsoft.Extensions.Logging` 工厂         | [日志记录、事件和诊断](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> | 在异常和日志记录中包括应用程序数据         | [日志记录、事件和诊断](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableDetailedErrors%2A>       | 更详细的查询错误（以性能为代价）  | [日志记录、事件和诊断](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.ConfigureWarnings%2A>          | 忽略或引发警告和其他事件               | [日志记录、事件和诊断](xref:core/logging-events-diagnostics/index)

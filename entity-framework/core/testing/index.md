@@ -4,12 +4,12 @@ description: 测试使用 Entity Framework Core 的应用程序的不同方法
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/index
-ms.openlocfilehash: db25a51ec83bff15ff8c8a959a5f1707dbcf7f0f
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: d94c40bdb1082473ee88e7c3c1fbfecee90ba4ff
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431126"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129065"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>测试使用 EF Core 的代码
 
@@ -19,7 +19,7 @@ ms.locfileid: "94431126"
 * 对其他更易管理的数据库系统运行查询和更新。
 * 使用测试替身或其他机制来避免使用数据库。
 
-本文档概述了每个选项所涉及的折衷方案，并说明了如何在每种方法中使用 EF Core。  
+本文档概述了每个选项所涉及的折衷方案，并说明了如何在每种方法中使用 EF Core。
 
 > [!TIP]
 > 请参阅 [EF Core 测试示例](xref:core/testing/testing-sample)查看演示此处引入的概念的代码。
@@ -35,7 +35,7 @@ EF Core 是一组通用的模式和概念，可用于任何数据库系统。
 虽然如此，但在许多情况下还是可以这么做，因为关系数据库之间存在高度的共性。
 这有利也有弊。
 其有利之处在于，可以相对轻松地切换数据库系统。
-而其弊端在于，如果未针对新的数据库系统彻底测试应用程序，会有一种虚假的安全感。  
+而其弊端在于，如果未针对新的数据库系统彻底测试应用程序，会有一种虚假的安全感。
 
 ## <a name="approach-1-production-database-system"></a>方法 1：生产数据库系统
 
@@ -65,7 +65,7 @@ LocalDB 也不是没有问题：
 就个人而言，我从来不觉得在开发计算机上运行数据库服务有什么问题，所以一般建议使用 Developer Edition。
 但是，LocalDB 对某些人而言可能适用，尤其是在处理能力不够强的开发计算机上。
 
-在 Docker 容器（或类似容器）中[运行 SQL Server](/sql/linux/quickstart-install-connect-docker)（或任何其他数据库系统）是避免直接在开发计算机上运行数据库系统的另一种方法。  
+在 Docker 容器（或类似容器）中[运行 SQL Server](/sql/linux/quickstart-install-connect-docker)（或任何其他数据库系统）是避免直接在开发计算机上运行数据库系统的另一种方法。
 
 ## <a name="approach-2-sqlite"></a>方法 2：SQLite
 
