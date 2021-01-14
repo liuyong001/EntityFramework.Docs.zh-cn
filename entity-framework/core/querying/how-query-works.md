@@ -4,12 +4,12 @@ description: 关于 Entity Framework Core 如何在内部编译和执行查询�
 author: ajcvickers
 ms.date: 03/17/2020
 uid: core/querying/how-query-works
-ms.openlocfilehash: 7b3014cf64f8467ccbec10598ea1bb47304dfe43
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 4f856bf7e084d020edee1585d5c6c64873a5ed15
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430464"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129000"
 ---
 # <a name="how-queries-work"></a>查询的工作原理
 
@@ -43,5 +43,5 @@ Entity Framework Core 使用语言集成查询 (LINQ) 来查询数据库中的�
 * 在 `for` 循环中循环访问结果
 * 使用 `ToList`、`ToArray`、`Single`、`Count` 等操作或等效的异步重载
 
-> [!WARNING]  
+> [!WARNING]
 > 始终验证用户输入：虽然 EF Core通过在查询中使用参数和转义文字来防止 SQL 注入攻击，但它不会验证输入。 根据应用程序的要求，在将 LINQ 查询中使用的来自不受信任的源的值分配给实体属性或传递给其他 EF Core API 之前，应执行相应的验证。 这包括用于动态构造查询的所有用户输入。 即使在使用 LINQ 时，如果接受用于生成表达式的用户输入，也会需要确保只能构造预期表达式。

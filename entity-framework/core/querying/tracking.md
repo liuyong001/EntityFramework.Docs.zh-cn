@@ -4,12 +4,12 @@ description: 关于 Entity Framework Core 中跟踪与非跟踪查询的信息
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: b4c059f9a9b726697009589271e007bd1d2afd56
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 1b3c1db702438390c0de4a2ad5d13e868a522b65
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430438"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128896"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>跟踪与非跟踪查询
 
@@ -18,7 +18,7 @@ ms.locfileid: "94430438"
 > [!NOTE]
 > 从不跟踪[无键实体类型](xref:core/modeling/keyless-entity-types)。 无论在何处提到实体类型，它都是指定义了键的实体类型。
 
-> [!TIP]  
+> [!TIP]
 > 可在 GitHub 上查看此文章的[示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Tracking)。
 
 ## <a name="tracking-queries"></a>跟踪查询

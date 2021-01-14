@@ -4,12 +4,12 @@ description: 关于使用 Entity Framework Core 的相关数据中的周期如�
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/serialization
-ms.openlocfilehash: 6b28a1fc79a8c23e5249d36386c8ed06805dbe30
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 3e1152f09493d039032d9d88493b52a5ef425eb9
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078860"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129130"
 ---
 # <a name="related-data-and-serialization"></a>关联数据和序列化
 

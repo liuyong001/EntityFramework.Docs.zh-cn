@@ -4,18 +4,18 @@ description: 关于在 Entity Framework Core 中保存相关实体图形和管�
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/related-data
-ms.openlocfilehash: 25b4e265f19e658097be7332f9cba6fec3b560db
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: f1cc752587e6a3eb58d070f5f573450b51986f70
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062940"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129091"
 ---
 # <a name="saving-related-data"></a>保存相关数据
 
 除了独立实体以外，还可以使用模型中定义的关系。
 
-> [!TIP]  
+> [!TIP]
 > 可在 GitHub 上查看此文章的[示例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/)。
 
 ## <a name="adding-a-graph-of-new-entities"></a>添加新实体的关系图
@@ -26,7 +26,7 @@ ms.locfileid: "92062940"
 
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
-> [!TIP]  
+> [!TIP]
 > 使用 EntityEntry.State 属性仅设置单个实体的状态。 例如，`context.Entry(blog).State = EntityState.Modified`。
 
 ## <a name="adding-a-related-entity"></a>添加相关实体
