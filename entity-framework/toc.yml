@@ -19,6 +19,8 @@
       items:
         - name: 欢迎使用！
           href: core/index.md
+        - name: EF Core 5.0 中的新增功能
+          href: /ef/core/what-is-new/ef-core-5.0/whatsnew
         - name: 入门
           items:
             - name: EF Core 概述
@@ -41,6 +43,14 @@
               href: core/what-is-new/index.md
             - name: 版本规划过程
               href: core/what-is-new/release-planning.md
+            - name: EF Core 6.0
+              items:
+                - name: 高级计划
+                  href: core/what-is-new/ef-core-6.0/plan.md
+                - name: 新增功能
+                  href: core/what-is-new/ef-core-6.0/whatsnew.md
+                - name: 重大更改
+                  href: core/what-is-new/ef-core-6.0/breaking-changes.md
             - name: EF Core 5.0
               items:
                 - name: 高级计划
@@ -182,6 +192,8 @@
               href: core/querying/filters.md
             - name: 查询标记
               href: core/querying/tags.md
+            - name: 比较查询中的 null 值
+              href: core/querying/null-comparisons.md
             - name: 查询的工作原理
               href: core/querying/how-query-works.md
         - name: 保存数据
@@ -202,6 +214,24 @@
               href: core/saving/disconnected-entities.md
             - name: 生成的属性的显式值
               href: core/saving/explicit-values-generated-properties.md
+        - name: 更改跟踪
+          items:
+            - name: 概述
+              href: core/change-tracking/index.md
+            - name: 显式跟踪实体
+              href: core/change-tracking/explicit-tracking.md
+            - name: 访问跟踪的实体
+              href: core/change-tracking/entity-entries.md
+            - name: 更改外键和导航
+              href: core/change-tracking/relationship-changes.md
+            - name: 更改检测和通知
+              href: core/change-tracking/change-detection.md
+            - name: 标识解析
+              href: core/change-tracking/identity-resolution.md
+            - name: 其他更改跟踪功能
+              href: core/change-tracking/miscellaneous.md
+            - name: 更改跟踪器调试
+              href: core/change-tracking/debug-views.md
         - name: 日志记录、事件和诊断
           items:
             - name: 概述
