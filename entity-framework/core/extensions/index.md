@@ -2,20 +2,20 @@
 title: 工具和扩展 - EF Core
 description: Entity Framework Core 的外部工具和扩展
 author: ErikEJ
-ms.date: 11/22/2020
+ms.date: 01/06/2021
 uid: core/extensions/index
-ms.openlocfilehash: 4136710567d0f6b088a0dd5ad9895d8b93313e5e
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 1198cd586902cd6222a94225056d076c847c9197
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635401"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129013"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和扩展
 
 这些工具和扩展为 Framework Core 2.1 及更高版本提供了附加功能。
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > 扩展由各种源构建，不作为 Entity Framework Core 项目的一部分进行维护。 考虑使用第三方扩展时，请务必评估其质量、授权、兼容性和支持等因素，确保其符合要求。 具体而言，为更早版本的 EF Core 构建的扩展可能需要更新，然后才适用于最新版本。
 
 ## <a name="tools"></a>工具
@@ -36,7 +36,7 @@ Entity Developer 是一种用于 ADO.NET Entity Framework、NHibernate、LinqCon
 
 为 Entity Framework 创建强类型的可扩展类的 O/RM。 生成的代码为 Entity Framework Core。 二者没有任何区别。 这不能替代 EF 或自定义 O/RM。 它是一种视觉对象建模层，可让团队管理复杂的数据库架构。 它适用于 Git 等 SCM 软件，允许多用户访问你的模型，并最大限度减少冲突。 安装程序可跟踪模型更改并创建升级脚本。 对于 EF Core：3.
 
-[Github 站点](https://github.com/nHydrate/nHydrate)
+[Github 存储库](https://github.com/nHydrate/nHydrate)
 
 ### <a name="ef-core-power-tools"></a>EF Core Power Tools
 
@@ -119,11 +119,23 @@ Microsoft.EntityFrameworkCore 的一个插件，它支持存储库、工作模�
 
 [GitHub 存储库](https://github.com/jsakamoto/EntityFrameworkCore.IndexAttribute)
 
-### <a name="efcoreinmemoryhelpers"></a>EfCore.InMemoryHelpers
+### <a name="verifyentityframework"></a>Verify.EntityFramework
 
-提供一个面向 EF Core 内存中数据库提供程序的包装器。 使其功能与关系提供程序更类似。 对于 EF Core：2.
+扩展 [Verify](https://github.com/VerifyTests/Verify)，以允许使用 EntityFramework 进行快照测试。 对于 EF Core：3、5。
 
-[GitHub 存储库](https://github.com/SimonCropp/EfCore.InMemoryHelpers)
+[GitHub 存储库](https://github.com/VerifyTests/Verify.EntityFramework)
+
+### <a name="localdb"></a>LocalDb
+
+提供围绕 [SQL Server Express LocalDB](https://docs.microsoft.com/sql/database-engine/configure-windows/sql-server-express-localdb) 的包装器，以简化针对实体框架的运行测试。 对于 EF Core：3、5。
+
+[GitHub 存储库](https://github.com/SimonCropp/LocalDb)
+
+### <a name="effluentvalidation"></a>EfFluentValidation
+
+向实体框架添加 [FluentValidation](https://fluentvalidation.net/) 支持。 对于 EF Core：3、5。
+
+[GitHub 存储库](https://github.com/SimonCropp/EfFluentValidation)
 
 ### <a name="efcoretemporalsupport"></a>EFCore.TemporalSupport
 
@@ -170,7 +182,7 @@ EF Core 的触发器。 在将 DbContext 中的更改提交到数据库之前和
 
 ### <a name="entity-framework-extensions"></a>实体框架扩展
 
-通过高性能批量操作扩展 DbContext：BulkSaveChanges、BulkInsert、BulkUpdate、BulkDelete、BulkMerge 等。 对于 EF Core：2、3。
+通过高性能批量操作扩展 DbContext：BulkSaveChanges、BulkInsert、BulkUpdate、BulkDelete、BulkMerge 等。 对于 EF Core：2、3、5。
 
 [网站](https://entityframework-extensions.net/)
 
@@ -246,3 +258,21 @@ Entity Framework Core 3.1 的 LINQ 扩展，目的是支持 Microsoft SQL Server
 包含组合/聚合处理的 DTO 实体映射器（类似于 GraphDiff）。 对于 EF Core：3、5。
 
 [NuGet](https://www.nuget.org/packages/Detached.Mappers.EntityFramework)
+
+### <a name="entityframeworkcoresqlitenodatime"></a>EntityFrameworkCore.Sqlite.NodaTime
+
+使用 [SQLite](https://sqlite.org) 时，添加对 [NodaTime](https://nodatime.org) 类型的支持。 对于 EF Core：5.
+
+[GitHub 存储库](https://github.com/khellang/EFCore.Sqlite.NodaTime)
+
+### <a name="erikejentityframeworkcoresqlserverdacpac"></a>ErikEJ.EntityFrameworkCore.SqlServer.Dacpac
+
+从 SQL Server 数据层应用程序包 (.dacpac) 对 EF Core 模型启用反向工程。 对于 EF Core：3、5。
+
+[GitHub wiki](https://github.com/ErikEJ/EFCorePowerTools/wiki/ErikEJ.EntityFrameworkCore.SqlServer.Dacpac)
+
+### <a name="erikejentityframeworkcoredgmlbuilder"></a>ErikEJ.EntityFrameworkCore.DgmlBuilder
+
+生成可视化 DbContext 的 DGML（图形）内容。 将 AsDgml() 扩展方法添加到 DbContext 类。 对于 EF Core：3、5。
+
+[GitHub wiki](https://github.com/ErikEJ/EFCorePowerTools/wiki/Inspect-your-DbContext-model)

@@ -2,14 +2,14 @@
 title: EF Core 版本和计划
 description: 当前 EF Core 版本和未来版本的安排/计划详细信息
 author: ajcvickers
-ms.date: 10/11/2020
+ms.date: 01/12/2021
 uid: core/what-is-new/index
-ms.openlocfilehash: 983a8b21d353481df4f1db232d00761e070d893b
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 18d8055840b5a38dc62d20e7e18c440b7360c9e4
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503134"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128324"
 ---
 # <a name="ef-core-releases-and-planning"></a>EF Core 版本和计划
 
@@ -50,7 +50,7 @@ EF Core 版本与 [.NET Core 发货计划](https://github.com/dotnet/core/blob/m
 
 下一个计划的稳定版本是 EF Core 6.0，计划于 2021 年 11 月发布 。
 
-目前，我们正在根据[版本规划过程](xref:core/what-is-new/release-planning)来处理高级计划。
+已根据记录的[发布计划流程](xref:core/what-is-new/release-planning)创建了 [EF Core 6.0 的高级计划](xref:core/what-is-new/ef-core-6.0/plan)。
 
 你对计划的反馈非常重要。
 指示问题重要性的最佳方式是在 GitHub 上为该问题投票（竖起大拇指 👍）。
@@ -61,7 +61,7 @@ EF Core 版本与 [.NET Core 发货计划](https://github.com/dotnet/core/blob/m
 EF Core 6.0 包现在以
 
 * [每日生成](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md)的形式提供
-  * 所有最新功能和 bug 修复。 通常非常稳定；针对每个生成已运行 57,000 多次测试。
+  * 所有最新功能和 bug 修复。 通常非常稳定；针对每个生成已运行 75,000 多次测试。
 
 此外，在我们进展的过程中，会频繁地将预览版推送到 NuGet。 注意，预览版滞后于每日生成，但经过测试可用于相应的 ASP.NET Core 和 .NET Core 预览版。
 

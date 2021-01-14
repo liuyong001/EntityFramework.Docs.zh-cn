@@ -4,12 +4,12 @@ description: Entity Framework Core 的一般介绍概述
 author: ajcvickers
 ms.date: 9/20/2020
 uid: core/index
-ms.openlocfilehash: ccb1fa4cbc0bd1a02e1aeb613475bfe4b2c1d118
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: f2905fc55419e196a6f5b8883cf2a2a76b8a1ab2
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429892"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128597"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 
@@ -53,7 +53,7 @@ EF 支持以下模型开发方法：
 * 若要在高性能生产应用中构建、调试、分析和迁移数据，必须具备基础数据库服务器的中级知识或更高级别的知识。 例如，有关主键和外键、约束、索引、标准化、DML 和 DDL 语句、数据类型、分析等方面的知识。
 * 功能和集成测试：请务必尽可能严密地复制生产环境，以便：
   * 查找仅在使用特定版本的数据库服务器时才出现的问题。
-  * 在升级 EF Core 和其他依赖项时捕获中断性变更。 例如，添加或升级 ASP.NET Core、OData 或 Automapper 等框架。 这些依赖项可能以多种意外方式影响 EF Core。
+  * 在升级 EF Core 和其他依赖项时捕获中断性变更。 例如，添加或升级 ASP.NET Core、OData 或 AutoMapper 等框架。 这些依赖项可能以多种意外方式影响 EF Core。
 * 通过代表性负载进行性能和压力测试。 某些功能的不成熟用法缩放性不佳。 例如，多项集合包含内容、大量使用延迟加载、对未编制索引的列执行条件查询、对存储生成的值进行大规模更新和插入、缺乏并发处理、大型模型、缓存策略不充分。
 * 安全评审：例如，连接字符串和其他机密处理、非部署操作的数据库权限、原始 SQL 的输入验证、敏感数据加密。
 * 确保日志记录和诊断充足且可用。 例如，适当的日志记录配置、查询标记和 Application Insights。
