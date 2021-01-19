@@ -4,12 +4,12 @@ description: Entity Framework Core 5.0 中引入的中断性变更的完整列�
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 7a13c9a6f6bd299991c379ec490480e1fbb4ba46
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 4a463e785edaceaf5dd96164c39e2cc9b5f86de4
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635466"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128740"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>EF Core 5.0 中的中断性变更
 
@@ -19,9 +19,14 @@ API 和行为的下列更改有可能导致现有应用程序在更新到 EF Cor
 
 | **中断性变更**                                                                                                                   | **影响** |
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
+| [EF Core 5.0 不支持 .NET Framework](#netstandard21)                                                                         | 中     |
+| [IProperty.GetColumnName() 现已过时](#getcolumnname-obsolete)                                                                  | 中     |
+| [小数要求精度和小数位数](#decimals)                                                                            | 中     |
 | [具有不同语义的从主体到依赖项的导航中必需](#required-dependent)                                 | 中     |
 | [定义查询替换为特定于提供程序的方法](#defining-query)                                                          | 中     |
 | [查询不覆盖非 null 引用导航](#nonnullreferences)                                                   | 中     |
+| [ToView() 因迁移具有不同的处理方式](#toview)                                                                              | 中型     |
+| [ToTable(null) 将实体类型标记为未映射到表](#totable)                                                              | 中     |
 | [从 SQLite NTS 扩展中删除了 HasGeometricDimension 方法](#geometric-sqlite)                                                   | 低        |
 | [Cosmos：分区键现已添加到主键](#cosmos-partition-key)                                                        | 低        |
 | [Cosmos：`id` 属性重命名为 `__id`](#cosmos-id)                                                                                 | 低        |
@@ -29,11 +34,8 @@ API 和行为的下列更改有可能导致现有应用程序在更新到 EF Cor
 | [Cosmos：GetPropertyName 和 SetPropertyName 已重命名](#cosmos-metadata)                                                          | 低        |
 | [当实体状态从“已分离”更改为“未更改”、“已更新”或“已删除”时，将调用值生成器](#non-added-generation) | 低        |
 | [IMigrationsModelDiffer 当前使用 IRelationalModel](#relational-model)                                                                 | 低        |
-| [ToView() 因迁移具有不同的处理方式](#toview)                                                                              | 低        |
-| [ToTable(null) 将实体类型标记为未映射到表](#totable)                                                              | 低        |
 | [鉴别器是只读的](#read-only-discriminators)                                                                             | 低        |
 | [特定于提供程序的 EF.Functions 方法针对 InMemory 提供程序引发](#no-client-methods)                                              | 低        |
-| [IProperty.GetColumnName() 现已过时](#getcolumnname-obsolete)                                                                  | 低        |
 | [IndexBuilder.HasName 现已过时](#index-obsolete)                                                                               | 低        |
 | [现已包括用于搭建实施了反向工程的模型的复数化程序](#pluralizer)                                                 | 低        |
 | [INavigationBase 替换某些 API 中的 INavigation 以支持跳过导航](#inavigationbase)                                     | 低        |
@@ -41,6 +43,95 @@ API 和行为的下列更改有可能导致现有应用程序在更新到 EF Cor
 | [不支持在投影中使用可查询类型的集合](#queryable-projection)                                          | 低        |
 
 ## <a name="medium-impact-changes"></a>影响中等的更改
+
+<a name="netstandard21"></a>
+
+### <a name="ef-core-50-does-not-support-net-framework"></a>EF Core 5.0 不支持 .NET Framework
+
+[跟踪问题 #15498](https://github.com/dotnet/efcore/issues/15498)
+
+#### <a name="old-behavior"></a>旧行为
+
+EF Core 3.1 面向 .NET Framework 支持的 .NET Standard 2.0。
+
+#### <a name="new-behavior"></a>新行为
+
+EF Core 5.0 面向 .NET Framework 不支持的 .NET Standard 2.1。 这意味着 EF Core 5.0 无法与 .NET Framework 应用程序一起使用。
+
+#### <a name="why"></a>原因
+
+这是整个 .NET 团队的更广泛行动的一部分，旨在统一到一个 .NET 目标框架。 有关详细信息，请参阅 [.NET Standard 的未来](https://devblogs.microsoft.com/dotnet/the-future-of-net-standard/)。
+
+#### <a name="mitigations"></a>缓解措施
+
+.NET Framework 应用程序可继续使用 EF Core 3.1，这是一个[长期支持 (LTS) 版本](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)。 或者，可将应用程序更新为使用 .NET Core 2.1、.NET Core 3.1 或 .NET 5，所有这些都支持 .NET Standard 2.1。
+
+<a name="getcolumnname-obsolete"></a>
+
+### <a name="ipropertygetcolumnname-is-now-obsolete"></a>IProperty.GetColumnName() 现已过时
+
+[跟踪问题 #2266](https://github.com/dotnet/efcore/issues/2266)
+
+#### <a name="old-behavior"></a>旧行为
+
+`GetColumnName()` 返回属性将映射到的列的名称。
+
+#### <a name="new-behavior"></a>新行为
+
+`GetColumnName()` 仍返回属性所映射到的列的名称，但此行为现在是不明确的，因为 EF Core 5 支持 TPT 并支持同时映射到视图或函数，在视图或函数中，这些映射可对同一属性使用不同的列名。
+
+#### <a name="why"></a>原因
+
+我们将此方法标记为已过时，以指导用户更准确地重载 - <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)>。
+
+#### <a name="mitigations"></a>缓解措施
+
+使用以下代码获取特定表的列名：
+
+```csharp
+var columnName = property.GetColumnName(StoreObjectIdentifier.Table("Users", null)));
+```
+
+<a name="decimals"></a>
+
+### <a name="precision-and-scale-are-required-for-decimals"></a>小数要求精度和小数位数
+
+[跟踪问题 #19293](https://github.com/dotnet/efcore/issues/19293)
+
+#### <a name="old-behavior"></a>旧行为
+
+EF Core 通常不会对 <xref:Microsoft.Data.SqlClient.SqlParameter> 对象设置精度和小数位数。 这意味着会将完整的精度和小数位数发送到 SQL Server，此时 SQL Server 会根据数据库列的精度和小数位数进行舍入。
+
+#### <a name="new-behavior"></a>新行为
+
+EF Core 现使用为 EF Core 模型中的属性配置的值设置参数的精度和小数位数。 这意味着舍入现在发生在 SqlClient 中。 因此，如果配置的精度和小数位数与数据库的精度和小数位数不符，则看到的舍入可能会发生更改。
+
+#### <a name="why"></a>原因
+
+较新的 SQL Server 功能（包括 Always Encrypted）要求完全指定参数方面。 此外，SqlClient 更改舍入值而不是截断小数值，从而匹配 SQL Server 行为。 这使得 EF Core 无需更改正确配置的小数的行为即可设置这些方面。
+
+#### <a name="mitigations"></a>缓解措施
+
+使用包含精度和小数位数的类型名称映射小数属性。 例如：
+
+```csharp
+public class Blog
+{
+    public int Id { get; set; }
+
+    [Column(TypeName = "decimal(16, 5")]
+    public decimal Score { get; set; }
+}
+```
+
+或在模型构建 API 中使用 `HasPrecision`。 例如：
+
+```csharp
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Blog>().Property(e => e.Score).HasPrecision(16, 5);
+    }
+```
 
 <a name="required-dependent"></a>
 
@@ -140,11 +231,69 @@ public class Blog
 
 一个针对博客和作者的查询通常首先会创建 `Blog` 实例，然后根据数据库返回的数据设置适当的 `Author` 实例。 但是，在这种情况下，每个 `Blog.Author` 属性都已初始化为空 `Author`。 不过 EF Core 无法知道此实例是否为“空”。 因此覆盖此实例可能会悄无声息地丢弃一个有效的 `Author`。 因而，EF Core 5.0 现在始终不会覆盖已初始化的导航。
 
-尽管经过调查发现，此新行为有时与 EF6 的行为不一致，但在大多数情况下它都与 EF6 一致。  
+尽管经过调查发现，此新行为有时与 EF6 的行为不一致，但在大多数情况下它都与 EF6 一致。
 
 #### <a name="mitigations"></a>缓解措施
 
 如果遇到此中断，解决方法是停止预先初始化引用导航属性。
+
+<a name="toview"></a>
+
+### <a name="toview-is-treated-differently-by-migrations"></a>ToView() 因迁移具有不同的处理方式
+
+[跟踪问题 #2725](https://github.com/dotnet/efcore/issues/2725)
+
+#### <a name="old-behavior"></a>旧行为
+
+如果调用 `ToView(string)`，迁移会将实体类型映射到视图，但会忽略该类型。
+
+#### <a name="new-behavior"></a>新行为
+
+现在，`ToView(string)` 除了将实体类型映射到视图，还会将其标记为未映射到表。 这会导致升级到 EF Core 5 之后的第一次迁移尝试删除此实体类型的默认表，因为它不会被忽略。
+
+#### <a name="why"></a>原因
+
+EF Core 现在允许同时映射到表和视图的实体类型，因此 `ToView` 不再是应由迁移忽略的有效指示器。
+
+#### <a name="mitigations"></a>缓解措施
+
+使用以下代码将映射的表标记为从迁移中排除：
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().ToTable("UserView", t => t.ExcludeFromMigrations());
+}
+```
+
+<a name="totable"></a>
+
+### <a name="totablenull-marks-the-entity-type-as-not-mapped-to-a-table"></a>ToTable(null) 将实体类型标记为未映射到表
+
+[跟踪问题 #21172](https://github.com/dotnet/efcore/issues/21172)
+
+#### <a name="old-behavior"></a>旧行为
+
+`ToTable(null)` 会将表名称重置为默认值。
+
+#### <a name="new-behavior"></a>新行为
+
+`ToTable(null)` 现在会将实体类型标记为未映射到任何表。
+
+#### <a name="why"></a>原因
+
+EF Core 现在允许同时映射到表和视图的实体类型，因此使用 `ToTable(null)` 指示其未映射到任何表。
+
+#### <a name="mitigations"></a>缓解措施
+
+如果表名称未映射到视图或 DbFunction，请使用以下代码将其重置为默认值：
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().Metadata.RemoveAnnotation(RelationalAnnotationNames.TableName);
+}
+```
 
 ## <a name="low-impact-changes"></a>影响较小的更改
 
@@ -343,64 +492,6 @@ var hasDifferences = modelDiffer.HasDifferences(
 
 我们计划在 6.0 中改进这种体验（[请参阅 #22031](https://github.com/dotnet/efcore/issues/22031)）
 
-<a name="toview"></a>
-
-### <a name="toview-is-treated-differently-by-migrations"></a>ToView() 因迁移具有不同的处理方式
-
-[跟踪问题 #2725](https://github.com/dotnet/efcore/issues/2725)
-
-#### <a name="old-behavior"></a>旧行为
-
-如果调用 `ToView(string)`，迁移会将实体类型映射到视图，但会忽略该类型。
-
-#### <a name="new-behavior"></a>新行为
-
-现在，`ToView(string)` 除了将实体类型映射到视图，还会将其标记为未映射到表。 这会导致升级到 EF Core 5 之后的第一次迁移尝试删除此实体类型的默认表，因为它不会被忽略。
-
-#### <a name="why"></a>原因
-
-EF Core 现在允许同时映射到表和视图的实体类型，因此 `ToView` 不再是应由迁移忽略的有效指示器。
-
-#### <a name="mitigations"></a>缓解措施
-
-使用以下代码将映射的表标记为从迁移中排除：
-
-```csharp
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<User>().ToTable("UserView", t => t.ExcludeFromMigrations());
-}
-```
-
-<a name="totable"></a>
-
-### <a name="totablenull-marks-the-entity-type-as-not-mapped-to-a-table"></a>ToTable(null) 将实体类型标记为未映射到表
-
-[跟踪问题 #21172](https://github.com/dotnet/efcore/issues/21172)
-
-#### <a name="old-behavior"></a>旧行为
-
-`ToTable(null)` 会将表名称重置为默认值。
-
-#### <a name="new-behavior"></a>新行为
-
-`ToTable(null)` 现在会将实体类型标记为未映射到任何表。
-
-#### <a name="why"></a>原因
-
-EF Core 现在允许同时映射到表和视图的实体类型，因此使用 `ToTable(null)` 指示其未映射到任何表。
-
-#### <a name="mitigations"></a>缓解措施
-
-如果表名称未映射到视图或 DbFunction，请使用以下代码将其重置为默认值：
-
-```csharp
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<User>().Metadata.RemoveAnnotation(RelationalAnnotationNames.TableName);
-}
-```
-
 <a name="read-only-discriminators"></a>
 
 ### <a name="discriminators-are-read-only"></a>鉴别器是只读的
@@ -450,32 +541,6 @@ modelBuilder.Entity<BaseEntity>()
 #### <a name="mitigations"></a>缓解措施
 
 由于无法准确模拟数据库函数的行为，因此应根据生产中的同一种数据库测试包含这些函数的查询。
-
-<a name="getcolumnname-obsolete"></a>
-
-### <a name="ipropertygetcolumnname-is-now-obsolete"></a>IProperty.GetColumnName() 现已过时
-
-[跟踪问题 #2266](https://github.com/dotnet/efcore/issues/2266)
-
-#### <a name="old-behavior"></a>旧行为
-
-`GetColumnName()` 返回属性将映射到的列的名称。
-
-#### <a name="new-behavior"></a>新行为
-
-`GetColumnName()` 仍返回属性所映射到的列的名称，但此行为现在是不明确的，因为 EF Core 5 支持 TPT 并支持同时映射到视图或函数，在视图或函数中，这些映射可对同一属性使用不同的列名。
-
-#### <a name="why"></a>原因
-
-我们将此方法标记为已过时，以指导用户更准确地重载 - <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)>。
-
-#### <a name="mitigations"></a>缓解措施
-
-使用以下代码获取特定表的列名：
-
-```csharp
-var columnName = property.GetColumnName(StoreObjectIdentifier.Table("Users", null)));
-```
 
 <a name="index-obsolete"></a>
 

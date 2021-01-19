@@ -4,14 +4,17 @@ description: 为 Entity Framework Core 5.0 规划的功能
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: f2639e41499f3bfca5942d613922fd97212fc2b9
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ba56a5f3c79dacc25b3402be114c57067da49433
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429229"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129039"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>针对 Entity Framework Core 5.0 的计划
+
+> [!IMPORTANT]
+> EF Core 5.0 [现已发布](xref:core/what-is-new/index)。 本页面保留作为计划的历史记录。
 
 如[计划过程](xref:core/what-is-new/release-planning)中所述，我们已来自利益干系人的输入收集到针对 EF Core 5.0 版的暂定计划中。
 

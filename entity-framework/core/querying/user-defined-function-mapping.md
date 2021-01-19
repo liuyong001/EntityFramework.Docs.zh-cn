@@ -3,13 +3,13 @@ title: 用户定义的函数映射 - EF Core
 description: 将用户定义的函数映射到数据库函数
 author: maumar
 ms.date: 11/23/2020
-uid: core/user-defined-function-mapping
-ms.openlocfilehash: ba60abdc9c81b34b8f4ed8f501cf2f7e52ba9d7d
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+uid: core/querying/user-defined-function-mapping
+ms.openlocfilehash: 3e49ed9c49b38b98430128ffdc7ceef0b844b9df
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657695"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129117"
 ---
 # <a name="user-defined-function-mapping"></a>用户定义的函数映射
 
@@ -94,6 +94,52 @@ CLR 方法如下所示：
 SELECT 100 * (ABS(CAST([p].[BlogId] AS float) - 3) / ((CAST([p].[BlogId] AS float) + 3) / 2))
 FROM [Posts] AS [p]
 ```
+
+## <a name="configuring-nullability-of-user-defined-function-based-on-its-arguments"></a>基于用户定义函数的参数配置该函数的为 null 性
+
+如果用户定义的函数只能在其一个或多个参数为 `null` 时返回 `null`，则 EFCore 会提供指定该参数的方法，从而提高 SQL 的性能。 可通过向相关函数参数模型配置添加 `PropagatesNullability()` 调用来完成此操作。
+
+为了说明这一点，请定义用户函数 `ConcatStrings`：
+
+```sql
+CREATE FUNCTION [dbo].[ConcatStrings] (@prm1 nvarchar(max), @prm2 nvarchar(max))
+RETURNS nvarchar(max)
+AS
+BEGIN
+    RETURN @prm1 + @prm2;
+END
+```
+
+和两个映射到该函数的 CLR 方法：
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Model.cs#NullabilityPropagationFunctionDefinition)]
+
+模型配置（在 `OnModelCreating` 方法中）如下所示：
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Model.cs#NullabilityPropagationModelConfiguration)]
+
+第一个函数是以标准方式配置的。 第二个函数配置为利用为 Null 性传播优化，并提供详细信息介绍函数如何围绕 null 参数做出行为。
+
+发出以下查询时：
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Program.cs#NullabilityPropagationExamples)]
+
+获取此 SQL：
+
+```sql
+SELECT [b].[BlogId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE ([dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) <> N'Lorem ipsum...') OR [dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) IS NULL
+
+SELECT [b].[BlogId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE ([dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) <> N'Lorem ipsum...') OR ([b].[Url] IS NULL OR [b].[Rating] IS NULL)
+```
+
+第二个查询不需要重新计算函数本身来测试它的为 Null 性。
+
+> [!NOTE]
+> 仅当函数只有在参数为 `null` 才返回 `null` 时，才应使用此优化。
 
 ## <a name="mapping-a-queryable-function-to-a-table-valued-function"></a>将可查询函数映射到表值函数
 
