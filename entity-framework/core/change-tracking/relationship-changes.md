@@ -4,12 +4,12 @@ description: 如何通过操作外键和导航来更改实体之间的关系
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/relationship-changes
-ms.openlocfilehash: ac2110509b6748e85411dbb14989522465925ecf
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: b1ebe77ed29291beeef3708b603db026c38bbbec
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129582"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983607"
 ---
 # <a name="changing-foreign-keys-and-navigations"></a>更改外键和导航
 
@@ -25,7 +25,7 @@ EF Core) 模型的 Entity Framework Core (中的关系使用 (Fk) 的外键来�
 > 本文档假设了解 EF Core 更改跟踪的实体状态和基础知识。 有关这些主题的详细信息，请参阅 [EF Core 中的更改跟踪](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 通过 [从 GitHub 下载示例代码](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangingFKsAndNavigations)，你可以运行并调试到本文档中的所有代码。
+> 通过[从 GitHub 下载示例代码](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangingFKsAndNavigations)，你可运行并调试到本文档中的所有代码。
 
 ### <a name="example-model"></a>示例模型
 
@@ -184,8 +184,8 @@ Post {Id: 4} Unchanged
         var posts = context.Posts.ToList();
         Console.WriteLine(context.ChangeTracker.DebugView.LongView);
 -->
-[！ code-csharp[Relationship_fixup_2](../../../ samples / core / ChangeTracking / ChangingFKsAndNavigations / OptionalRelationshipsSamples.cs ? name = Relationship_fixup_2
-) ]再次查看调试视图，在第一次查询后，只跟踪这两个博客：
+[!code-csharp[Relationship_fixup_2](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/OptionalRelationshipsSamples.cs?name=Relationship_fixup_2)]
+再次查看调试视图，在第一次查询后，只跟踪这两个博客：
 
 ```output
 Blog {Id: 1} Unchanged
@@ -746,7 +746,7 @@ Post {Id: 4} Modified
 
 请注意：
 
-- 博客标记为 `Deleted` 。
+- 博客标记为 `Deleted`。
 - 与已删除博客相关的资产具有 null FK 值 (`BlogId: <null> FK Modified Originally 2`) 和空引用导航 (`Blog: <null>`) 
 - 与已删除博客相关的每个帖子都具有 null FK 值 (`BlogId: <null> FK Modified Originally 2`) 和空引用导航 (`Blog: <null>`) 
 
@@ -790,7 +790,7 @@ Post {Id: 4} Deleted
 通过调用，可以随时强制执行级联删除操作，以及删除孤立项 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.CascadeChanges?displayProperty=nameWithType> 。 将此组合到将级联删除计时设置为 `Never` 将确保级联删除永远不会发生，除非显式指示 EF Core。
 
 > [!TIP]
-> 级联删除和删除孤立项是密切相关的。 当与所需的主体/父实体之间的关系断开时，两者都将导致删除从属实体。 对于级联删除，会发生此断开，因为主体/父项本身会被删除。 对于遗孤，主体/父实体仍然存在，但不再与从属/子实体相关。
+> 级联删除和删除孤立项是密切相关的。 当断开与所需的主体/父实体之间的关系时，两者都将导致删除依赖实体/子实体。 对于级联删除，由于主体/父实体本身已删除，因此发生了这种断开。 对于孤立项，主体/父实体仍然存在，但不再与依赖实体/子实体相关。
 
 ## <a name="many-to-many-relationships"></a>多对多关系
 

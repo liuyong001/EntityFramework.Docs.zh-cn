@@ -4,12 +4,12 @@ description: Entity Framework Core Visual Studio 包管理器控制台的参考�
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/powershell
-ms.openlocfilehash: 4a1ab889fc1117b67252ace51fd3df4797b6c8d3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 51f2dbcad0606a0d5571e96d7a7951cf595e2b9e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431229"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983503"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Entity Framework Core 工具参考-Visual Studio 中的包管理器控制台
 
@@ -69,11 +69,11 @@ SHORT DESCRIPTION
 
 ### <a name="target-and-startup-project"></a>目标和启动项目
 
-命令引用 *项目* 和 *启动项目* 。
+命令引用 *项目* 和 *启动项目*。
 
-* 该 *项目* 也称为 *目标项目* ，因为它是命令在其中添加或删除文件的位置。 默认情况下，在 " **程序包管理器控制台** " 中选择的 **默认项目** 是目标项目。 可以使用选项指定其他项目作为目标项目 <nobr>`--project`</nobr> 。
+* 该 *项目* 也称为 *目标项目* ，因为它是命令在其中添加或删除文件的位置。 默认情况下，在 "**程序包管理器控制台**" 中选择的 **默认项目** 是目标项目。 可以使用选项指定其他项目作为目标项目 <nobr>`--project`</nobr> 。
 
-* *启动项目* 是工具生成和运行的项目。 这些工具必须在设计时执行应用程序代码，以获取有关项目的信息，例如数据库连接字符串和模型的配置。 默认情况下， **解决方案资源管理器** 中的 **启动项目** 是启动项目。 您可以使用选项指定其他项目作为启动项目 <nobr>`--startup-project`</nobr> 。
+* *启动项目* 是工具生成和运行的项目。 这些工具必须在设计时执行应用程序代码，以获取有关项目的信息，例如数据库连接字符串和模型的配置。 默认情况下，**解决方案资源管理器** 中的 **启动项目** 是启动项目。 您可以使用选项指定其他项目作为启动项目 <nobr>`--startup-project`</nobr> 。
 
 启动项目和目标项目通常是同一个项目。 它们是不同的项目的典型方案是：
 
@@ -180,7 +180,7 @@ Update-Database -Args '--environment Production'
 
 | 参数                          | 说明                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-连接 \<String></nobr> | 用于连接到数据库的连接字符串。 对于 ASP.NET Core 2.x 项目，值可以是 *name = \<name of connection string>* 。 在这种情况下，该名称来自为项目设置的配置源。 这是一个位置参数，并且是必需的。 |
+| <nobr>-连接 \<String></nobr> | 用于连接到数据库的连接字符串。 对于 ASP.NET Core 2.x 项目，值可以是 *name = \<name of connection string>*。 在这种情况下，该名称来自为项目设置的配置源。 这是一个位置参数，并且是必需的。 |
 | <nobr>-提供程序 \<String></nobr>   | 要使用的提供程序。 通常，这是 NuGet 包的名称，例如： `Microsoft.EntityFrameworkCore.SqlServer` 。 这是一个位置参数，并且是必需的。                                                                                           |
 | -OutputDir \<String>               | 要在其中放置文件的目录。 路径相对于项目目录。                                                                                                                                                                                             |
 | -ContextDir \<String>              | 要在其中放置文件的目录 `DbContext` 。 路径相对于项目目录。                                                                                                                                                               |
@@ -212,7 +212,7 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 下面的示例使用 [机密管理器工具](/aspnet/core/security/app-secrets#secret-manager)从项目的配置中读取连接字符串。
 
 ```powershell
-Scaffold-DbContext "Name=ConnectionStrings.Blogging" Microsoft.EntityFrameworkCore.SqlServer
+Scaffold-DbContext "Name=ConnectionStrings:Blogging" Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="script-dbcontext"></a>Script-DbContext
@@ -235,11 +235,11 @@ Scaffold-DbContext "Name=ConnectionStrings.Blogging" Microsoft.EntityFrameworkCo
 
 | 参数                    | 说明                                                                                                                                                                                                                |
 |:---------------------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-来自*\<String>            | 开始迁移。 可以按名称或 ID 识别迁移。 数字0是一个特殊情况，表示在 *第一次迁移之前* 。 默认值为 0。                                                              |
+| *-来自*\<String>            | 开始迁移。 可以按名称或 ID 识别迁移。 数字0是一个特殊情况，表示在 *第一次迁移之前*。 默认值为 0。                                                              |
 | *-到*\<String>              | 结束迁移。 默认为上次迁移。                                                                                                                                                                      |
 | -幂等                  | 生成可用于任何迁移的数据库的脚本。                                                                                                                                                         |
 | <nobr>-NoTransactions</nobr> | 不生成 SQL transaction 语句。 在 EF Core 5.0 中添加。                                                                                                                                                           |
-| -输出 \<String>            | 要向其写入结果的文件。 如果省略此参数，则会在创建应用的运行时文件所在的同一文件夹中创建具有生成名称的文件，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/* 。 |
+| -输出 \<String>            | 要向其写入结果的文件。 如果省略此参数，则会在创建应用的运行时文件所在的同一文件夹中创建具有生成名称的文件，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*。 |
 
 上面列出了 [常见参数](#common-parameters) 。
 

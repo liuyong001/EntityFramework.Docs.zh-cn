@@ -4,29 +4,29 @@ description: 使用 "添加"、"附加"、"更新" 和 "删除" 通过 DbContext
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 28a6ec3e3c25dad70882b8681f78744a5979efe6
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129583"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983269"
 ---
 # <a name="explicitly-tracking-entities"></a>显式跟踪实体
 
-每个 <xref:Microsoft.EntityFrameworkCore.DbContext> 实例跟踪对实体所做的更改。 在调用时，这些跟踪的实体会驱动对数据库的更改 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。
+每个 <xref:Microsoft.EntityFrameworkCore.DbContext> 实例跟踪对实体所做的更改。 在调用 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 时，这些跟踪的实体会相应地驱动对数据库的更改。
 
-Entity Framework Core (EF Core 当同一 <xref:Microsoft.EntityFrameworkCore.DbContext> 实例同时用于查询实体并通过调用更新实体时，) 更改跟踪的效果最佳。 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 这是因为 EF Core 会自动跟踪查询实体的状态，然后在调用 SaveChanges 时检测对这些实体所做的任何更改。 [EF Core 更改跟踪中](xref:core/change-tracking/index)介绍了这种方法。
+Entity Framework Core (EF Core 当同一 <xref:Microsoft.EntityFrameworkCore.DbContext> 实例同时用于查询实体并通过调用更新实体时，) 更改跟踪的效果最佳。 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 这是因为 EF Core 会自动跟踪已查询实体的状态，然后在调用 SaveChanges 时检测对这些实体所做的任何更改。 [EF Core 更改跟踪中](xref:core/change-tracking/index)介绍了这种方法。
 
 > [!TIP]
 > 本文档假设了解 EF Core 更改跟踪的实体状态和基础知识。 有关这些主题的详细信息，请参阅 [EF Core 中的更改跟踪](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 通过 [从 GitHub 下载示例代码](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore)，你可以运行并调试到本文档中的所有代码。
+> [从 GitHub 下载示例代码](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore)，你可以运行并调试到本文档中的所有代码。
 
 > [!TIP]
-> 为简单起见，本文档使用和引用同步方法（如）， <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 而不是它们的异步等效方法（如） <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 。 除非另有说明，否则调用并等待异步方法。
+> 为简单起见，本文档使用和引用同步方法（如 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A>），而不是它们的异步等效方法（如 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>）。 除非另有说明，否则可以替换调用并等待异步方法。
 
-## <a name="introduction"></a>简介
+## <a name="introduction"></a>介绍
 
 实体可以显式 "附加" 到，以便 <xref:Microsoft.EntityFrameworkCore.DbContext> 上下文随后跟踪这些实体。 这主要适用于以下情况：
 
@@ -311,7 +311,7 @@ Post {Id: 2} Unchanged
 这与上一个使用显式键值的示例的最终状态完全相同。
 
 > [!TIP]
-> 即使使用生成的键值，也仍可以设置显式键值。 然后 EF Core 将尝试使用此键值进行插入。 某些数据库配置（包括含标识列 SQL Server）不支持此类插入，因此将引发。
+> 即使使用生成的键值，也仍可以设置显式键值。 然后 EF Core 将尝试使用此键值进行插入。 某些数据库配置（包括带有标识列的 SQL Server）不支持此类插入，并将引发 ([请参阅这些文档，了解解决方法](xref:core/providers/sql-server/value-generation#inserting-explicit-values-into-identity-columns)) 。
 
 ## <a name="attaching-existing-entities"></a>附加现有实体
 
@@ -394,35 +394,6 @@ Post {Id: 2} Unchanged
 ### <a name="generated-key-values"></a>生成的键值
 
 如上所述，默认情况下，integer 和 GUID [键属性](xref:core/modeling/keys) 配置为使用 [自动生成的键值](xref:core/modeling/generated-properties) 。 当使用断开连接的实体时，这有一个主要优势：未设置的键值指示该实体尚未插入到数据库中。 这允许更改跟踪器自动检测新实体并使其处于 `Added` 状态。 例如，请考虑附加博客和文章的此图：
-
-```c#
-            context.Attach(
-                new Blog
-                {
-                    Id = 1,
-                    Name = ".NET Blog",
-                    Posts =
-                    {
-                        new Post
-                        {
-                            Id = 1,
-                            Title = "Announcing the Release of EF Core 5.0",
-                            Content = "Announcing the release of EF Core 5.0, a full featured cross-platform..."
-                        },
-                        new Post
-                        {
-                            Id = 2,
-                            Title = "Announcing F# 5",
-                            Content = "F# 5 is the latest version of F#, the functional programming language..."
-                        },
-                        new Post
-                        {
-                            Title = "Announcing .NET 5.0",
-                            Content = ".NET 5.0 includes many enhancements, including single file applications, more..."
-                        },
-                    }
-                });
-```
 
 <!--
             context.Attach(
@@ -922,7 +893,7 @@ SaveChanges 完成后，所有删除的实体将从 DbContext 中分离出来，
 
 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.TrackGraph%2A?displayProperty=nameWithType> 的工作方式类似于 `Add` `Attach` 和， `Update` 只不过它在跟踪之前为每个实体实例生成一个回调。 这允许在确定如何跟踪图形中的各个实体时使用自定义逻辑。
 
-例如，请考虑在使用生成的键值跟踪实体时使用的规则 EF Core：如果 kye 值为零，则实体为 new，应插入该实体。 让我们扩展此规则，以指示键值是否为负，然后应删除该实体。 这样，我们便可以更改断开连接图形的实体中的主键值，以标记已删除的实体：
+例如，请考虑在使用生成的键值跟踪实体时使用的规则 EF Core：如果键值为零，则实体为 new，应插入该实体。 让我们扩展此规则，以指示键值是否为负，然后应删除该实体。 这样，我们便可以更改断开连接图形的实体中的主键值，以标记已删除的实体：
 
 <!--
             blog.Posts.Add(

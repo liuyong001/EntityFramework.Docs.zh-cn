@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 时配置实体类型之间�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 93d129435a3583ac5f741cc27952fb702f415a01
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129169"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983464"
 ---
 # <a name="relationships"></a>关系
 
@@ -301,7 +301,10 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-在内部，EF 会创建一个实体类型来表示将被称为联接实体类型的联接表。 `Dictionary<string, object>` 用于处理外键属性的任意组合，有关详细信息，请参阅 [属性包实体类型](shadow-properties.md#property-bag-entity-types) 。 模型中可能存在多个多对多关系，因此，在此情况下，必须为联接实体类型指定唯一名称 `PostTag` 。 此功能可用于共享类型的实体类型。
+在内部，EF 会创建一个实体类型来表示将被称为联接实体类型的联接表。 `Dictionary<string, object>` 当前用于处理外键属性的任意组合，有关详细信息，请参阅 [属性包实体类型](shadow-properties.md#property-bag-entity-types) 。 模型中可能存在多个多对多关系，因此，在此情况下，必须为联接实体类型指定唯一名称 `PostTag` 。 此功能可用于共享类型的实体类型。
+
+> [!IMPORTANT]
+> 用于按约定联接实体类型的 CLR 类型在将来的版本中可能会更改以提高性能。 不要依赖于联接类型 `Dictionary<string, object>` ，除非已显式配置了此项，如下一节中所述。
 
 "多对多" 导航称为 "跳过导航"，因为它们实际上会跳过联接实体类型。 如果你正在运用大容量配置，则可以从获取所有 skip 导航 <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> 。
 

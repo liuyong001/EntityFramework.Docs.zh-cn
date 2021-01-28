@@ -2,14 +2,14 @@
 title: 值比较器-EF Core
 description: 使用值比较器来控制 EF Core 比较属性值的方式
 author: ajcvickers
-ms.date: 03/20/2020
+ms.date: 01/16/2021
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 618341315de05f6efae8f43384809ed72226e18b
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5c5e5beee72230a331a8e1c88a2020dc5ad88ecf
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128506"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983477"
 ---
 # <a name="value-comparers"></a>值比较器
 
@@ -21,9 +21,9 @@ ms.locfileid: "98128506"
 
 ## <a name="background"></a>背景
 
-更改跟踪是指 EF Core 自动确定已加载的实体实例上的应用程序所执行的更改，以便在调用时可以将这些更改保存回数据库 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 EF Core 通常会在从数据库中加载实例时获取实例的 *快照* ，并将该快照与向应用程序传递的实例进行 *比较* 。
+[更改跟踪](xref:core/change-tracking/index) 是指 EF Core 自动确定已加载的实体实例上的应用程序所执行的更改，以便在调用时可以将这些更改保存回数据库 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 EF Core 通常会在从数据库中加载实例时获取实例的 *快照* ，并将该快照与向应用程序传递的实例进行 *比较* 。
 
-EF Core 附带了用于快照和比较数据库中使用的大多数标准类型的内置逻辑，因此用户通常不需要担心本主题。 但是，当通过 [值转换器](xref:core/modeling/value-conversions)映射属性时，EF Core 需要对任意用户类型执行比较，这可能很复杂。 默认情况下，EF Core 使用由类型定义的默认相等比较 (例如 `Equals` ，) 的方法; 对于快照，会复制值类型以生成快照，而对于引用类型，则不进行复制，同一实例用作快照。
+EF Core 附带了用于快照和比较数据库中使用的大多数标准类型的内置逻辑，因此用户通常不需要担心本主题。 但是，当通过 [值转换器](xref:core/modeling/value-conversions)映射属性时，EF Core 需要对任意用户类型执行比较，这可能很复杂。 默认情况下，EF Core 使用由类型定义的默认相等比较 (例如 `Equals` ，) 的方法; 对于快照，会复制 [值类型](/dotnet/csharp/language-reference/builtin-types/value-types) 以生成快照，而对于 [引用类型](/dotnet/csharp/language-reference/keywords/reference-types) ，则不进行复制，同一实例用作快照。
 
 如果内置的比较行为不合适，则用户可以提供 *值比较器*，其中包含快照的逻辑、比较和计算哈希代码。 例如，下面的属性的值转换设置为要 `List<int>` 转换为数据库中的 JSON 字符串的值，并定义适当的值比较器。
 
@@ -42,7 +42,7 @@ EF Core 附带了用于快照和比较数据库中使用的大多数标准类型
 * 通过引用，因此只有在使用新的字节数组时才会检测到差异
 * 进行深层比较时，将检测到数组中字节的变化
 
-默认情况下，EF Core 使用这些方法中的第一个方法来实现非键字节数组。 也就是说，仅对引用进行比较，并且仅当现有字节数组替换为新的字节数组时，才会检测到更改。 这是一项切实的决策，可避免在执行时复制整个数组并对它们进行字节到字节的比较，这种情况下，将 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 以高性能的方式处理替换为一个映像的常见方案。
+默认情况下，EF Core 使用这些方法中的第一个方法来实现非键字节数组。 也就是说，仅对引用进行比较，并且仅当现有字节数组替换为新的字节数组时，才会检测到更改。 这是一项切实的决策，可避免在执行时复制整个数组，并将它们与字节进行比较 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 这意味着，将一个图像替换为另一个映像的常见方案是以高性能的方式进行处理。
 
 另一方面，如果使用字节数组表示二进制键，则引用相等性将不起作用，因为 FK 属性不太可能设置为与需要进行比较的 PK 属性 _相同的实例_ 。 因此，EF Core 对用作键的字节数组使用深层比较;这不太可能会产生大的性能，因为二进制密钥通常很短。
 
@@ -71,18 +71,11 @@ EF Core 附带了用于快照和比较数据库中使用的大多数标准类型
 
 [!code-csharp[ConfigureImmutableStructProperty](../../../samples/core/Modeling/ValueConversions/MappingImmutableStructProperty.cs?name=ConfigureImmutableStructProperty)]
 
-EF Core 提供对结构属性的编译按成员比较的内置支持。
-这意味着结构无需重写 EF Core 的相等性，但出于 [其他原因](/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type)，你仍可以选择执行此操作。
-此外，不需要特殊快照，因为结构是不可变的，并且始终复制按成员。
- (对于可变结构也是如此，但 [通常应避免可变结构](/dotnet/csharp/write-safe-efficient-code)。 ) 
+EF Core 提供对结构属性的编译按成员比较的内置支持。 这意味着结构无需重写 EF Core 的相等性，但出于 [其他原因](/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type)，你仍可以选择执行此操作。 此外，不需要特殊快照，因为结构是不可变的，并且始终复制按成员。  (对于可变结构也是如此，但 [通常应避免可变结构](/dotnet/csharp/write-safe-efficient-code)。 ) 
 
 ## <a name="mutable-classes"></a>可变类
 
-建议尽可能使用值转换器 (类或结构) 的不可变类型。
-这通常更高效，并具有比使用可变类型更清晰的语义。
-
-但这种情况下，通常使用应用程序无法更改的类型的属性。
-例如，映射包含数字列表的属性：
+建议尽可能使用值转换器 (类或结构) 的不可变类型。 这通常更高效，并具有比使用可变类型更清晰的语义。 但这种情况下，通常使用应用程序无法更改的类型的属性。 例如，映射包含数字列表的属性：
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
@@ -111,24 +104,16 @@ EF Core 提供对结构属性的编译按成员比较的内置支持。
 
 在这种情况下，比较是通过检查数字序列是否相同来完成的。
 
-同样，哈希代码是根据此相同的顺序生成的。
- (请注意，这是一个基于可变值的哈希代码，因此可能 [会导致问题](https://ericlippert.com/2011/02/28/guidelines-and-rules-for-gethashcode/)。
-如果可以，则改为不可变。 ) 
+同样，哈希代码是根据此相同的顺序生成的。  (请注意，这是一个基于可变值的哈希代码，因此可能 [会导致问题](https://ericlippert.com/2011/02/28/guidelines-and-rules-for-gethashcode/)。 如果可以，则改为不可变。 ) 
 
-通过使用克隆列表创建快照 `ToList` 。
-同样，仅当要转变列表时，才需要这样做。
-如果可以，则改为不可变。
+通过使用克隆列表创建快照 `ToList` 。 同样，仅当要转变列表时，才需要这样做。 如果可以，则改为不可变。
 
 > [!NOTE]
-> 值转换器和比较器使用表达式而不是简单委托来构造。
-> 这是因为 EF Core 会将这些表达式插入到更复杂的表达式树中，然后将其编译到实体整形程序委托中。
-> 从概念上讲，这类似于编译器内联。
-> 例如，简单转换可能是在强制转换中编译的，而不是调用其他方法来执行转换。
+> 值转换器和比较器使用表达式而不是简单委托来构造。 这是因为 EF Core 会将这些表达式插入到更复杂的表达式树中，然后将其编译到实体整形程序委托中。 从概念上讲，这类似于编译器内联。 例如，简单转换可能是在强制转换中编译的，而不是调用其他方法来执行转换。
 
 ## <a name="key-comparers"></a>密钥比较器
 
-背景部分介绍了为何密钥比较可能需要特殊语义。
-在 primary、principal 或 foreign key 属性上设置键时，请确保创建的比较器适用于键。
+背景部分介绍了为何密钥比较可能需要特殊语义。 在 primary、principal 或 foreign key 属性上设置键时，请确保创建的比较器适用于键。
 
 <xref:Microsoft.EntityFrameworkCore.MutablePropertyExtensions.SetKeyValueComparer%2A>在相同的属性上需要不同语义的罕见情况下使用。
 
@@ -137,9 +122,7 @@ EF Core 提供对结构属性的编译按成员比较的内置支持。
 
 ## <a name="overriding-the-default-comparer"></a>重写默认比较器
 
-有时 EF Core 使用的默认比较可能不合适。
-例如，默认情况下，不会在 EF Core 中检测到字节数组的变化。
-这可以通过对属性设置不同的比较器来重写：
+有时 EF Core 使用的默认比较可能不合适。 例如，默认情况下，不会在 EF Core 中检测到字节数组的变化。 这可以通过对属性设置不同的比较器来重写：
 
 [!code-csharp[OverrideComparer](../../../samples/core/Modeling/ValueConversions/OverridingByteArrayComparisons.cs?name=OverrideComparer)]
 

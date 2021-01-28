@@ -4,12 +4,12 @@ description: 用 Entity Framework Core 管理不同环境下的连接字符串
 author: bricelam
 ms.date: 10/27/2016
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: fee7e8f6de1faa11203cfcdab033b73a0a8ef6ea
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 75e364eddd02087cffdffd1c152d1e988a99817b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429723"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983555"
 ---
 # <a name="connection-strings"></a>连接字符串
 
@@ -22,8 +22,8 @@ ms.locfileid: "94429723"
 例如，你可以使用 [机密管理器工具](/aspnet/core/security/app-secrets#secret-manager) 存储数据库密码，然后在基架中，使用只包含的连接字符串 `Name=<database-alias>` 。
 
 ```dotnetcli
-dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
+dotnet user-secrets set ConnectionStrings:YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
+dotnet ef dbcontext scaffold Name=ConnectionStrings:YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 下面的示例显示了中存储的连接字符串 `appsettings.json` 。

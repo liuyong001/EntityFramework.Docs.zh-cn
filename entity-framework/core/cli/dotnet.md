@@ -4,12 +4,12 @@ description: Entity Framework Core .NET Core CLI 工具的参考指南
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 83989b8690236dbec3466cda78c204ab67fd10c4
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 60655c03a7fc29137ccb8d9304c94dac6b803cb2
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431230"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983581"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Entity Framework Core 工具参考-.NET Core CLI
 
@@ -77,7 +77,7 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 
 ### <a name="target-project-and-startup-project"></a>目标项目和启动项目
 
-命令引用 *项目* 和 *启动项目* 。
+命令引用 *项目* 和 *启动项目*。
 
 * 该 *项目* 也称为 *目标项目* ，因为它是命令在其中添加或删除文件的位置。 默认情况下，当前目录中的项目是目标项目。 可以使用选项指定其他项目作为目标项目 <nobr>`--project`</nobr> 。
 
@@ -186,7 +186,7 @@ dotnet ef database update 20180904195021_InitialCreate --connection your_connect
 
 | 参数                    | 说明                                                                                                                                                                                                             |
 |:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`<CONNECTION>`</nobr> | 用于连接到数据库的连接字符串。 对于 ASP.NET Core 2.x 项目，值可以是 *name = \<name of connection string>* 。 在这种情况下，该名称来自为项目设置的配置源。 |
+| <nobr>`<CONNECTION>`</nobr> | 用于连接到数据库的连接字符串。 对于 ASP.NET Core 2.x 项目，值可以是 *name = \<name of connection string>*。 在这种情况下，该名称来自为项目设置的配置源。 |
 | `<PROVIDER>`                | 要使用的提供程序。 通常，这是 NuGet 包的名称，例如： `Microsoft.EntityFrameworkCore.SqlServer` 。                                                                                           |
 
 选项：
@@ -223,8 +223,8 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 下面的示例使用 [机密管理器工具](/aspnet/core/security/app-secrets#secret-manager)从项目的配置集读取连接字符串。
 
 ```dotnetcli
-dotnet user-secrets set ConnectionStrings.Blogging "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Blogging"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFrameworkCore.SqlServer
+dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Blogging"
+dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="dotnet-ef-dbcontext-script"></a>dotnet ef dbcontext 脚本
@@ -291,7 +291,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFra
 
 | 参数              | 说明                                                                                                                                                   |
 |:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`<FROM>`</nobr> | 开始迁移。 可以按名称或 ID 识别迁移。 数字0是一个特殊情况，表示在 *第一次迁移之前* 。 默认值为 0。 |
+| <nobr>`<FROM>`</nobr> | 开始迁移。 可以按名称或 ID 识别迁移。 数字0是一个特殊情况，表示在 *第一次迁移之前*。 默认值为 0。 |
 | `<TO>`                | 结束迁移。 默认为上次迁移。                                                                                                         |
 
 选项：
