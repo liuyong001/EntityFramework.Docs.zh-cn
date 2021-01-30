@@ -212,8 +212,6 @@
               href: core/saving/transactions.md
             - name: 断开连接的实体
               href: core/saving/disconnected-entities.md
-            - name: 生成的属性的显式值
-              href: core/saving/explicit-values-generated-properties.md
         - name: 更改跟踪
           items:
             - name: 概述
@@ -298,6 +296,8 @@
               items:
                 - name: 概述
                   href: core/providers/sql-server/index.md
+                - name: 创造价值
+                  href: core/providers/sql-server/value-generation.md
                 - name: 函数映射
                   href: core/providers/sql-server/functions.md
                 - name: 索引
