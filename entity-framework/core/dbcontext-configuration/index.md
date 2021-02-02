@@ -4,12 +4,12 @@ description: 用于创建和管理包含或不包含依赖关系注入的 DbCont
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: 10ed474df2c4c52e61083d9d671909be02cd8cef
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5b3143edbcfb82312b8026fb09c96dac85427831
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129026"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983516"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbContext 生存期、配置和初始化
 
@@ -314,7 +314,7 @@ ms.locfileid: "98129026"
 > [!NOTE]
 > <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies%2A> 和 <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseChangeTrackingProxies%2A> 是 [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) NuGet 包中的扩展方法。 建议的方式是使用这种类型的“.UseSomething()”调用来配置和/或使用其他包中包含的 EF Core 扩展。
 
-### <a name="dbcontextoptions-verses-dbcontextoptionstcontext"></a>`DbContextOptions` 与 `DbContextOptions<TContext>`
+### <a name="dbcontextoptions-versus-dbcontextoptionstcontext"></a>`DbContextOptions` 与 `DbContextOptions<TContext>`
 
 大多数接受 `DbContextOptions` 的 `DbContext` 子类应使用 [泛型](/dotnet/csharp/programming-guide/generics/) `DbContextOptions<TContext>` 变体。 例如：
 

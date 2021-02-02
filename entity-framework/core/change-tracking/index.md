@@ -4,12 +4,12 @@ description: EF Core 的更改跟踪概述
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/index
-ms.openlocfilehash: 52223e5472b09271d19ac9449a3989b4a0e277f7
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 8cfa4590af07ec1715eb48ec0c7acb3426b6a6b4
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129517"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983256"
 ---
 # <a name="change-tracking-in-ef-core"></a>EF Core 中的更改跟踪
 
