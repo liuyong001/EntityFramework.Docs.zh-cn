@@ -5,10 +5,10 @@ author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
 ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98128532"
 ---
 # <a name="indexes"></a>索引
@@ -47,9 +47,9 @@ ms.locfileid: "98128532"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
 
-**_
+***
 
-跨多个列的索引，也称为 _composite 索引 *，加速对索引列进行筛选的查询，以及仅筛选索引覆盖的 *第一* 列的查询。 有关详细信息，请参阅 [性能文档](xref:core/performance/efficient-querying#use-indexes-properly) 。
+跨多个列的索引（也称为 *复合索引*）可以加快对索引列进行筛选的查询，还可以加速查询，这些查询仅筛选索引覆盖的 *第一* 列。 有关详细信息，请参阅 [性能文档](xref:core/performance/efficient-querying#use-indexes-properly) 。
 
 ## <a name="index-uniqueness"></a>索引唯一性
 

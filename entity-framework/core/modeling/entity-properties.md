@@ -5,10 +5,10 @@ author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
 ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/19/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "97635544"
 ---
 # <a name="entity-properties"></a>实体属性
@@ -45,7 +45,7 @@ ms.locfileid: "97635544"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnName.cs?Name=ColumnName&highlight=3-5)]
 
-**_
+***
 
 ## <a name="column-data-types"></a>列数据类型
 
@@ -63,7 +63,7 @@ ms.locfileid: "97635544"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
 
-_*_
+***
 
 ### <a name="maximum-length"></a>最大长度
 
@@ -82,7 +82,7 @@ _*_
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/MaxLength.cs?name=MaxLength&highlight=3-5)]
 
-_*_
+***
 
 ### <a name="precision-and-scale"></a>精度和小数位数
 
@@ -106,7 +106,7 @@ _*_
 > [!NOTE]
 > 永远不会定义规模，无需先定义精度，因此用于定义刻度的流畅 API 是 `HasPrecision(precision, scale)` 。
 
-_*_
+***
 
 ## <a name="required-and-optional-properties"></a>必需属性和可选属性
 
@@ -118,7 +118,7 @@ _*_
 
 C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutorials/nullable-reference-types)的新功能，该功能允许对引用类型进行批注，以指示它是否可用于包含空值。 默认情况下，此功能处于禁用状态，它会按以下方式影响 EF Core 的行为：
 
-如果 (默认的) 中禁用了可以为 null 的引用类型，则所有具有 .NET 引用类型的属性都将按约定配置为可选的 (例如， `string`) 。
+* 如果 (默认的) 中禁用了可以为 null 的引用类型，则所有具有 .NET 引用类型的属性都将按约定配置为可选的 (例如， `string`) 。
 * 如果启用了可以为 null 的引用类型，则将根据 .NET 类型的 c # 为空性配置属性： `string?` 将配置为可选，但 `string` 会根据需要进行配置。
 
 下面的示例显示了一个具有 required 和 optional 属性的实体类型， (默认) 并启用了 "可为 null 的引用" 功能：
@@ -152,7 +152,7 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?name=Required&highlight=3-5)]
 
-**_
+***
 
 ## <a name="column-collations"></a>列排序规则
 
@@ -182,4 +182,4 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnComment.cs?name=ColumnComment&highlight=5)]
 
-_**
+***

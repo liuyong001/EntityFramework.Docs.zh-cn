@@ -5,10 +5,10 @@ author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
 ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "95003271"
 ---
 # <a name="managing-migrations"></a>管理迁移
@@ -68,7 +68,7 @@ Add-Migration InitialCreate -OutputDir Your\Directory
 > [!NOTE]
 > 在 EF Core 5.0 中，你还可以使用更改独立于目录的命名空间 `-Namespace` 。
 
-**_
+***
 
 ## <a name="customize-migration-code"></a>自定义迁移代码
 
@@ -164,7 +164,7 @@ migrationBuilder.Sql(
 
 这可用于管理数据库的任何方面，包括：
 
-_ 存储过程
+* 存储过程
 * 全文搜索
 * 函数
 * 触发器
@@ -216,11 +216,11 @@ dotnet ef migrations list
 Get-Migration
 ```
 
-**_
+***
 
 ## <a name="resetting-all-migrations"></a>正在重置所有迁移
 
-在某些极端情况下，可能需要删除所有迁移并重新开始。 这可以通过删除 _ *迁移** 文件夹并删除数据库来轻松完成;此时，你可以创建新的初始迁移，其中将包含整个当前架构。
+在某些极端情况下，可能需要删除所有迁移并重新开始。 这可以通过删除 **迁移** 文件夹并删除数据库来轻松完成;此时，你可以创建新的初始迁移，其中将包含整个当前架构。
 
 还可以重置所有迁移并创建单个迁移，而不会丢失数据。 这有时称为 "squashing"，包括一些手动工作：
 

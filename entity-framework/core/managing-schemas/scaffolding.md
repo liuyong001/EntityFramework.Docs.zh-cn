@@ -8,7 +8,7 @@ ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
 ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/28/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98983568"
 ---
 # <a name="reverse-engineering"></a>反向工程
@@ -80,7 +80,7 @@ dotnet ef dbcontext scaffold ... --table Artist --table Album
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
-**_
+***
 
 ## <a name="preserving-names"></a>保留名称
 
@@ -108,7 +108,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>DbContext 名称
 
-默认情况下，基架 DbContext 类名称将为带有后缀 _Context * 的数据库的名称。 若要指定其他项，请 `-Context` 在 PMC 中使用， `--context` 在 .NET Core CLI 中使用。
+默认情况下，基架 DbContext 类名称将是以默认值作为 *后缀的数据库* 的名称。 若要指定其他项，请 `-Context` 在 PMC 中使用， `--context` 在 .NET Core CLI 中使用。
 
 ## <a name="directories-and-namespaces"></a>目录和命名空间
 
