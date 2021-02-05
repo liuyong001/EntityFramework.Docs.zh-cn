@@ -140,7 +140,7 @@ ms.locfileid: "98983464"
 
 ### <a name="single-navigation-property"></a>单个导航属性
 
-如果只有一个导航属性，则和的无参数重载 `WithOne` `WithMany` 。 这表示在概念上，关系的另一端有一个引用或集合，但实体类中不包含导航属性。
+如果只有一个导航属性，则 `WithOne` 和 `WithMany` 会发生无参数重载。 这表示在概念上，关系的另一端有一个引用或集合，但实体类中不包含导航属性。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneNavigation.cs?name=OneNavigation&highlight=8-10)]
 
