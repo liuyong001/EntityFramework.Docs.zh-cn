@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: c19c70903926c2c8ff4b51cca7781859af7e3567
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128779"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983594"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>EF Core 和 Xamarin 入门
 
@@ -78,8 +78,7 @@ ms.locfileid: "98128779"
 >
 > * 第一种方法是将 `--linkskip System.Core` 添加到“iOS 生成”选项中的“其他 mtouch 参数”。
 > * 或者，将 Xamarin.iOS“链接器行为”设置为“iOS 生成”选项中的 `Don't Link`。
-> [本文详细介绍了 Xamarin.iOS 链接器](/xamarin/ios/deploy-test/linker)，包括如何在 Xamarin.iOS 上设置行为。
->
+> [本文详细介绍了 Xamarin.iOS 链接器](/xamarin/ios/deploy-test/linker)，包括如何在 Xamarin.iOS 上设置行为。 （此方法并不理想，因为它可能会导致拒绝存储）。
 
 ## <a name="entity-framework-core-nuget-packages"></a>Entity Framework Core NuGet 包
 

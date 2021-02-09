@@ -4,12 +4,12 @@ description: 关于 Entity Framework Core 中跟踪与非跟踪查询的信息
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: 1b3c1db702438390c0de4a2ad5d13e868a522b65
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: cb18125fb3453bb533981afb36480b12727cd6f2
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128896"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983412"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>跟踪与非跟踪查询
 
@@ -83,4 +83,4 @@ EF Core 不会跟踪结果中包含的无键实体实例。 但 EF Core 会根�
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#CustomProjection2)]
 
 - 只要查询结果中包含无键实体类型，整个查询就会进行非跟踪。 这表示不会跟踪结果中包含的带有键的实体类型。
-- EF Core 在非跟踪查询中执行标识解析。 它使用了弱引用来跟踪已返回的实体。 因此，如果结果集多次包含相同的实体，则每次会返回相同的实例。 尽管具有相同标识的上一个结果超出了范围并进行了垃圾回收，EF Core 也会返回新实例。
+- EF Core 曾经在非跟踪查询中执行标识解析。 它使用了弱引用来跟踪已返回的实体。 因此，如果结果集多次包含相同的实体，则每次会返回相同的实例。 尽管具有相同标识的上一个结果超出了范围并进行了垃圾回收，EF Core 也会返回新实例。

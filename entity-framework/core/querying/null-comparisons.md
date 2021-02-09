@@ -4,12 +4,12 @@ description: 介绍 Entity Framework Core 如何处理查询中的 null 比较
 author: maumar
 ms.date: 11/11/2020
 uid: core/querying/null-comparisons
-ms.openlocfilehash: d1235eb8df7fd22c7a930b3661ec38a99f75e5fa
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: fc63d0e0e6aea09e46b1700152312d4b74270219
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129531"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983347"
 ---
 # <a name="query-null-semantics"></a>查询 null 语义
 
@@ -77,7 +77,7 @@ WHERE [e].[String1] IS NULL OR [e].[String2] IS NULL
 
 - 比较不可为 null 的列比比较可为 null 的列更简单且更快。 如果可能，请考虑将列标记为不可为 null。
 
-- 检查相等性 (`==`) 比检查不相等 (`!=`) 更简单且更快，因为查询无需区分 `null` 和 `false` 结果。 尽可能使用相等性比较。不过，只是否定 `==` 比较这一点实际上与 `!=` 等效，因此不会提高性能。
+- 检查相等性 (`==`) 比检查不相等 (`!=`) 更简单且更快，因为查询无需区分 `null` 和 `false` 结果。 尽可能使用相等性比较。 不过，只是否定 `==` 比较这一点实际上与 `!=` 等效，因此不会提高性能。
 
 - 在某些情况下，可通过从列中显式筛选出 `null` 值来简化复杂比较，例如，当不存在 `null` 值或这些值在结果中不相关时。 请看下面的示例：
 

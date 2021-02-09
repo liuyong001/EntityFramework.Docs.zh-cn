@@ -4,12 +4,12 @@ description: 配置从主体/父实体删除或断开时触发的级联行为
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 7c35de900930cf42da0e534df76124b5fb19ca52
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 27ba84fa5d7e0d72e66ccbd96df9b6a5008791fb
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128857"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983334"
 ---
 # <a name="cascade-delete"></a>级联删除
 
@@ -473,11 +473,11 @@ SELECT @@ROWCOUNT;
 |:----------------------|--------------------------
 | Cascade               | ON DELETE CASCADE
 | 限制              | ON DELETE NO ACTION
-| NoAction              | <database default>
+| NoAction              | 数据库默认值
 | SetNull               | ON DELETE SET NULL
 | ClientSetNull         | ON DELETE NO ACTION
 | ClientCascade         | ON DELETE NO ACTION
-| ClientNoAction        | <database default>
+| ClientNoAction        | 数据库默认值
 
 > [!NOTE]
 > 该表令人困惑，我们计划在将来的版本中重新进行介绍。 请参阅 [GitHub 问题 #21252](https://github.com/dotnet/efcore/issues/21252).
