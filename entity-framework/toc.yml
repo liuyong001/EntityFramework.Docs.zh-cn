@@ -29,6 +29,8 @@
                   href: core/get-started/overview/install.md
                 - name: 第一个 EF Core 应用
                   href: core/get-started/overview/first-app.md
+                - name: NuGet 包
+                  href: core/what-is-new/nuget-packages.md
             - name: ASP.NET Core 教程 >>
               href: /aspnet/core/data/ef-rp/intro
             - name: 包含 EF Core 的 Blazor Server 指南 >>
