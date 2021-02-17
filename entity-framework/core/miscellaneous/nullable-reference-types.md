@@ -4,12 +4,12 @@ description: '使用时使用 c # 可为 null 的引用类型 Entity Framework C
 author: roji
 ms.date: 09/09/2019
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 749fef8560c6777dcb2314126b11d2dd6a3562f8
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 0747b1328458fbaddd9e3cca117e378bbad5b365
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128558"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543427"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可以为 Null 的引用类型
 
@@ -28,7 +28,7 @@ C # 8 引入了一项名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 
 如果启用了可以为 null 的引用类型，则 c # 编译器将为任何未初始化的不可为 null 的属性发出警告，因为这将包含 null。 因此，不能使用以下常见方法来编写实体类型：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithWarning.cs?name=CustomerWithWarning&highlight=4-5)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithWarning.cs?name=CustomerWithWarning&highlight=5-6)]
 
 [构造函数绑定](xref:core/modeling/constructors) 是一项有用的技术，可确保初始化不可为 null 的属性：
 
@@ -65,11 +65,11 @@ C # 8 引入了一项名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 
 当处理可选关系时，可能会遇到编译器警告，但不可能出现实际的 null 引用异常。 在转换和执行 LINQ 查询时，EF Core 确保在一个可选的相关实体不存在的情况下，将忽略对该实体的任何导航，而不是引发。 但是，编译器不知道这 EF Core 确保，并生成警告，就好像 LINQ 查询是在内存中执行的，而 LINQ to Objects。 因此，需要使用包容性运算符 (！ ) 来通知编译器无法实现实际的 null 值：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?range=46)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?name=Navigating)]
 
 在可选导航中包含多个级别的关系时，会发生类似的问题：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?range=36-39&highlight=2)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?name=Including&highlight=2)]
 
 如果你发现自己执行了大量操作，并且所涉及的实体类型主要 (或独占) 用于 EF Core 查询，请考虑使导航属性不可为 null，并将其配置为可通过流畅 API 或数据批注将它们配置为可选。 这将删除所有编译器警告，同时保持关系为可选;但是，如果你的实体是在 EF Core 之外遍历的，则你可能会观察到 null 值，尽管这些属性已批注为不可为 null。
 

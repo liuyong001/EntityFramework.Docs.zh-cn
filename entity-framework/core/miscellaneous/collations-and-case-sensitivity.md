@@ -4,17 +4,17 @@ description: 在数据库和查询中配置排序规则和区分大小写的 Ent
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: eca68af6e658f76e1480b1e1083212f160fa765c
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 48e0a6b316742dc1467134ae81f90086bb93d011
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003453"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543531"
 ---
 # <a name="collations-and-case-sensitivity"></a>排序规则和区分大小写
 
 > [!NOTE]
-> EF Core 5.0 中引入了此功能。
+> EF Core 5.0 中已引入此功能。
 
 数据库中的文本处理可能会很复杂，并且需要更多用户注意。 一方面，数据库处理文本的方式有很大差别;例如，尽管某些数据库在默认情况下是区分大小写的 (例如 Sqlite、PostgreSQL) 等，但其他数据库不区分大小写， (SQL Server MySQL) 。 此外，由于索引使用情况，区分大小写和类似方面可能会对查询性能产生很大的影响：尽管在区分大小写的 `string.Lower` 数据库中使用强制不区分大小写的比较可能会很有吸引力，但这样做可能会阻止应用程序使用索引。 本页详细说明了如何配置区分大小写或更一般的排序规则，以及如何在不影响查询性能的情况下有效地执行此操作。
 
@@ -30,7 +30,7 @@ ms.locfileid: "95003453"
 
 使用 EF Core 迁移来管理数据库架构时，模型的方法中的以下 `OnModelCreating` 内容将 SQL Server 数据库配置为使用区分大小写的排序规则：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=40)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=DatabaseCollation)]
 
 ## <a name="column-collation"></a>列排序规则
 
@@ -38,7 +38,7 @@ ms.locfileid: "95003453"
 
 使用 EF Core 迁移来管理数据库架构时，以下内容将属性的列配置为在其他情况下被配置为区分大小写的 `Name` 数据库中的不区分大小写：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=OnModelCreating&highlight=6)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=ColumnCollation)]
 
 ## <a name="explicit-collation-in-a-query"></a>查询中的显式排序规则
 

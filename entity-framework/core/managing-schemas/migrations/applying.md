@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 将架构迁移应用到生产和开�
 author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 7ff84636fb0999941b832c6a2d65d77b0ad368c5
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: cb4e6f719ba5ab4ef70e2e1d06760db1de5658b4
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429841"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543596"
 ---
 # <a name="applying-migrations"></a>应用迁移
 
@@ -88,7 +88,7 @@ Script-Migration AddNewTables AddAuditTable
 
 ***
 
-脚本生成接受以下两个自变量，以指示应生成的迁移范围：
+脚本生成接受以下两个参数，以指示应生成的迁移范围：
 
 * from 迁移应是运行该脚本前应用到数据库的最后一个迁移。 如果未应用任何迁移，请指定 `0`（默认值）。
 * to 迁移是运行该脚本后应用到数据库的最后一个迁移。 它默认为项目中的最后一个迁移。
@@ -111,13 +111,13 @@ dotnet ef migrations script --idempotent
 Script-Migration -Idempotent
 ```
 
-**_
+***
 
 ## <a name="command-line-tools"></a>命令行工具
 
 EF 命令行工具可用于将迁移应用到数据库。 尽管迁移的本地开发和测试工作效率，但这种方法不适合用于管理生产数据库：
 
-_ 直接应用 SQL 命令，而无需为开发人员提供检查或修改的机会。 这在生产环境中可能会很危险。
+* SQL 命令直接应用于该工具，而不允许开发人员检查或修改它们。 这在生产环境中可能会很危险。
 * .NET SDK 和 EF 工具必须安装在生产服务器上。
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)

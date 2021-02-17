@@ -4,12 +4,12 @@ description: 使用实体框架6中的属性值
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/change-tracking/property-values
-ms.openlocfilehash: deb110df1dbb2b433b54b98a684bc06e696c4351
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 4e9912df960481232c492f8a83d15595800edec3
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064440"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543557"
 ---
 # <a name="working-with-property-values"></a>使用属性值
 大多数情况下实体框架将负责跟踪实体实例的属性的状态、原始值和当前值。 但是，在某些情况下（例如，已断开连接的情况下），你希望查看或操作有关属性的信息 EF。 本主题所介绍的方法同样适用于查询使用 Code First 和 EF 设计器创建的模型。  
@@ -222,7 +222,7 @@ using (var context = new BloggingContext())
 {
     var blog = context.Blogs.Find(1);
 
-    var newValues = new Dictionary\<string, object>
+    var newValues = new Dictionary<string, object>
     {
         { "Name", "The New ADO.NET Blog" },
         { "Url", "blogs.msdn.com/adonet" },
@@ -250,7 +250,7 @@ using (var context = new BloggingContext())
 {
     var user = context.Users.Find("johndoe1987");
 
-    var newValues = new Dictionary\<string, object>
+    var newValues = new Dictionary<string, object>
     {
         { "Name", "John Doe" },
         { "Location.City", "Redmond" },

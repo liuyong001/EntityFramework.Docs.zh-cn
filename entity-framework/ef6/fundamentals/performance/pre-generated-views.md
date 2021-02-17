@@ -4,15 +4,15 @@ description: 实体框架6中预生成的映射视图
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/performance/pre-generated-views
-ms.openlocfilehash: 0c698e50f5c747d9953d9cf55dbbd8824ff8126d
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bea0cdc59161068a8186ad2106516ba4f34910a9
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062953"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543141"
 ---
 # <a name="pre-generated-mapping-views"></a>预生成的映射视图
-在实体框架可以执行查询或将更改保存到数据源之前，它必须生成一组用于访问数据库的映射视图。 这些映射视图是一组实体 SQL 语句，它们以抽象的方式表示数据库，是每个应用程序域缓存的元数据的一部分。 如果在同一个应用程序域中创建同一个上下文的多个实例，则它们将重用缓存的元数据中的映射视图，而不是重新生成它们。 由于映射视图生成是执行第一个查询的总体成本的重要部分，因此实体框架允许您预先生成映射视图，并将它们包含在已编译的项目中。有关详细信息，请参阅  [性能注意事项 (实体框架) ](xref:ef6/fundamentals/performance/perf-whitepaper)。
+在实体框架可以执行查询或将更改保存到数据源之前，它必须生成一组用于访问数据库的映射视图。 这些映射视图是一组实体 SQL 语句，它们以抽象的方式表示数据库，是每个应用程序域缓存的元数据的一部分。 如果在同一个应用程序域中创建同一个上下文的多个实例，则它们将重用缓存的元数据中的映射视图，而不是重新生成它们。 由于映射视图生成是执行第一个查询的总体成本的重要部分，因此实体框架允许您预先生成映射视图，并将它们包含在已编译的项目中。 有关详细信息，请参阅  [性能注意事项 (实体框架) ](xref:ef6/fundamentals/performance/perf-whitepaper)。
 
 ## <a name="generating-mapping-views-with-the-ef-power-tools-community-edition"></a>用 EF Power Tools 社区版生成映射视图
 
@@ -49,7 +49,7 @@ ms.locfileid: "92062953"
 获得 StorageMappingItemCollection 后，可以访问 GenerateViews 和 ComputeMappingHashValue 方法。
 
 ``` csharp
-    public Dictionary\<EntitySetBase, DbMappingView> GenerateViews(IList<EdmSchemaError> errors)
+    public Dictionary<EntitySetBase, DbMappingView> GenerateViews(IList<EdmSchemaError> errors)
     public string ComputeMappingHashValue()
 ```
 

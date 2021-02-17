@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 创建设计时 DbContext 的策略
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dbcontext-creation
-ms.openlocfilehash: 144ed26dcf605dc29d53519ad2ea9cea58fb4e44
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 1a2c0e853047cf4ab54a320d0bef413a114e90bc
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431231"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543401"
 ---
 # <a name="design-time-dbcontext-creation"></a>设计时 DbContext 创建
 
@@ -44,11 +44,11 @@ ms.locfileid: "94431231"
 > 在 EFCore 5.0 之前， `args` 未使用参数 () ，请参阅 [此问题][8] 。
 > 这在 EFCore 5.0 中是固定的，任何其他设计时参数都将通过该参数传递到应用程序。
 
-如果需要以不同于运行时的方式配置 DbContext 的设计时，则设计时工厂特别有用 `DbContext` 。如果构造函数采用其他参数，但未在 di 中注册，如果根本不使用 di，或者出于某种原因而不是使用 `CreateHostBuilder` ASP.NET Core 应用程序的类中的方法 `Main` 。
+如果需要在 `DbContext` 设计时与运行时的配置不同， `DbContext` 并且如果构造函数采用其他参数，而不是在 di 中注册，如果根本不使用 di，或者出于某种原因而不是使用 `CreateHostBuilder` ASP.NET Core 应用程序的类中的方法，设计时工厂就特别有用 `Main` 。
 
 ## <a name="args"></a>Args
 
-CreateDbContext 和 CreateHostBuilder 都接受命令行参数。
+<xref:Microsoft.EntityFrameworkCore.Design.IDesignTimeDbContextFactory%601.CreateDbContext%2A?displayProperty=nameWithType>和均 `Program.CreateHostBuilder` 接受命令行参数。
 
 从 EF Core 5.0 开始，可以从工具中指定以下参数：
 

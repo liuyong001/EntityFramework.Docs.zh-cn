@@ -4,12 +4,12 @@ description: 使用主键值将多个实体实例解析为单个实例
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/identity-resolution
-ms.openlocfilehash: f94b61371dcead27853799719dabc7849500d466
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: d4c8f935c8d0ab92eaecd8fc7a4156bd824713d4
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129590"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543609"
 ---
 # <a name="identity-resolution-in-ef-core"></a>EF Core 中的标识解析
 
@@ -19,7 +19,7 @@ ms.locfileid: "98129590"
 > 本文档假设了解 EF Core 更改跟踪的实体状态和基础知识。 有关这些主题的详细信息，请参阅 [EF Core 中的更改跟踪](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 通过 [从 GitHub 下载示例代码](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/IdentityResolutionInEFCore)，你可以运行并调试到本文档中的所有代码。
+> 通过[从 GitHub 下载示例代码](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/IdentityResolutionInEFCore)，你可运行并调试到本文档中的所有代码。
 
 ## <a name="introduction"></a>简介
 
@@ -617,7 +617,7 @@ Discarding duplicate EntityType: Post entity with key value 4
 
 ## <a name="identity-resolution-and-queries"></a>标识解析和查询
 
-当从查询跟踪实体时，将自动进行标识解析。 这意味着，如果已跟踪具有给定键值的实体实例，则使用此现有跟踪实例而不是创建新的实例。 这有一个重要的结果：如果数据在数据库中发生了更改，则不会在查询结果中反映出来。 这是对每个工作单元使用新的 DbContext 实例的 angood 原因，如 [DbContext 初始化和配置](xref:core/dbcontext-configuration/index)中所述，以及 [EF Core 中更改跟踪](xref:core/change-tracking/index)详细说明。
+当从查询跟踪实体时，将自动进行标识解析。 这意味着，如果已跟踪具有给定键值的实体实例，则使用此现有跟踪实例而不是创建新的实例。 这有一个重要的结果：如果数据在数据库中发生了更改，则不会在查询结果中反映出来。 这是将新的 DbContext 实例用于每个工作单元的好理由，如 [DbContext 初始化和配置](xref:core/dbcontext-configuration/index)中所述，以及 [EF Core 更改跟踪](xref:core/change-tracking/index)的详细说明。
 
 > [!IMPORTANT]
 > 务必了解 EF Core 始终针对数据库执行 LINQ 查询，并根据数据库中的内容仅返回结果。 但是，对于跟踪查询，如果已跟踪返回的实体，则使用跟踪的实例，而不是从数据库中的数据创建实例。

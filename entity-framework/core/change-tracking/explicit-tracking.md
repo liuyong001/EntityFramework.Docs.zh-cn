@@ -4,12 +4,12 @@ description: 使用 "添加"、"附加"、"更新" 和 "删除" 通过 DbContext
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 3d9142cecf272c635c3a041fe6c5d9c49a26c33d
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983269"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543180"
 ---
 # <a name="explicitly-tracking-entities"></a>显式跟踪实体
 
@@ -26,7 +26,7 @@ Entity Framework Core (EF Core 当同一 <xref:Microsoft.EntityFrameworkCore.DbC
 > [!TIP]
 > 为简单起见，本文档使用和引用同步方法（如 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A>），而不是它们的异步等效方法（如 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>）。 除非另有说明，否则可以替换调用并等待异步方法。
 
-## <a name="introduction"></a>介绍
+## <a name="introduction"></a>简介
 
 实体可以显式 "附加" 到，以便 <xref:Microsoft.EntityFrameworkCore.DbContext> 上下文随后跟踪这些实体。 这主要适用于以下情况：
 
@@ -42,7 +42,7 @@ Web 应用程序现在必须重新附加这些实体，以便再次跟踪这些�
 > [!TIP]
 > 通常不需要将实体附加到从中查询它们的 _同一 DbContext 实例_ 。 不要定期执行无跟踪查询，然后将返回的实体附加到同一个上下文。 这会比使用跟踪查询慢，并且可能还会导致诸如缺少影子属性值之类的问题，从而使其更难正确地使用。
 
-### <a name="generated-verses-explicit-key-values"></a>生成的辞句显式键值
+### <a name="generated-versus-explicit-key-values"></a>生成的值与显式键值
 
 默认情况下，integer 和 GUID [键属性](xref:core/modeling/keys) 配置为使用 [自动生成的键值](xref:core/modeling/generated-properties)。 这 **对于更改跟踪具有主要优势：未设置的键值指示该实体为 "new"**。 通过 "新"，我们表示尚未将其插入到数据库中。
 

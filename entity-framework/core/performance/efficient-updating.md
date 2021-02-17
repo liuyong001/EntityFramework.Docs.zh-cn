@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 进行高效更新的性能指南
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-updating
-ms.openlocfilehash: 92766d2339fb04ed5ebc3123429171cc9be424b1
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: f8e222991af52cd7cae6089e95ad6634b6b949f8
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657716"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543128"
 ---
 # <a name="efficient-updating"></a>有效更新
 
@@ -19,7 +19,7 @@ EF Core 通过在单个往返中自动对所有更新进行批处理，有助于
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#SaveChangesBatching)]
 
-上面的内容从数据库中加载博客，更改其名称，然后添加两个新博客：若要应用此语句，请将两个 SQL INSERT 语句和一个 UPDATE 语句发送到数据库。 不是逐个发送，而是添加博客实例，EF Core 在内部跟踪这些更改，并在调用时在单次往返中执行这些更改 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。
+上述内容从数据库加载博客，更改其 URL，然后添加两个新博客：若要应用此语句，请将两个 SQL INSERT 语句和一个 UPDATE 语句发送到数据库。 不是逐个发送，而是添加博客实例，EF Core 在内部跟踪这些更改，并在调用时在单次往返中执行这些更改 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。
 
 EF 在单次往返中分批批处理的语句数取决于所使用的数据库提供程序。 例如，在涉及到4条以上的语句时，性能分析显示了对 SQL Server 效率较低的批处理。 同样，在 SQL Server 的40语句之后，批处理的优点会下降，因此 EF Core 默认情况下，仅在单个批处理中执行最多42条语句，并在单独的往返中执行其他语句。
 

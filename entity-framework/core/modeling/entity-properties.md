@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 配置和映射实体属性
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 3c64f5ac1c86a83b6456df9e29472dc0b22d8524
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "97635544"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543362"
 ---
 # <a name="entity-properties"></a>实体属性
 
@@ -57,11 +57,11 @@ ms.locfileid: "97635544"
 
 ### <a name="data-annotations"></a>[数据批注](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=4,6)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=5,8)]
 
 ### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=6-7)]
 
 ***
 
@@ -76,7 +76,7 @@ ms.locfileid: "97635544"
 
 #### <a name="data-annotations"></a>[数据批注](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=5)]
 
 #### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
@@ -125,7 +125,7 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 
 #### <a name="without-nrt-default"></a>[不带 NRT (默认值) ](#tab/without-nrt)
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=4-8)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=5,8)]
 
 #### <a name="with-nrt"></a>[With NRT](#tab/with-nrt)
 
@@ -146,7 +146,7 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 
 #### <a name="data-annotations"></a>[数据批注](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=5)]
 
 #### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
@@ -161,7 +161,7 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 
 可以在文本列上定义排序规则，以确定如何对它们进行比较和排序。 例如，以下代码段将 SQL Server 列配置为不区分大小写：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=42-43)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=ColumnCollation)]
 
 如果数据库中的所有列都需要使用特定的排序规则，请改为在数据库级别定义排序规则。
 
@@ -176,7 +176,7 @@ C # 8 引入了一个名 [为 null 的引用类型 (NRT) ](/dotnet/csharp/tutori
 > [!NOTE]
 > EF Core 5.0 中引入了通过数据批注设置注释。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=5)]
 
 ### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 

@@ -4,12 +4,12 @@ description: Entity Framework Core .NET Core CLI 工具的参考指南
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 60655c03a7fc29137ccb8d9304c94dac6b803cb2
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 5f25ad67060e59507285af6e78269baa784c5288
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983581"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543388"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Entity Framework Core 工具参考-.NET Core CLI
 
@@ -128,7 +128,7 @@ dotnet ef database update -- --environment Production
 
 从 EF Core 5.0 开始，将任何其他参数传递给应用程序。
 
-## <a name="dotnet-ef-database-drop"></a>dotnet ef 数据库删除
+## `dotnet ef database drop`
 
 删除数据库。
 
@@ -141,7 +141,7 @@ dotnet ef database update -- --environment Production
 
 上面列出了 [常见选项](#common-options) 。
 
-## <a name="dotnet-ef-database-update"></a>dotnet ef 数据库更新
+## `dotnet ef database update`
 
 将数据库更新到上次迁移或指定迁移。
 
@@ -166,19 +166,19 @@ dotnet ef database update InitialCreate
 dotnet ef database update 20180904195021_InitialCreate --connection your_connection_string
 ```
 
-## <a name="dotnet-ef-dbcontext-info"></a>dotnet ef dbcontext 信息
+## `dotnet ef dbcontext info`
 
 获取有关类型的信息 `DbContext` 。
 
 上面列出了 [常见选项](#common-options) 。
 
-## <a name="dotnet-ef-dbcontext-list"></a>dotnet ef dbcontext 列表
+## `dotnet ef dbcontext list`
 
 列出可用 `DbContext` 的类型。
 
 上面列出了 [常见选项](#common-options) 。
 
-## <a name="dotnet-ef-dbcontext-scaffold"></a>dotnet ef dbcontext 基架
+## `dotnet ef dbcontext scaffold`
 
 为 `DbContext` 数据库的和实体类型生成代码。 为了使此命令生成实体类型，数据库表必须具有主键。
 
@@ -227,7 +227,7 @@ dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLL
 dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-## <a name="dotnet-ef-dbcontext-script"></a>dotnet ef dbcontext 脚本
+## `dotnet ef dbcontext script`
 
 从 DbContext 生成 SQL 脚本。 绕过任何迁移。 在 EF Core 3.0 中添加。
 
@@ -239,7 +239,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 上面列出了 [常见选项](#common-options) 。
 
-## <a name="dotnet-ef-migrations-add"></a>dotnet ef 迁移添加
+## `dotnet ef migrations add`
 
 添加新的迁移。
 
@@ -258,7 +258,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 上面列出了 [常见选项](#common-options) 。
 
-## <a name="dotnet-ef-migrations-list"></a>dotnet ef 迁移列表
+## `dotnet ef migrations list`
 
 列出可用迁移。
 
@@ -271,7 +271,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 上面列出了 [常见选项](#common-options) 。
 
-## <a name="dotnet-ef-migrations-remove"></a>dotnet ef 迁移删除
+## `dotnet ef migrations remove`
 
 删除上一次迁移 (回滚对迁移) 所做的代码更改。
 
@@ -283,7 +283,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 上面列出了 [常见选项](#common-options) 。
 
-## <a name="dotnet-ef-migrations-script"></a>dotnet ef 迁移脚本
+## `dotnet ef migrations script`
 
 从迁移生成 SQL 脚本。
 

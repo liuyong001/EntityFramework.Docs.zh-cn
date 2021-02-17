@@ -4,12 +4,12 @@ description: 通过 Entity Framework Core 异步查询和保存数据
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: 52b3ac20a50babbed6937ebe3365ac1947dcaef1
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 78c109e9fd73dbb0451f9e29562799e4d22d66c9
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128571"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543349"
 ---
 # <a name="asynchronous-programming"></a>异步编程
 
@@ -43,7 +43,7 @@ ms.locfileid: "98128571"
 
 ## <a name="client-side-async-linq-operators"></a>客户端异步 LINQ 运算符
 
-上面所述的异步 LINQ 运算符只能在 EF 查询上使用-不能将其与客户端 LINQ to Objects 查询一起使用。 若要在 EF 之外执行客户端异步 LINQ 操作，请使用 system.exception [包](https://www.nuget.org/packages/System.Interactive.Async);此包对于在客户端上执行无法在服务器上进行求值的操作时特别有用。
+上面所述的异步 LINQ 运算符只能在 EF 查询上使用-不能将其与客户端 LINQ to Objects 查询一起使用。 若要在 EF 之外执行客户端异步 LINQ 操作，请使用 system.exception [包](https://www.nuget.org/packages/System.Linq.Async);此包对于在客户端上执行无法在服务器上进行求值的操作时特别有用。
 
 遗憾的是，引用 system.exception 会导致应用于 EF Dbset 的 LINQ 运算符上出现不明确的调用编译错误;这使得难以在同一项目中使用 EF 和 System.object。 若要解决此问题，请将 AsQueryable 添加到 DbSet：
 

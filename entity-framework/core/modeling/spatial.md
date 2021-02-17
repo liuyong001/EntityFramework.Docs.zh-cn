@@ -4,12 +4,12 @@ description: 在 Entity Framework Core 模型中使用空间数据
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: a38e75e150b3d3404f2ed7619d05ba478c411117
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 721aa2628d17b89b79160f8f658f8ef0dd78d6a6
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003440"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543284"
 ---
 # <a name="spatial-data"></a>空间数据
 
@@ -60,7 +60,7 @@ Teradata.EntityFrameworkCore            | [Teradata. Microsoft.entityframeworkco
 
 ## <a name="longitude-and-latitude"></a>经度和纬度
 
-NTS 中的坐标采用 X 和 Y 值。 若要表示经度和纬度，请将 X 用于经度，将 Y 用于纬度。 请注意，这 **backwards** 是从 `latitude, longitude` 通常会看到这些值的格式反向进行的。
+NTS 中的坐标采用 X 和 Y 值。 若要表示经度和纬度，请将 X 用于经度，将 Y 用于纬度。 请注意，这是从 `latitude, longitude` 通常会看到这些值的格式反向进行的。
 
 ## <a name="querying-data"></a>查询数据
 
@@ -78,15 +78,18 @@ NTS 中的坐标采用 X 和 Y 值。 若要表示经度和纬度，请将 X 用
 
 ## <a name="reverse-engineering"></a>反向工程
 
-空间 NuGet 包还启用具有空间属性的 [反向工程](xref:core/managing-schemas/scaffolding) 模型，但需要在运行或 *_之前_* 安装包 * `Scaffold-DbContext` `dotnet ef dbcontext scaffold` 。 否则，你将收到有关找不到列的类型映射的警告，将跳过这些列。
+空间 NuGet 包还启用具有空间属性的 [反向工程](xref:core/managing-schemas/scaffolding) 模型，但需要在运行或 ***之前*** 安装包 `Scaffold-DbContext` `dotnet ef dbcontext scaffold` 。 否则，你将收到有关找不到列的类型映射的警告，将跳过这些列。
 
 ## <a name="srid-ignored-during-client-operations"></a>在客户端操作过程中忽略 SRID
 
-NTS 在操作过程中忽略 SRID 值。 它假定为平面坐标系统。 这意味着，如果在经度和纬度方面指定了坐标，则某些客户端计算的值（例如，距离、长度和区域）将为度数，而不是计量。 若要获得更有意义的值，首先需要使用库（如 [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI) ）在计算这些值之前投影到另一个坐标系统的坐标。
+NTS 在操作过程中忽略 SRID 值。 它假定为平面坐标系统。 这意味着，如果在经度和纬度方面指定了坐标，则某些客户端计算的值（例如，距离、长度和区域）将为度数，而不是计量。 为了获得更有意义的值，您首先需要使用库（如 [ProjNet (For GeoAPI) ](https://github.com/NetTopologySuite/ProjNet4GeoAPI)）投影到另一个坐标系统的坐标。
+
+> [!NOTE]
+> 使用较新的 [ProjNet NuGet 包](https://www.nuget.org/packages/ProjNet/)， **而不** 是名为 ProjNet4GeoAPI 的旧包。
 
 如果通过 EF Core 通过 SQL 对操作进行服务器计算，则该结果的单元将由数据库确定。
 
-下面是一个示例，说明如何使用 ProjNet4GeoAPI 来计算两个城市之间的距离。
+下面是一个示例，说明如何使用 ProjNet 来计算两个城市之间的距离。
 
 [!code-csharp[](../../../samples/core/Spatial/Projections/GeometryExtensions.cs?name=snippet_GeometryExtensions)]
 
@@ -101,7 +104,7 @@ NTS 在操作过程中忽略 SRID 值。 它假定为平面坐标系统。 这�
 
 有关使用空间数据的其他信息，请务必阅读提供程序的文档。
 
-_ [SQL Server 提供程序中的空间数据](xref:core/providers/sql-server/spatial)
+* [SQL Server 提供程序中的空间数据](xref:core/providers/sql-server/spatial)
 * [SQLite 提供程序中的空间数据](xref:core/providers/sqlite/spatial)
 * [Npgsql 提供程序中的空间数据](https://www.npgsql.org/efcore/mapping/nts.html)
 

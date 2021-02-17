@@ -4,12 +4,12 @@ description: 如何在使用时配置属性的值生成 Entity Framework Core
 author: AndriySvyryd
 ms.date: 1/10/2021
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 76fa4454c88a5ef7afb9864c2a4b1063ac75e37e
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: a9e43f3b755bf028bc76581135988e831a42d0d1
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983542"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543336"
 ---
 # <a name="generated-values"></a>生成的值
 
@@ -52,7 +52,7 @@ ms.locfileid: "98983542"
 
 ### <a name="data-annotations"></a>[数据批注](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=6)]
 
 ### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
@@ -64,16 +64,16 @@ ms.locfileid: "98983542"
 
 ### <a name="data-annotations"></a>[数据批注](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=6)]
 
 ### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
 
-**_
+***
 
 > [!WARNING]
-> 与默认值或计算列不同的是，我们不会指定要生成的值 _how *;这取决于所使用的数据库提供程序。 数据库提供程序可以为某些属性类型自动设置值生成，但其他提供程序可能要求您手动设置如何生成值。
+> 与默认值或计算列不同，我们不指定 *如何* 生成值;这取决于所使用的数据库提供程序。 数据库提供程序可以为某些属性类型自动设置值生成，但其他提供程序可能要求您手动设置如何生成值。
 >
 > 例如，在 SQL Server 上，当 GUID 属性配置为 "添加时生成的值" 时，提供程序将使用算法生成最佳顺序 GUID 值，自动执行值生成客户端。 但是， `ValueGeneratedOnAdd()` 对 datetime 属性指定将不起任何作用 ([请参阅下面的部分，了解是否) 生成日期值](#datetime-value-generation) 。
 >

@@ -4,12 +4,12 @@ description: 涉及 EF Core 更改跟踪的其他功能和方案
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/miscellaneous
-ms.openlocfilehash: db1e32948b2a60ad1b85e300bbbccd54d49a84e5
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 9eb3186f4eef300e4824dc86700497444ece4a2c
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129581"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543414"
 ---
 # <a name="additional-change-tracking-features"></a>其他更改跟踪功能
 
@@ -19,9 +19,9 @@ ms.locfileid: "98129581"
 > 本文档假设了解 EF Core 更改跟踪的实体状态和基础知识。 有关这些主题的详细信息，请参阅 [EF Core 中的更改跟踪](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 通过 [从 GitHub 下载示例代码](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures)，你可以运行并调试到本文档中的所有代码。
+> 通过[从 GitHub 下载示例代码](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures)，你可运行并调试到本文档中的所有代码。
 
-## <a name="add-verses-addasync"></a>添加辞 AddAsync
+## <a name="add-versus-addasync"></a>`Add` 与 `AddAsync`
 
 Entity Framework Core (EF Core) 在使用该方法时提供异步方法可能会导致数据库交互。 还提供了同步方法，以避免使用不支持高性能异步访问的数据库时的开销。
 
@@ -29,16 +29,16 @@ Entity Framework Core (EF Core) 在使用该方法时提供异步方法可能会
 
 诸如、和之类的其他类似方法没有 `Update` `Attach` `Remove` 异步重载，因为它们永远不会生成新的键值，因此永远不需要访问数据库。
 
-## <a name="addrange-updaterange-attachrange-and-removerange"></a>AddRange、UpdateRange、AttachRange 和 RemoveRange
+## <a name="addrange-updaterange-attachrange-and-removerange"></a>`AddRange`、`UpdateRange`、`AttachRange` 和 `RemoveRange`
 
-<xref:Microsoft.EntityFrameworkCore.DbSet%601> 和 <xref:Microsoft.EntityFrameworkCore.DbContext> 提供了、、和的备用版本 `Add` ， `Update` `Attach` `Remove` 可在单个调用中接受多个实例。 这些方法分别称为 `AddRange` 、 `UpdateRange` 、 `AttachRange` 和 `RemoveRange` 。
+<xref:Microsoft.EntityFrameworkCore.DbSet%601> 和 <xref:Microsoft.EntityFrameworkCore.DbContext> 提供了、、和的备用版本 `Add` ， `Update` `Attach` `Remove` 可在单个调用中接受多个实例。 这些方法 <xref:Microsoft.EntityFrameworkCore.DbSet%601.AddRange%2A> 分别为、 <xref:Microsoft.EntityFrameworkCore.DbSet%601.UpdateRange%2A> 、 <xref:Microsoft.EntityFrameworkCore.DbSet%601.AttachRange%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbSet%601.RemoveRange%2A> 。
 
 这些方法是提供方便的。 使用 "范围" 方法与对等效的非范围方法的多个调用具有相同的功能。 这两种方法之间没有明显的性能差异。
 
 > [!NOTE]
-> 这不同于 EF6，其中 AddRange 并添加了自动调用的 DetectChanges，但调用 Add 多次导致 DetectChanges 多次调用，而不是一次。 这使 AddRange 在 EF6 中更有效。 在 EF Core 中，这两种方法都不会自动调用 DetectChanges。
+> 这不同于 EF6，其中 `AddRange` 和 `Add` 都是自动调用的 `DetectChanges` ，但调用多次 `Add` 将导致多次调用 DetectChanges，而不是一次。 这 `AddRange` 在 EF6 中提高了效率。 在 EF Core 中，这两种方法都不会自动调用 `DetectChanges` 。
 
-## <a name="dbcontext-verses-dbset-methods"></a>DbContext 辞句 DbSet 方法
+## <a name="dbcontext-versus-dbset-methods"></a>DbContext 与 DbSet 方法
 
 许多方法（包括 `Add` 、 `Update` 、 `Attach` 和 `Remove` ）在和上都具有 <xref:Microsoft.EntityFrameworkCore.DbSet%601> 实现 <xref:Microsoft.EntityFrameworkCore.DbContext> 。 对于普通实体类型，这些方法具有 _完全相同的行为_ 。 这是因为实体的 CLR 类型会映射到 EF Core 模型中的一个实体类型。 因此，CLR 类型会完全定义实体在模型中的适合位置，因此，可以隐式确定要使用的 DbSet。
 
@@ -89,14 +89,14 @@ Entity Framework Core (EF Core) 在使用该方法时提供异步方法可能会
 
             context.SaveChanges();
 -->
-[!code-csharp[DbContext_verses_DbSet_methods_1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/Samples.cs?name=DbContext_verses_DbSet_methods_1)]
+[!code-csharp[DbContext_versus_DbSet_methods_1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/Samples.cs?name=DbContext_versus_DbSet_methods_1)]
 
 请注意， <xref:Microsoft.EntityFrameworkCore.DbContext.Set%60%601(System.String)?displayProperty=nameWithType> 用于为 `PostTag` 实体类型创建 DbSet。 然后，可以使用此 DbSet 调用 `Add` 新的联接实体实例。
 
 > [!IMPORTANT]
 > 用于按约定联接实体类型的 CLR 类型在将来的版本中可能会更改以提高性能。 不依赖于任何特定的联接实体类型，除非已将其显式配置为 `Dictionary<string, int>` 在上面的代码中完成。
 
-## <a name="property-verses-field-access"></a>属性辞字段访问
+## <a name="property-versus-field-access"></a>属性和字段访问
 
 从 EF Core 3.0 开始，默认情况下，对实体属性的访问将使用属性的支持字段。 这是高效的，避免了调用属性 getter 和 setter 的副作用。 例如，这是延迟加载如何避免触发无限循环。 有关在模型中配置支持字段的详细信息，请参阅 [支持字段](xref:core/modeling/backing-field) 。
 

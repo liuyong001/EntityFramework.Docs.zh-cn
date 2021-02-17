@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 从现有数据库反向工程模型
 author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 0f33ee23393819aa86bf1e28ee0eca48110203f6
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "98983568"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543375"
 ---
 # <a name="reverse-engineering"></a>反向工程
 
